@@ -1,0 +1,45 @@
+.webView {
+    height: 100vh !important;
+    background: #fff0 !important;
+}
+
+.webViewHeader {
+    background: #013D5F;
+    padding: 0.5rem 1rem;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+.webViewClose {
+    font-size: 18px;
+    font-weight: 600;
+    width: 25px;
+    height: 25px;
+    border: none;
+    outline: none;
+    border-radius: 99px;
+    background-color: #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s linear;
+    cursor: pointer;
+}
+
+.webViewClose:hover {
+    background-color: #fff;
+}
+
+.webViewContent {
+    height: calc(100vh - 40px) !important;
+    background: #e0e0e0;
+}
+
+.webView iframe {
+    width: 100%;
+    min-height: 100%;
+}

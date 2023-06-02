@@ -1,0 +1,90 @@
+.audioPlayerWrapper {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 99;
+    width: 100%;
+    background: #051d3f;
+    border-top: 1px solid var(--lightColor);
+    padding: 0.5rem 0;
+}
+
+.audioPlayerControls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.playerAction {
+    background: none;
+    border: none;
+    outline: none;
+    padding: 0;
+    margin: 0 1rem;
+    flex-shrink: 0;
+}
+
+.playerAction p {
+    font-size: 11px;
+    color: var(--lightColor);
+    text-align: center;
+    margin: 0;
+}
+
+.playerAction svg {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+}
+
+.playerAction path {
+    fill: #fff0;
+    stroke: var(--lightColor);
+}
+
+.mixerButton path {
+    fill: var(--lightColor);
+}
+
+.playerAction rect {
+    fill: var(--lightColor);
+}
+
+.playerVolume {
+    flex-grow: 1;
+    max-width: 380px;
+}
+
+.playerVolume input {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 3px;
+    outline: none;
+    background: var(--lightColor);
+    transition: 0.3s linear;
+}
+
+.playerVolume input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 1rem;
+    height: 1rem;
+    background: var(--secondaryColor);
+    border: 3px solid var(--lightColor);
+    border-radius: 99px;
+    cursor: grabbing;
+}
+
+.playerVolume input::-moz-range-thumb {
+    appearance: none;
+    width: 1rem;
+    height: 1rem;
+    background: var(--secondaryColor);
+    border: 3px solid var(--lightColor);
+    border-radius: 99px;
+    cursor: grabbing;
+}
+
+.audioPlayerWrapper.mobileMenu {
+    bottom: 48px;
+}

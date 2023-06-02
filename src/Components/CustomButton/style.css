@@ -1,0 +1,45 @@
+.customButton {
+    display: inline-block;
+    font-size: 15px;
+    line-height: 1;
+    font-weight: 700;
+    text-transform: capitalize;
+    text-align: center;
+    text-decoration: none;
+    border: 2px solid;
+    border-radius: 99px;
+    padding: 0.6rem 1.8rem;
+    min-width: 120px;
+    position: relative;
+    transition: 0.3s linear;
+    cursor: pointer;
+}
+
+.primaryButton {
+    background: #fff;
+    color: #000;
+    border-color: #fff;
+}
+
+.secondaryButton {
+    background: #fff0;
+    color: #fff;
+    border-color: #fff;
+}
+
+.primaryButton:hover {
+    background: var(--primaryColor);
+    color: #fff;
+}
+
+.secondaryButton:hover {
+    background: #fff;
+    color: #000;
+}
+
+@media screen and (max-width: 575px) {
+    .customButton {
+        font-size: 14px;
+        padding: 0.6rem 1.5rem;
+    }
+}

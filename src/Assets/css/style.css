@@ -1,0 +1,172 @@
+@import url('./../fonts/stylesheet.css');
+
+/*----- General Css Start -----*/
+
+:root {
+    --primaryColor: #013D5F;
+    --secondaryColor: #21173A;
+    --lightColor: #89a8b9;
+}
+
+body {
+    font-family: 'Poppins';
+    color: #fff;
+    background: linear-gradient(120.55deg, #013D5F -1.27%, #22163A 79.83%);
+    transition: 0.3s linear;
+}
+
+a {
+    color: #fff;
+    transition: 0.3s linear;
+}
+
+a:hover {
+    color: var(--lightColor);
+}
+
+.primaryColor {
+    color: var(--primaryColor) !important;
+}
+
+.secondaryColor {
+    color: var(--secondaryColor) !important;
+}
+
+.lightColor {
+    color: var(--lightColor) !important;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    border-radius: 0px;
+    background-color: var(--primaryColor);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: var(--lightColor);
+    border-radius: 99px;
+}
+
+.smallText {
+    font-size: 14px;
+}
+
+
+.pageTitle {
+    font-size: 32px;
+    font-weight: 600;
+    color: #fff;
+    text-transform: capitalize;
+    margin: 0;
+}
+
+.sectionTitle {
+    font-size: 22px;
+    font-weight: 600;
+    color: #E2E4E9;
+    text-transform: capitalize;
+    margin: 0;
+}
+
+/*----- General Css End -----*/
+
+
+
+
+/*----- General Buttons Css Start -----*/
+
+.notButton {
+    border: none;
+    background: none;
+    outline: none;
+    padding: 0;
+}
+
+.roundButton {
+    width: 30px;
+    height: 30px;
+    border: none;
+    border-radius: 99px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.roundButton svg path {
+    stroke: var(--primaryColor);
+    transition: 0.3s linear;
+}
+
+.roundButton:hover svg path {
+    fill: var(--primaryColor);
+}
+
+/*----- General Buttons Css End -----*/
+
+
+
+
+/*----- Svg Css Start -----*/
+
+.primaryFill path {
+    fill: var(--primaryColor);
+}
+
+.primaryStroke path {
+    stroke: var(--primaryColor);
+}
+
+.lightFill path {
+    fill: var(--lightColor);
+}
+
+.lightStroke path {
+    stroke: var(--lightColor);
+}
+
+.whiteFill path {
+    fill: #fff;
+}
+
+.whiteStroke path {
+    stroke: #fff;
+}
+
+/*----- Svg Css End -----*/
+
+
+
+@media screen and (max-width: 991px) {
+    .pageTitle {
+        font-size: 30px;
+    }
+
+    .sectionTitle {
+        font-size: 20px;
+    }
+
+}
+
+
+@media screen and (max-width: 768px) {
+    .pageTitle {
+        font-size: 28px;
+    }
+}
+
+@media screen and (max-width: 575px) {
+    .pageTitle {
+        font-size: 26px;
+    }
+
+    .sectionTitle {
+        font-size: 18px;
+    }
+}

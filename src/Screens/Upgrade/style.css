@@ -1,0 +1,14 @@
+.premiumList {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.premiumHeading {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.premiumItem {
+    margin-bottom: 4px;
+}

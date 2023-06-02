@@ -1,0 +1,60 @@
+.customTable {
+    overflow-x: auto;
+}
+
+.customTable table {
+    font-size: 15px;
+    padding: 0 0.5rem;
+    width: 100%;
+}
+
+.customTable table thead {
+    border-bottom: 1px solid var(--lightColor);
+}
+
+.customTable table th, .customTable table td {
+    padding: 0.8rem 1rem;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.customTable table th {
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.customTable table td {
+    font-weight: 400;
+    color: var(--lightColor);
+    transition: 0.3s linear;
+}
+
+.customTable table tbody tr:hover td {
+    background: #193555;
+}
+
+.customTable table th:not(:first-child), .customTable table td:not(:first-child) {
+    text-align: center;
+}
+
+.customTableThumbnail {
+    width: 35px;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 99px;
+    margin-right: 0.5rem;
+}
+
+.customTableActions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.customTableAction svg {
+    width: 30px;
+    height: 30px;
+}
+

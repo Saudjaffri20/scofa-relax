@@ -1,0 +1,57 @@
+.inputWrapper {
+    margin-bottom: 1rem;
+}
+
+.mainLabel {
+    font-size: 15px;
+    color: #fff;
+    font-weight: 500;
+}
+
+.mainInput {
+    background: #fff0;
+    border: none;
+    border-bottom: 1px solid #fff;
+    font-weight: 400;
+    padding: 10px 15px;
+    font-size: 14px;
+    color: #fff;
+    width: 100%;
+    resize: none;
+    border-radius: none;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    outline: none;
+}
+
+
+.passwordWrapper {
+    position: relative;
+}
+
+.eyeButton {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0.3rem;
+    font-size: 1rem;
+    background: none;
+    border: none;
+    line-height: 1;
+    color: var(--primaryColor);
+    outline: #fff0;
+}
+
+.passInput {
+    padding-right: 2rem;
+}
+
+.eyeButton svg {
+    width: 20px;
+    height: 20px;
+}
+
+.eyeButton svg path {
+    fill: var(--lightColor);
+}

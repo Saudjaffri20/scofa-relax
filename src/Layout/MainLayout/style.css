@@ -1,0 +1,234 @@
+/*----- Menu Bar Start -----*/
+.menubar .logo {
+    display: block;
+    text-align: center;
+    margin: 2rem 0;
+    outline: none;
+}
+
+.menubar .logo img {
+    width: 120px;
+    max-width: 100%;
+}
+
+.menubar {
+    width: 260px;
+    height: 100vh;
+    position: fixed;
+    transition: all 0.35s ease-in-out, left 0.35s ease-in-out, margin-right 0.35s ease-in-out, right 0.35s ease-in-out;
+    background: #100b16;
+    z-index: 2;
+    top: 0;
+    padding-bottom: 100px;
+    scrollbar-width: thin;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    overflow-y: auto;
+}
+
+.menubar::-webkit-scrollbar {
+    display: none;
+}
+
+.menuLink {
+    font-size: 15px;
+    font-weight: 400;
+    text-decoration: none;
+    color: #fff;
+    padding: 0.8rem 1rem;
+    background: #fff0;
+    position: relative;
+    transition: 0.3s linear;
+    display: flex;
+    align-items: center;
+}
+
+.menuLink:hover, .menuLink.active {
+    color: #fff;
+    background: #051d3f;
+}
+
+.menuIcon {
+    margin-right: 1rem;
+}
+
+.menuIcon svg {
+    width: 22px;
+    height: 22px;
+    fill: #fff;
+}
+
+.menuIcon path, .menuIcon rect {
+    stroke: #fff;
+}
+
+/*----- Menu Bar End -----*/
+
+
+
+
+/*----- Header Start -----*/
+
+.headerWrapper {
+    padding: 1rem;
+}
+
+.headerSearchWrapper {
+    display: flex;
+    align-items: baseline;
+}
+
+.headerUpgradeLink {
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #ffc025;
+    text-decoration: none;
+}
+
+.headerDropdownButton {
+    font-size: 14px !important;
+    background: var(--primaryColor) !important;
+    border: none !important;
+    border-radius: 99px !important;
+    outline: none !important;
+    display: flex !important;
+    align-items: center;
+    gap: 0.5rem;
+    margin-left: auto;
+}
+
+.headerDropdownButton:hover {
+    background: var(--primaryColor) !important;
+}
+
+.avatar {
+    width: 30px;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 99px;
+}
+
+.headerDropdownMenu {
+    background: var(--primaryColor) !important;
+    padding: 0 !important;
+}
+
+.headerDropdownAction {
+    display: block;
+    font-size: 14px;
+    background: none;
+    color: #fff;
+    border: none;
+    outline: none;
+    width: 100%;
+    text-align: left;
+    text-decoration: none;
+    padding: 0.5rem 0.8rem;
+    transition: 0.3s linear;
+}
+
+.headerDropdownAction:not(:last-child) {
+    border-bottom: 1px solid var(--lightColor);
+}
+
+.headerDropdownAction:hover {
+    color: var(--lightColor);
+}
+
+/*----- Header End -----*/
+
+
+
+/*----- Mobile Menu Bar Start -----*/
+
+.menubar.mobileMenu .logo {
+    display: none;
+}
+
+.menubar.mobileMenu {
+    width: 100%;
+    border: none;
+    border-top: 1px solid var(--lightColor);
+    padding: 0;
+    height: 48px;
+    bottom: 0;
+    top: unset;
+}
+
+.menubar.mobileMenu>ul {
+    display: flex;
+    align-items: center;
+    margin: 0;
+}
+
+.menubar.mobileMenu .menubar-li {
+    flex-grow: 1;
+}
+
+.menubar.mobileMenu .menuLink {
+    padding: 0.2rem 0.8rem;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border-top: 2px solid #ffffff3b;
+}
+
+.menubar.mobileMenu .menuLink:hover, .menubar.mobileMenu .menuLink.active {
+    border-top: 2px solid #fff;
+}
+
+.menubar.mobileMenu .menuIcon {
+    margin: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.menubar.mobileMenu .menuIcon svg {
+    width: 20px;
+    height: 22px;
+}
+
+.menubar.mobileMenu .menuLinkText {
+    font-size: 10px;
+}
+
+.menuSeperator {
+    border-top: 1px solid var(--lightColor);
+    margin: 1rem;
+    opacity: 1;
+}
+
+
+/*----- Mobile Menu Bar End -----*/
+
+
+
+/*----- General Layout Start -----*/
+
+.secondaryBg {
+    background: url('./../../Assets/images/secondaryBg.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+
+.mainBody {
+    min-height: 100vh;
+}
+
+.desktopBody {
+    padding: 0rem 0.5rem 60px 0.5rem;
+    margin-left: 260px;
+}
+
+.mobileBody {
+    padding: 0rem 0.5rem 100px 0.5rem;
+}
+
+/*----- General Layout End -----*/
+
+
+
+

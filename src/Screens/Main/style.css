@@ -1,0 +1,147 @@
+.mainWrapper {
+    background: url('./../../Assets/images/fullPageBg.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.logo img {
+    width: 140px;
+}
+
+.mainPremium {
+    background: linear-gradient(120.55deg, #013D5F -1.27%, #22163A 79.83%);
+    height: 100vh;
+    padding: 1rem 4rem;
+    display: flex;
+    align-items: center;
+}
+
+.mainPremiumTitle {
+    font-size: 28px;
+    font-weight: 200;
+    margin-bottom: 1rem;
+    text-transform: capitalize;
+    font-style: italic;
+}
+
+.mainPremiumText {
+    font-size: 16px;
+    line-height: 1;
+    font-weight: 300;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.mainPremiumIcon {
+    width: 26px;
+    height: 26px;
+}
+
+.mainPremiumIcon path {
+    fill: #e8a700 !important;
+    stroke: #e8a700 !important;
+}
+
+.mainCategories {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    min-height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: relative;
+}
+
+.mainCategoryTitle {
+    font-size: 26px;
+    font-weight: 500;
+}
+
+.categoryLink {
+    font-size: 16px;
+    line-height: 1;
+    font-weight: 400;
+    text-transform: capitalize;
+    text-align: center;
+    text-decoration: none;
+    color: #eaeaea;
+    background: #fff0;
+    border: 1px solid #eaeaea;
+    border-radius: 99px;
+    margin: 0.8rem 0;
+    padding: 0.8rem 1.5rem;
+    height: auto;
+    display: inline-block;
+    min-width: 280px;
+    position: relative;
+    backdrop-filter: contrast(0.9);
+    -webkit-backdrop-filter: contrast(0.9);
+    transition: 0.3s linear;
+    cursor: pointer;
+}
+
+.categoryLink:hover {
+    color: #fff;
+    border-color: #fff;
+    backdrop-filter: contrast(1);
+    -webkit-backdrop-filter: contrast(1);
+}
+
+.externalLink {
+    font-size: 16px;
+    text-decoration: none;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.externalLink svg {
+    width: 1rem;
+    height: 1rem;
+}
+
+.mw-320 {
+    min-width: 320px !important;
+}
+
+@media screen and (max-width: 1200px) {
+
+}
+
+@media screen and (max-width: 991px) {
+
+    .mainCategories {
+        padding: 0rem 4rem;
+    }
+
+    .externalLink {
+        font-size: 13px;
+    }
+
+}
+
+@media screen and (max-width: 768px) {
+
+    .logo img {
+        width: 120px;
+    }
+
+    .mainCategoryTitle {
+        font-size: 20px;
+    }
+
+    .categoryLink {
+        font-size: 14px;
+        min-width: 240px;
+    }
+
+
+
+}
+
+@media screen and (max-width: 575px) {
+}

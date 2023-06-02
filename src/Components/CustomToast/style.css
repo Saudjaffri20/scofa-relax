@@ -1,0 +1,14 @@
+.customToast {
+    background: var(--lightColor) !important;
+    color: var(--primaryColor) !important;
+    border: none !important;
+}
+
+.customToast .toast-header {
+    background: var(--primaryColor) !important;
+    color: var(--lightColor) !important;
+}
+
+.customToast .btn-close {
+    filter: brightness(0) invert(1);
+}
