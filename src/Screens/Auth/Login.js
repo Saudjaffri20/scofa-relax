@@ -36,6 +36,7 @@ const Login = () => {
         const token = response.data.data[0].token;
         setLoginError({ error: false, text: "" });
         setAccessToken(token);
+        localStorage.setItem("user", JSON.stringify(response.data.data[0]));
         dispatch(setUserDetails(response.data.data[0]));
         navigate("/home");
       } else {

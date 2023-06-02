@@ -23,7 +23,6 @@ const Stories = () => {
   const dispatch = useDispatch();
 
   const [data, setData] = useState([]);
-  console.log(data)
   const [playingAudio, setPlayingAudio] = useState({});
 
   useEffect(() => {

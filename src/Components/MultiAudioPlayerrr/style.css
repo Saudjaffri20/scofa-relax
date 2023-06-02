@@ -86,6 +86,25 @@
     text-align: center;
 }
 
+.audioRemoveButton {
+    width: 20px;
+    height: 20px;
+    border: none;
+    border-radius: 99px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.audioRemoveButton svg {
+    width: 20px;
+    height: 20px;
+}
+
+.audioRemoveButton path {
+    fill: var(--primaryColor);
+}
+
 .playerVolume input::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
@@ -138,7 +157,7 @@
 }
 
 .mixerBody {
-    padding: 1rem;
+    padding: 0rem 1rem;
     max-height: 240px;
     overflow-y: scroll;
 }
@@ -177,7 +196,12 @@
 .individualAudio {
     display: flex;
     flex-direction: column;
-    text-align: left !important;
+    padding: 1rem 0;
+}
+
+.individualAudio:not(:last-child) {
+    border-bottom: 1px solid var(--lightColor);
+    
 }
 
 .mixerSoundDetail {
@@ -187,17 +211,18 @@
 }
 
 .mixerSoundThumbnail {
-    width: 45px;
+    width: 35px;
     aspect-ratio: 1/1;
     object-fit: cover;
     object-position: center;
     border-radius: 99px;
 }
 
-.mixerSoundTitle {
+.mixerAudioTitle {
     font-size: 12px !important;
     text-align: center !important;
-    margin: 0 !important;
+    margin: 0.3rem !important;
+    color: var(--lightColor);
 }
 
 .mixerFooter {

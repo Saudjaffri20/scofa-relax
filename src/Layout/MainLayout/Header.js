@@ -7,9 +7,12 @@ import { setUserDetails } from "../../Store/Slices/UserSlice";
 import { Dropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-import CustomSearchBar from "../../Components/CustomSearchBar";
+import { avatar } from "../../Assets/images";
 
-import { currentUser } from "../../Config/data";
+import CustomSearchBar from "../../Components/CustomSearchBar";
+import BASEURL from "../../Config/global";
+
+// import { currentUser } from "../../Config/data";
 
 export const Header = (props) => {
   const dispatch = useDispatch();
@@ -18,8 +21,13 @@ export const Header = (props) => {
   const [user, setUser] = useState({});
 
   useEffect(() => {
-    setUser(currentUser);
+    const currentUser = localStorage.getItem("user")
+    if (currentUser) {
+      const parsedUser = JSON.parse(currentUser);
+      setUser(parsedUser);
+    }
   }, []);
+
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
@@ -27,6 +35,7 @@ export const Header = (props) => {
 
   const handleLogout = () => {
     removeAccessToken()
+    localStorage.removeItem("user")
     dispatch(setUserDetails(null))
     navigate('/login')
   };
@@ -56,8 +65,8 @@ export const Header = (props) => {
                 id="dropdown-basic"
                 className="headerDropdownButton"
               >
-                <img src={user.image} alt="Avatar" className="avatar" />
-                {user.name}
+                <img src={avatar} alt="Avatar" className="avatar" />
+                {user.first_name}
               </Dropdown.Toggle>
               <Dropdown.Menu className="headerDropdownMenu">
                 <Link to={"/upgrade"} className="headerDropdownAction d-md-none">

@@ -246,7 +246,7 @@ const MultiAudioPlayerrr = () => {
                     className="playButton playerAction"
                     onClick={handlePlayAll}
                   >
-                    <PlayButton className="playerActionIcon"/>
+                    <PlayButton className="playerActionIcon" />
                     <p className="playerActionText">Play</p>
                   </button>
                 )}
@@ -265,7 +265,7 @@ const MultiAudioPlayerrr = () => {
                   disabled={isMixerDisabled}
                   title={
                     <div className="">
-                      <MixerButton className="playerActionIcon"/>
+                      <MixerButton className="playerActionIcon" />
                       <p className="playerActionText">Mixer</p>
                     </div>
                   }
@@ -294,7 +294,7 @@ const MultiAudioPlayerrr = () => {
                               }}
                             />
                             <button
-                              className="roundButton"
+                              className="audioRemoveButton"
                               onClick={() => {
                                 handleRemoveSound(index);
                               }}
@@ -302,7 +302,7 @@ const MultiAudioPlayerrr = () => {
                               <CrossIcon />
                             </button>
                           </div>
-                          <p className="mixerSoundTitle">{sound.audioTitle}</p>
+                          <p className="mixerAudioTitle">{sound.audioTitle}</p>
                         </div>
                       ))}
                     </div>
@@ -311,11 +311,11 @@ const MultiAudioPlayerrr = () => {
                         className="timerButton notButton"
                         onClick={handleShowTimer}
                       >
-                        <TimerButton className="playerActionIcon"/>
+                        <TimerButton className="playerActionIcon" />
                         <p className="playerActionText">Timer</p>
                       </button>
                       <CustomButton
-                        variant="secondaryButton"
+                        variant="primaryButton fw-normal"
                         text="Clear Mix"
                         onClick={handleClearMix}
                       />

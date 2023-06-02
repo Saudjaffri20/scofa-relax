@@ -104,6 +104,10 @@
     height: 1rem;
 }
 
+.externalLink .cls-2 {
+    fill: #fff0;
+}
+
 .mw-320 {
     min-width: 320px !important;
 }

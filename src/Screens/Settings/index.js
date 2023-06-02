@@ -6,21 +6,31 @@ import MainLayout from "./../../Layout/MainLayout";
 import { currentUser } from "../../Config/data";
 
 import "./style.css";
+import { avatar } from "../../Assets/images";
 
 const Settings = () => {
   const [user, setUser] = useState({});
 
+  // useEffect(() => {
+  //   setUser(currentUser);
+  // }, []);
+
   useEffect(() => {
-    setUser(currentUser);
+    const currentUser = localStorage.getItem("user")
+    if (currentUser) {
+      const parsedUser = JSON.parse(currentUser);
+      setUser(parsedUser);
+    }
   }, []);
+
   return (
     <>
       <MainLayout>
         <div className="row mb-lg-5 mb-4">
           <div className="col-12">
             <div className="d-flex align-items-center gap-3">
-              <img src={user.image} alt="" className="profileImage"/>
-              <h2 className="pageTitle">{user.name}</h2>
+              <img src={avatar} alt="" className="profileImage"/>
+              <h2 className="pageTitle">{`${user.first_name} ${user.last_name}`}</h2>
             </div>
           </div>
         </div>
