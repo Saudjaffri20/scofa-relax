@@ -46,7 +46,7 @@ export const Header = (props) => {
     <div className="headerWrapper">
       <div className="row">
         <div className="col-12 text-end">
-          <div className="d-flex align-items-center justify-content-end gap-3 flex-wrap-reverse">
+          <div className="d-flex align-items-center justify-content-end gap-2">
             <div className="headerSearchWrapper">
               <p className="smallText mb-0 me-2">Search</p>
               <CustomSearchBar

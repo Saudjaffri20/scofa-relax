@@ -60,7 +60,7 @@ a:hover {
 
 
 .pageTitle {
-    font-size: 32px;
+    font-size: 30px;
     font-weight: 600;
     color: #fff;
     text-transform: capitalize;
@@ -145,7 +145,7 @@ a:hover {
 
 @media screen and (max-width: 991px) {
     .pageTitle {
-        font-size: 30px;
+        font-size: 26px;
     }
 
     .sectionTitle {
@@ -157,13 +157,13 @@ a:hover {
 
 @media screen and (max-width: 768px) {
     .pageTitle {
-        font-size: 28px;
+        font-size: 24px;
     }
 }
 
 @media screen and (max-width: 575px) {
     .pageTitle {
-        font-size: 26px;
+        font-size: 22px;
     }
 
     .sectionTitle {
