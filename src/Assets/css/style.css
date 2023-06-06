@@ -108,6 +108,11 @@ a:hover {
     fill: var(--primaryColor);
 }
 
+.roundButton img {
+    max-width: 15px;
+    width: 100%;
+}
+
 /*----- General Buttons Css End -----*/
 
 

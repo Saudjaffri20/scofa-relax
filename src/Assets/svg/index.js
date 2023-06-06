@@ -28,6 +28,9 @@ import { ReactComponent as Eye } from "./eye.svg";
 import { ReactComponent as EyeSlash } from "./eye-slash.svg";
 import { ReactComponent as CrossIcon } from "./cross.svg";
 
+import crossIcon from './crossIcon.png'
+import playIcon from './playIcon.png'
+
 export {
   PremiumPlaylist,
   PremiumQuality,
@@ -54,4 +57,7 @@ export {
   Eye,
   EyeSlash,
   CrossIcon,
+
+  crossIcon,
+  playIcon,
 };

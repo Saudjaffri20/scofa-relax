@@ -7,6 +7,7 @@ import {
   PauseButton,
   PlayButton,
   ShuffleButton,
+  playIcon,
 } from "../../Assets/svg";
 
 import "./style.css";
@@ -127,7 +128,7 @@ const Meditation = () => {
                             );
                           }}
                         >
-                          <PlayButton />
+                        <img src={playIcon} alt="" />
                         </button></td>
                     <td>
                       <img

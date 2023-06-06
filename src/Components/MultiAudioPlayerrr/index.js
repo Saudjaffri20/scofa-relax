@@ -19,6 +19,7 @@ import {
   PlayButton,
   Spinner,
   CrossIcon,
+  crossIcon,
 } from "../../Assets/svg";
 import "./style.css";
 import BASEURL from "../../Config/global";
@@ -333,7 +334,7 @@ const MultiAudioPlayerrr = () => {
                                 handleRemoveSound(index);
                               }}
                             >
-                              <CrossIcon />
+                              <img src={crossIcon} alt="" />
                             </button>
                           </div>
                           <p className="mixerAudioTitle">{sound.audioTitle}</p>
@@ -374,7 +375,7 @@ const MultiAudioPlayerrr = () => {
             className="closeButton roundButton ms-auto"
             onClick={handleCloseTimer}
           >
-            <CrossIcon />
+            <img src={crossIcon} alt="" />
           </button>
           <h2 className="modalHeading pageTitle mb-4">Select Time</h2>
           <div className="timerOptions">
@@ -433,7 +434,7 @@ const MultiAudioPlayerrr = () => {
               dispatch(hideErrorMessage())
             }}
           >
-            <CrossIcon />
+            <img src={crossIcon} alt="" />
           </button>
           <div className="customModalContent">
           <h2 className="soundModalError mb-4">
