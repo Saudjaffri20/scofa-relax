@@ -154,7 +154,7 @@
     border: none;
     border-top: 1px solid var(--lightColor);
     padding: 0;
-    height: 48px;
+    height: 60px;
     bottom: 0;
     top: unset;
 }
@@ -170,11 +170,12 @@
 }
 
 .menubar.mobileMenu .menuLink {
-    padding: 0.2rem 0.8rem;
+    padding: 0.5rem 0.8rem;
     flex-direction: column;
     align-items: center;
     text-align: center;
     border-top: 2px solid #ffffff3b;
+    height: 100%;
 }
 
 .menubar.mobileMenu .menuLink:hover, .menubar.mobileMenu .menuLink.active {

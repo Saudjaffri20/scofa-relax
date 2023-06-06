@@ -49,8 +49,8 @@ const Meditation = () => {
   //   }
   // };
 
-  const dispatchPlaySound = (source, title, thumbnail) => {
-    dispatch(playSound({ source, title, thumbnail }));
+  const dispatchPlaySound = (source, title, thumbnail, naration) => {
+    dispatch(playSound({ source, title, thumbnail, naration }));
   };
 
   // const dispatchSound = (id, source, title, thumbnail) => {
@@ -58,6 +58,10 @@ const Meditation = () => {
   // };
 
   const tableHeaders = [
+    {
+      key: "play",
+      title: "",
+    },
     {
       key: "title",
       title: "Title",
@@ -84,7 +88,7 @@ const Meditation = () => {
             <h2 className="pageTitle">Meditation</h2>
           </div>
         </div>
-        <div className="row mb-3">
+        {/* <div className="row mb-3">
           <div className="col-12">
             <div className="d-flex align-items-center gap-2">
               <div className="customTableActionWrapper">
@@ -104,13 +108,27 @@ const Meditation = () => {
               </button>
             </div>
           </div>
-        </div>
+        </div> */}
         <div className="row mb-3">
           <div className="col-12">
             <CustomTable headers={tableHeaders}>
               <tbody>
                 {data.map((item, index) => (
                   <tr key={index}>
+                    <td> <button
+                          type="button"
+                          className="customTableAction roundButton primaryFill"
+                          onClick={() => {
+                            dispatchPlaySound(
+                              item.audio,
+                              item.title,
+                              item.thumbnail,
+                              item.naration
+                            );
+                          }}
+                        >
+                          <PlayButton />
+                        </button></td>
                     <td>
                       <img
                         src={`${BASEURL + item.thumbnail}`}
@@ -129,19 +147,7 @@ const Meditation = () => {
                         >
                           <HeartButton />
                         </button>
-                        <button
-                          type="button"
-                          className="customTableAction roundButton primaryFill"
-                          onClick={() => {
-                            dispatchPlaySound(
-                              item.audio,
-                              item.title,
-                              item.thumbnail
-                            );
-                          }}
-                        >
-                          <PlayButton />
-                        </button>
+                       
                         {/* {playingAudio.id == item.id ? <p>Playing</p> : <p>Not</p>} */}
                       </div>
                     </td>

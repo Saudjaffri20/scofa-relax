@@ -87,8 +87,8 @@ const Home = () => {
     fetchData();
   }, []);
 
-  const dispatchPlaySound = (source, title, thumbnail) => {
-    dispatch(playSound({source, title, thumbnail}))
+  const dispatchPlaySound = (source, title, thumbnail, naration) => {
+    dispatch(playSound({source, title, thumbnail, naration}))
   }
 
   // const dispatchSound = (source, title, thumbnail) => {
@@ -127,6 +127,7 @@ const Home = () => {
                       item.audio,
                       item.title,
                       item.thumbnail,
+                      item.naration,
                     );
                   }}
                 />
@@ -158,7 +159,8 @@ const Home = () => {
                     dispatchPlaySound(
                       item.audio,
                       item.title,
-                      item.thumbnail
+                      item.thumbnail,
+                      item.naration
                     );
                   }}
                 />
@@ -190,7 +192,8 @@ const Home = () => {
                     dispatchPlaySound(
                       item.audio,
                       item.title,
-                      item.thumbnail
+                      item.thumbnail,
+                      item.naration
                     );
                   }}
                 />
@@ -222,7 +225,8 @@ const Home = () => {
                     dispatchPlaySound(
                       item.audio,
                       item.title,
-                      item.thumbnail
+                      item.thumbnail,
+                      item.naration
                     );
                   }}
                 />

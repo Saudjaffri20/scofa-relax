@@ -5,10 +5,21 @@ const soundPlayerSlice = createSlice({
   name: "soundPlayer",
   initialState: {
     sounds: [],
+    errorMessage: false,
   },
   reducers: {
     playSound(state, action) {
-      const { source, title, thumbnail } = action.payload;
+      const { source, title, thumbnail, naration } = action.payload;
+      const existingNarationSound = state.sounds.find(
+        (sound) => sound.naration
+      );
+
+      if (naration && existingNarationSound) {
+        state.errorMessage = true;
+        // console.log(state.errorMessage)
+        return state;
+      }
+
       const soundExists = state.sounds.some(
         (sound) => sound.audioSource === BASEURL + source
       );
@@ -17,58 +28,20 @@ const soundPlayerSlice = createSlice({
           audioSource: BASEURL + source,
           audioTitle: title,
           audioThumbnail: BASEURL + thumbnail,
+          naration: naration,
         };
         state.sounds.push(newSound);
       }
     },
-    // setVolume(state, action) {
-    //   state.overallVolume = action.payload;
-    //   state.sounds.forEach((sound) => {
-    //     if (sound.howl) {
-    //       sound.howl.volume(action.payload);
-    //     }
-    //   });
-    // },
-    // playAll(state) {
-    //   state.sounds.forEach((sound) => {
-    //     if (sound.howl && !sound.howl.playing()) {
-    //       sound.howl.play();
-    //     }
-    //   });
-    // },
-    // pauseAll(state) {
-    //   state.sounds.forEach((sound) => {
-    //     if (sound.howl && sound.howl.playing()) {
-    //       sound.howl.pause();
-    //     }
-    //   });
-    // },
-    // setSoundVolume(state, action) {
-    //   const { index, volume } = action.payload;
-    //   if (state.sounds[index].howl) {
-    //     state.sounds[index].volume = volume;
-    //     state.sounds[index].howl.volume(volume * state.overallVolume);
-    //   }
-    // },
-    // pauseSound(state, action) {
-    //   const index = action.payload;
-    //   if (state.sounds[index].howl && state.sounds[index].howl.playing()) {
-    //     state.sounds[index].howl.pause();
-    //   }
-    // }, 
-    // stopSound(state, action) {
-    //   const index = action.payload;
-    //   if (state.sounds[index].howl && state.sounds[index].howl.playing()) {
-    //     state.sounds[index].howl.stop();
-    //   }
-    // },
     removeSound(state, action) {
       const index = action.payload;
       state.sounds.splice(index, 1);
     },
-    
     clearAllSound(state, action) {
       state.sounds = [];
+    },
+    hideErrorMessage(state) {
+      state.errorMessage = false;
     },
   },
 });
@@ -83,6 +56,7 @@ export const {
   stopSound,
   removeSound,
   clearAllSound,
+  hideErrorMessage
 } = soundPlayerSlice.actions;
 
 export default soundPlayerSlice.reducer;

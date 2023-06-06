@@ -13,7 +13,7 @@
 }
 
 .customTable table th, .customTable table td {
-    padding: 0.8rem 1rem;
+    padding: 0.8rem 0.5rem;
     vertical-align: middle;
     white-space: nowrap;
 }
@@ -33,9 +33,9 @@
     background: #193555;
 }
 
-.customTable table th:not(:first-child), .customTable table td:not(:first-child) {
+/* .customTable table th:not(:first-child), .customTable table td:not(:first-child) {
     text-align: center;
-}
+} */
 
 .customTableThumbnail {
     width: 35px;

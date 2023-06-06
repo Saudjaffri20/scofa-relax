@@ -9,8 +9,8 @@ import BASEURL from "../../Config/global";
 const RoundAudio = (props) => {
   const dispatch = useDispatch();
 
-  const dispatchPlaySound = (source, title, thumbnail) => {
-    dispatch(playSound({ source, title, thumbnail }));
+  const dispatchPlaySound = (source, title, thumbnail, naration) => {
+    dispatch(playSound({ source, title, thumbnail, naration }));
   };
 
   // const dispatchSound = (source, title, thumbnail) => {
@@ -25,7 +25,8 @@ const RoundAudio = (props) => {
           dispatchPlaySound(
             props.item.audio,
             props.item.title,
-            props.item.thumbnail
+            props.item.thumbnail,
+            props.item.naration
           );
         }}
       >

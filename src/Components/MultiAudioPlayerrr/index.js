@@ -7,6 +7,7 @@ import { Modal } from "react-bootstrap";
 import {
   clearAllSound,
   removeSound,
+  hideErrorMessage,
 } from "../../Store/Slices/SoundPlayerSlice";
 
 // import { playAll } from "../../Store/Slices/SoundPlayerSlice";
@@ -43,6 +44,9 @@ const MultiAudioPlayerrr = () => {
   const location = useLocation();
 
   const sounds = useSelector((state) => state.soundPlayer.sounds);
+  const soundErrorMessage = useSelector(
+    (state) => state.soundPlayer.errorMessage
+  );
   const dispatch = useDispatch();
 
   const [soundList, setSoundList] = useState([]);
@@ -63,12 +67,6 @@ const MultiAudioPlayerrr = () => {
       handleClearMix();
     }
   }, [location]);
-
-  // console.log("soundList => ", soundList)
-  // console.log("sourceList => ", sourceList)
-  // console.log("lastSource => ", lastSource)
-  // console.log("soundList => ", soundList);
-  // console.log("howlCount ===> ", howlCount);
 
   useEffect(() => {
     const duplicateArray = [];
@@ -177,6 +175,25 @@ const MultiAudioPlayerrr = () => {
     howlList[index].volume(volumeLevel);
   };
 
+  const volumeControl = (value) => {
+    if (value === "increase" && howlList.length > 0 && overallVolume <= 1) {
+      setOverallVolume(overallVolume + 0.01);
+      Howler.volume(overallVolume);
+      howlList.forEach((howl) => {
+        howl.volume(overallVolume);
+      });
+      console.log(overallVolume);
+    }
+    if (value === "decrease" && howlList.length > 0 && overallVolume >= 0) {
+      setOverallVolume(overallVolume - 0.01);
+      Howler.volume(overallVolume);
+      howlList.forEach((howl) => {
+        howl.volume(overallVolume);
+      });
+      console.log(overallVolume);
+    }
+  };
+
   const handleRemoveSound = (index) => {
     howlList[index].unload();
 
@@ -251,6 +268,23 @@ const MultiAudioPlayerrr = () => {
                   </button>
                 )}
                 <div className="playerVolume">
+                  <div className="volumeControl">
+                    <button
+                      onClick={() => {
+                        volumeControl("decrease");
+                      }}
+                    >
+                      -
+                    </button>
+                    <p>Volume</p>
+                    <button
+                      onClick={() => {
+                        volumeControl("increase");
+                      }}
+                    >
+                      +
+                    </button>
+                  </div>
                   <input
                     type="range"
                     min="0"
@@ -266,7 +300,7 @@ const MultiAudioPlayerrr = () => {
                   title={
                     <div className="">
                       <MixerButton className="playerActionIcon" />
-                      <p className="playerActionText">Mixer</p>
+                      <p className="playerActionText">Sound Mixer</p>
                     </div>
                   }
                   drop="up"
@@ -332,7 +366,7 @@ const MultiAudioPlayerrr = () => {
         show={showTimerModal}
         centered
         onHide={handleCloseTimer}
-        className="timerModal"
+        className="soundModal"
         backdrop="static"
       >
         <Modal.Body className="text-center">
@@ -380,6 +414,40 @@ const MultiAudioPlayerrr = () => {
               }}
             />
           </div>
+        </Modal.Body>
+      </Modal>
+
+      <Modal
+        show={soundErrorMessage}
+        centered
+        onHide={() => {
+          dispatch(hideErrorMessage())
+        }}
+        className="soundModal"
+        backdrop="static"
+      >
+        <Modal.Body className="text-center">
+          <button
+            className="closeButton roundButton ms-auto"
+            onClick={() => {
+              dispatch(hideErrorMessage())
+            }}
+          >
+            <CrossIcon />
+          </button>
+          <div className="customModalContent">
+          <h2 className="soundModalError mb-4">
+            We noticed you currently have a vocal content playing.
+          </h2>
+          <CustomButton
+            variant="secondaryButton fw-normal"
+            text="Close"
+            onClick={() => {
+              dispatch(hideErrorMessage())
+            }}
+          />
+          </div>
+
         </Modal.Body>
       </Modal>
     </>

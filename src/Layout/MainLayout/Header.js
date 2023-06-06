@@ -48,7 +48,7 @@ export const Header = (props) => {
         <div className="col-12 text-end">
           <div className="d-flex align-items-center justify-content-end gap-2">
             <div className="headerSearchWrapper">
-              <p className="smallText mb-0 me-2">Search</p>
+              <p className="smallText d-none d-md-block mb-0 me-2">Search</p>
               <CustomSearchBar
                 placeholder="What do you want to listen to?"
                 onChange={(event) => {

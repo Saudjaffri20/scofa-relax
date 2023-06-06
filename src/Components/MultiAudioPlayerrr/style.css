@@ -6,12 +6,12 @@
     width: 100%;
     background: #051d3f;
     border-top: 1px solid var(--lightColor);
-    padding: 0.5rem 0;
+    padding: 0.3rem 0;
 }
 
 .audioPlayerControls {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
 }
 
@@ -33,8 +33,8 @@
 
 .playerAction .playerActionIcon {
     display: inline-block;
-    width: 25px;
-    height: 25px;
+    width: 22px;
+    height: 22px;
 }
 
 .playerAction path {
@@ -62,9 +62,9 @@
 
 .playerVolume {
     flex-grow: 1;
-    max-width: 380px;
+    max-width: 340px;
     position: relative;
-    margin: 18px 0;
+    margin: 6px 0;
 }
 
 .playerVolume input {
@@ -75,6 +75,29 @@
     background: var(--lightColor);
     transition: 0.3s linear;
 
+}
+
+.volumeControl {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+}
+
+.volumeControl button {
+    font-size: 20px;
+    line-height: 1;
+    color: var(--lightColor);
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+.volumeControl p {
+    font-size: 14px;
+    line-height: 1;
+    color: var(--lightColor);
+    margin: 0;
 }
 
 .soundTitle {
@@ -127,7 +150,7 @@
 }
 
 .audioPlayerWrapper.mobileMenu {
-    bottom: 48px;
+    bottom: 60px;
 }
 
 
@@ -137,9 +160,10 @@
 
 
 
-.customDropdownButton button {
+.customDropdownButton > button {
     outline: #fff0 !important;
     border: none !important;
+    padding: 0;
 }
 
 .customDropdownButton button::after {
@@ -255,11 +279,11 @@
 }
 
 
-.timerModal {
+.soundModal {
     backdrop-filter: blur(12px);
 }
 
-.timerModal .modal-content {
+.soundModal .modal-content {
     background: var(--primaryColor);
     border: 1px solid var(--lightColor);
 }
@@ -268,6 +292,15 @@
     display: block;
     min-width: 240px;
     margin: 1rem auto;
+}
+
+.customModalContent {
+    padding: 1rem 1rem;
+}
+
+.soundModalError {
+    font-size: 18px;
+    line-height: 1.5;
 }
 
 @-webkit-keyframes spin {
