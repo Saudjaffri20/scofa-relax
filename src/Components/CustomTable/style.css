@@ -58,3 +58,10 @@
     height: 30px;
 }
 
+.svgButton svg {
+    width: 25px;
+    height: 25px;
+    background: #fff;
+    border-radius: 99px;
+    padding: 0.3rem;
+}

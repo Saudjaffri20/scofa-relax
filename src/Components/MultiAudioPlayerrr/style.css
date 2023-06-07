@@ -118,10 +118,18 @@
     align-items: center;
     justify-content: center;
 }
-
+/* 
 .audioRemoveButton svg {
     width: 20px;
     height: 20px;
+} */
+
+.audioRemoveButton svg, .closeButton svg {
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border-radius: 99px;
+    padding: 0.2rem;
 }
 
 .audioRemoveButton path {

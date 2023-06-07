@@ -124,7 +124,7 @@ const Articles = () => {
                       {" "}
                       <button
                         type="button"
-                        className="customTableAction roundButton primaryFill"
+                        className="customTableAction svgButton notButton primaryFill"
                         onClick={() => {
                           dispatchPlaySound(
                             item.audio,
@@ -134,7 +134,8 @@ const Articles = () => {
                           );
                         }}
                       >
-                        <img src={playIcon} alt="" />
+                        <PlayButton />
+                        {/* <img src={playIcon} alt="" /> */}
                       </button>
                     </td>
                     <td>

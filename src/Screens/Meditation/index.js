@@ -7,7 +7,6 @@ import {
   PauseButton,
   PlayButton,
   ShuffleButton,
-  playIcon,
 } from "../../Assets/svg";
 
 import "./style.css";
@@ -118,7 +117,7 @@ const Meditation = () => {
                   <tr key={index}>
                     <td> <button
                           type="button"
-                          className="customTableAction roundButton primaryFill"
+                          className="customTableAction svgButton notButton primaryFill"
                           onClick={() => {
                             dispatchPlaySound(
                               item.audio,
@@ -128,7 +127,8 @@ const Meditation = () => {
                             );
                           }}
                         >
-                        <img src={playIcon} alt="" />
+                          <PlayButton />
+                        {/* <img src={playIcon} alt="" /> */}
                         </button></td>
                     <td>
                       <img

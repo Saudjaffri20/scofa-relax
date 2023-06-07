@@ -10,20 +10,20 @@ const soundPlayerSlice = createSlice({
   reducers: {
     playSound(state, action) {
       const { source, title, thumbnail, naration } = action.payload;
-      const existingNarationSound = state.sounds.find(
-        (sound) => sound.naration
-      );
-
-      if (naration && existingNarationSound) {
-        state.errorMessage = true;
-        // console.log(state.errorMessage)
-        return state;
-      }
 
       const soundExists = state.sounds.some(
         (sound) => sound.audioSource === BASEURL + source
       );
       if (!soundExists) {
+        if (naration) {
+          const prevNarationSoundIndex = state.sounds.findIndex(
+            (sound) => sound.naration
+          );
+          if (prevNarationSoundIndex !== -1) {
+            state.sounds.splice(prevNarationSoundIndex, 1);
+          }
+        }
+
         const newSound = {
           audioSource: BASEURL + source,
           audioTitle: title,
@@ -56,7 +56,7 @@ export const {
   stopSound,
   removeSound,
   clearAllSound,
-  hideErrorMessage
+  hideErrorMessage,
 } = soundPlayerSlice.actions;
 
 export default soundPlayerSlice.reducer;

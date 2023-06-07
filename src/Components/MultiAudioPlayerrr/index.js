@@ -20,6 +20,7 @@ import {
   Spinner,
   CrossIcon,
   crossIcon,
+  playIcon,
 } from "../../Assets/svg";
 import "./style.css";
 import BASEURL from "../../Config/global";
@@ -329,12 +330,13 @@ const MultiAudioPlayerrr = () => {
                               }}
                             />
                             <button
-                              className="audioRemoveButton"
+                              className="notButton audioRemoveButton"
                               onClick={() => {
                                 handleRemoveSound(index);
                               }}
                             >
-                              <img src={crossIcon} alt="" />
+                              <CrossIcon />
+                              {/* <img src={crossIcon} alt="" /> */}
                             </button>
                           </div>
                           <p className="mixerAudioTitle">{sound.audioTitle}</p>
@@ -370,13 +372,17 @@ const MultiAudioPlayerrr = () => {
         className="soundModal"
         backdrop="static"
       >
-        <Modal.Body className="text-center">
-          <button
-            className="closeButton roundButton ms-auto"
-            onClick={handleCloseTimer}
-          >
-            <img src={crossIcon} alt="" />
-          </button>
+        <Modal.Body>
+          <div className="text-end">
+            <button
+              className="closeButton notButton ms-auto"
+              onClick={handleCloseTimer}
+            >
+              <CrossIcon />
+              {/* <img src={crossIcon} alt="" /> */}
+            </button>
+          </div>
+          <div className="customModalContent text-center">
           <h2 className="modalHeading pageTitle mb-4">Select Time</h2>
           <div className="timerOptions">
             <CustomButton
@@ -415,14 +421,15 @@ const MultiAudioPlayerrr = () => {
               }}
             />
           </div>
+          </div>
         </Modal.Body>
       </Modal>
 
-      <Modal
+      {/* <Modal
         show={soundErrorMessage}
         centered
         onHide={() => {
-          dispatch(hideErrorMessage())
+          dispatch(hideErrorMessage());
         }}
         className="soundModal"
         backdrop="static"
@@ -431,26 +438,25 @@ const MultiAudioPlayerrr = () => {
           <button
             className="closeButton roundButton ms-auto"
             onClick={() => {
-              dispatch(hideErrorMessage())
+              dispatch(hideErrorMessage());
             }}
           >
             <img src={crossIcon} alt="" />
           </button>
           <div className="customModalContent">
-          <h2 className="soundModalError mb-4">
-            We noticed you currently have a vocal content playing.
-          </h2>
-          <CustomButton
-            variant="secondaryButton fw-normal"
-            text="Close"
-            onClick={() => {
-              dispatch(hideErrorMessage())
-            }}
-          />
+            <h2 className="soundModalError mb-4">
+              We noticed you currently have a vocal content playing.
+            </h2>
+            <CustomButton
+              variant="secondaryButton fw-normal"
+              text="Close"
+              onClick={() => {
+                dispatch(hideErrorMessage());
+              }}
+            />
           </div>
-
         </Modal.Body>
-      </Modal>
+      </Modal> */}
     </>
   );
 };
