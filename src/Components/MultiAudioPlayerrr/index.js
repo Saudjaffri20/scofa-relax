@@ -63,8 +63,8 @@ const MultiAudioPlayerrr = () => {
   const [isMixerDisabled, setIsMixerDisabled] = useState(true);
   const [showTimerModal, setShowTimerModal] = useState(false);
 
-  // const [loadedSound, setLoadedSound] = useState([]);
-  // console.log(loadedSound);
+  const [loadedSound, setLoadedSound] = useState([]);
+  console.log(loadedSound);
 
   useEffect(() => {
     const token = getAccessToken();
@@ -96,7 +96,7 @@ const MultiAudioPlayerrr = () => {
 
   useEffect(() => {
     if (sourceList.length > 0 && soundList.length > howlCount) {
-      // setLoadedSound([...loadedSound, true]);
+      setLoadedSound([...loadedSound, false]);
       const howl = new Howl({
         src: [lastSource],
         loop: true,
@@ -104,7 +104,13 @@ const MultiAudioPlayerrr = () => {
         html5: true,
         preload: true,
         volume: 0.5,
-        // onload: () => {},
+        onload: () => {
+          setLoadedSound((previousArray) => {
+            const newArray = [...previousArray];
+            newArray[newArray.length - 1] = true;
+            return newArray;
+          });
+        },
       });
       const duplicateHowlList = [...howlList];
       duplicateHowlList.push(howl);
@@ -329,22 +335,22 @@ const MultiAudioPlayerrr = () => {
                       {soundList.map((sound, index) => (
                         <div className="individualAudio" key={index}>
                           <div className="mixerSoundDetail">
-                            {/* {loadedSound[index] ? (
-                              <div className="spinner">
-                                <Spinner />
-                              </div>
-                            ) : (
+                            {loadedSound[index] ? (
                               <img
                                 src={sound.audioThumbnail}
                                 alt=""
                                 className="mixerSoundThumbnail"
                               />
-                            )} */}
-                            <img
+                            ) : (
+                              <div className="spinner">
+                                <Spinner />
+                              </div>
+                            )}
+                            {/* <img
                               src={sound.audioThumbnail}
                               alt=""
                               className="mixerSoundThumbnail"
-                            />
+                            /> */}
                             <input
                               type="range"
                               min="0"
