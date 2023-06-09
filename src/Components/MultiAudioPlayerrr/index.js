@@ -226,6 +226,8 @@ const MultiAudioPlayerrr = () => {
     if (howlList > 1) {
       setIsPlaying(false);
     }
+
+    loadedSound.splice(index, 1);
   };
 
   const handleClearMix = () => {
@@ -237,6 +239,7 @@ const MultiAudioPlayerrr = () => {
       dispatch(clearAllSound());
       setIsPlaying(false);
       setIsMixerDisabled(true);
+      setLoadedSound([])
     }
   };
 
