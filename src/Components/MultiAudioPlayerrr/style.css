@@ -54,6 +54,12 @@
     -webkit-animation: spin 3s linear infinite;
     animation: spin 3s linear infinite;
     transform-origin: center;
+    margin: 0;
+}
+
+.spinner svg {
+    width: 30px;
+    height: 30px;
 }
 
 .spinner path {

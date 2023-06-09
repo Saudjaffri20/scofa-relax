@@ -63,6 +63,9 @@ const MultiAudioPlayerrr = () => {
   const [isMixerDisabled, setIsMixerDisabled] = useState(true);
   const [showTimerModal, setShowTimerModal] = useState(false);
 
+  // const [loadedSound, setLoadedSound] = useState([]);
+  // console.log(loadedSound);
+
   useEffect(() => {
     const token = getAccessToken();
     if (!token) {
@@ -93,12 +96,15 @@ const MultiAudioPlayerrr = () => {
 
   useEffect(() => {
     if (sourceList.length > 0 && soundList.length > howlCount) {
+      // setLoadedSound([...loadedSound, true]);
       const howl = new Howl({
         src: [lastSource],
         loop: true,
         autoplay: false,
+        html5: true,
         preload: true,
         volume: 0.5,
+        // onload: () => {},
       });
       const duplicateHowlList = [...howlList];
       duplicateHowlList.push(howl);
@@ -141,23 +147,25 @@ const MultiAudioPlayerrr = () => {
     }
   };
 
-  const handlePlayAll = () => {
-    if (howlList.length > 0) {
-      howlList.forEach((howl) => {
-        howl.seek(howl.pausedPosition || 0);
-        howl.play();
-        setIsPlaying(true);
-      });
-    }
-  };
-
   const handlePauseAll = () => {
     if (howlList.length > 0) {
       howlList.forEach((howl) => {
-        howl.pause();
         howl.pausedPosition = howl.seek();
+        howl.pause();
       });
       setIsPlaying(false);
+    }
+  };
+
+  const handlePlayAll = () => {
+    if (howlList.length > 0) {
+      howlList.forEach((howl) => {
+        if (!howl.playing()) {
+          howl.seek(howl.pausedPosition);
+          howl.play();
+        }
+      });
+      setIsPlaying(true);
     }
   };
 
@@ -245,16 +253,11 @@ const MultiAudioPlayerrr = () => {
   const handleCloseTimer = () => setShowTimerModal(false);
   const handleShowTimer = () => setShowTimerModal(true);
 
-  const isPlayingRef = useRef(isPlaying);
+  const isPlayingRef = useRef(null);
+
   useEffect(() => {
     isPlayingRef.current = isPlaying;
   }, [isPlaying]);
-  document.addEventListener("visibilitychange", () => {
-    if (document.visibilityState === "hidden" && isPlayingRef.current) {
-      handlePauseAll();
-      handlePlayAll();
-    }
-  });
 
   return (
     <>
@@ -326,6 +329,17 @@ const MultiAudioPlayerrr = () => {
                       {soundList.map((sound, index) => (
                         <div className="individualAudio" key={index}>
                           <div className="mixerSoundDetail">
+                            {/* {loadedSound[index] ? (
+                              <div className="spinner">
+                                <Spinner />
+                              </div>
+                            ) : (
+                              <img
+                                src={sound.audioThumbnail}
+                                alt=""
+                                className="mixerSoundThumbnail"
+                              />
+                            )} */}
                             <img
                               src={sound.audioThumbnail}
                               alt=""
