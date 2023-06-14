@@ -97,32 +97,29 @@ const MultiAudioPlayerrr = () => {
     setSoundInfo(lastSoundInfo);
   }, [sourceList]);
 
+  useEffect(() => {
+    // console.log(soundList[soundList.length - 1].naration);
+    if (howlList.length) {
+      howlList.filter((eachHowl, index) => {
+        if(eachHowl.info.naration) {
+          // console.log('st here')
+          // howlList.unload()
+          // const updatedHowlList = [...howlList];
+          // updatedHowlList.splice(index, 1);
+          // setHowlList(updatedHowlList);
+          handleRemoveSound(index)
+        }
+      })
+    }
+  }, [soundList]);
+
   console.log("soundList => ", soundList);
   console.log("howlList => ", howlList);
 
-  // useEffect(() => {
-  //   if (soundList[soundList.length - 1].naration) {
-  //     howlList.forEach((e, index) => {
-  //       // console.log(index , "   =>  " ,e.info.naration)
-  //       if (e.info.naration) {
-  //         handleRemoveSound(index);
-  //       }
-  //     });
-  //   }
-  // }, [lastSource]);
-
   useEffect(() => {
     if (sourceList.length > 0 && soundList.length > howlCount) {
-      // setLoadedSound([...loadedSound, false]);
+      setLoadedSound([...loadedSound, false]);
 
-      if(soundList[soundList.length - 1].naration) {
-        howlList.forEach((e, index) => {
-          // console.log(index , "   =>  " ,e.info.naration)
-          if(e.info.naration) {
-            handleRemoveSound(index)
-          }
-        })
-      }
       const howl = new Howl({
         src: [lastSource],
         loop: true,
@@ -139,6 +136,8 @@ const MultiAudioPlayerrr = () => {
         //   });
         // },
       });
+
+
       howl.info = soundInfo;
       const duplicateHowlList = [...howlList];
       duplicateHowlList.push(howl);

@@ -15,14 +15,14 @@ const soundPlayerSlice = createSlice({
         (sound) => sound.audioSource === BASEURL + source
       );
       if (!soundExists) {
-        if (naration) {
-          const prevNarationSoundIndex = state.sounds.findIndex(
-            (sound) => sound.naration
-          );
-          if (prevNarationSoundIndex !== -1) {
-            state.sounds.splice(prevNarationSoundIndex, 1);
-          }
-        }
+        // if (naration) {
+        //   const prevNarationSoundIndex = state.sounds.findIndex(
+        //     (sound) => sound.naration
+        //   );
+        //   if (prevNarationSoundIndex !== -1) {
+        //     state.sounds.splice(prevNarationSoundIndex, 1);
+        //   }
+        // }
 
         const newSound = {
           audioSource: BASEURL + source,
