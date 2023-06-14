@@ -54,6 +54,7 @@ const MultiAudioPlayerrr = () => {
   const [soundList, setSoundList] = useState([]);
   const [sourceList, setSourceList] = useState([]);
   const [lastSource, setLastSource] = useState(null);
+  const [soundInfo, setSoundInfo] = useState(false);
   const [howlList, setHowlList] = useState([]);
   const [howlCount, setHowlCount] = useState(0);
   const [mixerTimer, setMixerTimer] = useState(null);
@@ -64,7 +65,6 @@ const MultiAudioPlayerrr = () => {
   const [showTimerModal, setShowTimerModal] = useState(false);
 
   const [loadedSound, setLoadedSound] = useState([]);
-  console.log(loadedSound);
 
   useEffect(() => {
     const token = getAccessToken();
@@ -92,26 +92,54 @@ const MultiAudioPlayerrr = () => {
   useEffect(() => {
     const lastElem = sourceList[sourceList.length - 1];
     setLastSource(lastElem);
+
+    const lastSoundInfo = soundList[soundList.length - 1];
+    setSoundInfo(lastSoundInfo);
   }, [sourceList]);
+
+  console.log("soundList => ", soundList);
+  console.log("howlList => ", howlList);
+
+  // useEffect(() => {
+  //   if (soundList[soundList.length - 1].naration) {
+  //     howlList.forEach((e, index) => {
+  //       // console.log(index , "   =>  " ,e.info.naration)
+  //       if (e.info.naration) {
+  //         handleRemoveSound(index);
+  //       }
+  //     });
+  //   }
+  // }, [lastSource]);
 
   useEffect(() => {
     if (sourceList.length > 0 && soundList.length > howlCount) {
-      setLoadedSound([...loadedSound, false]);
+      // setLoadedSound([...loadedSound, false]);
+
+      if(soundList[soundList.length - 1].naration) {
+        howlList.forEach((e, index) => {
+          // console.log(index , "   =>  " ,e.info.naration)
+          if(e.info.naration) {
+            handleRemoveSound(index)
+          }
+        })
+      }
       const howl = new Howl({
         src: [lastSource],
         loop: true,
         autoplay: false,
         html5: true,
+        autoUnlock: true,
         preload: true,
         volume: 0.5,
-        onload: () => {
-          setLoadedSound((previousArray) => {
-            const newArray = [...previousArray];
-            newArray[newArray.length - 1] = true;
-            return newArray;
-          });
-        },
+        // onload: () => {
+        //   setLoadedSound((previousArray) => {
+        //     const newArray = [...previousArray];
+        //     newArray[newArray.length - 1] = true;
+        //     return newArray;
+        //   });
+        // },
       });
+      howl.info = soundInfo;
       const duplicateHowlList = [...howlList];
       duplicateHowlList.push(howl);
       setHowlList(duplicateHowlList);
@@ -121,7 +149,7 @@ const MultiAudioPlayerrr = () => {
   }, [lastSource]);
 
   useEffect(() => {
-    firstSound();
+    // firstSound();
     alreadyPlaying();
   }, [howlList]);
 
@@ -166,10 +194,8 @@ const MultiAudioPlayerrr = () => {
   const handlePlayAll = () => {
     if (howlList.length > 0) {
       howlList.forEach((howl) => {
-        if (!howl.playing()) {
-          howl.seek(howl.pausedPosition);
-          howl.play();
-        }
+        howl.seek(howl.pausedPosition);
+        howl.play();
       });
       setIsPlaying(true);
     }
@@ -180,9 +206,9 @@ const MultiAudioPlayerrr = () => {
     if (howlList.length > 0) {
       setOverallVolume(volumeLevel);
       Howler.volume(volumeLevel);
-      howlList.forEach((howl) => {
-        howl.volume(volumeLevel);
-      });
+      // howlList.forEach((howl) => {
+      //   howl.volume(volumeLevel);
+      // });
     }
   };
 
@@ -239,7 +265,7 @@ const MultiAudioPlayerrr = () => {
       dispatch(clearAllSound());
       setIsPlaying(false);
       setIsMixerDisabled(true);
-      setLoadedSound([])
+      setLoadedSound([]);
     }
   };
 
@@ -428,6 +454,13 @@ const MultiAudioPlayerrr = () => {
               />
               <CustomButton
                 variant="secondaryButton fw-normal"
+                text="1 Minute"
+                onClick={() => {
+                  runTimer(1);
+                }}
+              />
+              <CustomButton
+                variant="secondaryButton fw-normal"
                 text="15 Minutes"
                 onClick={() => {
                   runTimer(15);
@@ -458,39 +491,6 @@ const MultiAudioPlayerrr = () => {
           </div>
         </Modal.Body>
       </Modal>
-
-      {/* <Modal
-        show={soundErrorMessage}
-        centered
-        onHide={() => {
-          dispatch(hideErrorMessage());
-        }}
-        className="soundModal"
-        backdrop="static"
-      >
-        <Modal.Body className="text-center">
-          <button
-            className="closeButton roundButton ms-auto"
-            onClick={() => {
-              dispatch(hideErrorMessage());
-            }}
-          >
-            <img src={crossIcon} alt="" />
-          </button>
-          <div className="customModalContent">
-            <h2 className="soundModalError mb-4">
-              We noticed you currently have a vocal content playing.
-            </h2>
-            <CustomButton
-              variant="secondaryButton fw-normal"
-              text="Close"
-              onClick={() => {
-                dispatch(hideErrorMessage());
-              }}
-            />
-          </div>
-        </Modal.Body>
-      </Modal> */}
     </>
   );
 };

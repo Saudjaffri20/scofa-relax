@@ -59,8 +59,8 @@ export const Menubar = (props) => {
         <img src={logo} alt="Logo" />
       </Link>
       <ul className="list-unstyled">
-        {menu.map((item) => (
-          <li className="menubar-li">
+        {menu.map((item, index) => (
+          <li className="menubar-li" key={index}>
             <Link
               className={
                 location.pathname.includes(item.path)

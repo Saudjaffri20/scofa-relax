@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 import AuthLayout from "../../Layout/AuthLayout";
 import CustomButton from "../../Components/CustomButton";
@@ -9,9 +10,13 @@ import CustomToast from "../../Components/CustomToast";
 import "./style.css";
 import axios from "axios";
 import BASEURL from "../../Config/global";
+import { setAccessToken } from "../../Util/authHeader";
+import { setUserDetails } from "../../Store/Slices/UserSlice";
 
 const Signup = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
 
   const [formData, setFormData] = useState({});
   const [newPassword, setNewPassword] = useState("");
@@ -34,7 +39,6 @@ const Signup = () => {
 
   const handlePhoneChange = (event) => {
     const formattedValue = formatPhoneNumber(event.target.value);
-    console.log(formattedValue)
     setFormData({
       ...formData,
       phone: formattedValue,
@@ -43,14 +47,14 @@ const Signup = () => {
 
   const formatPhoneNumber = (value) => {
     // Remove all non-digit characters from the input
-    const cleanedValue = value.replace(/\D/g, '');
-  
+    const cleanedValue = value.replace(/\D/g, "");
+
     // Apply the USA phone number format
     const formattedValue = cleanedValue.replace(
       /^(\d{3})(\d{3})(\d{4})$/,
-      '($1) $2-$3'
+      "($1) $2-$3"
     );
-  
+
     return formattedValue;
   };
 
@@ -74,9 +78,37 @@ const Signup = () => {
       if (response.data.error === false) {
         setSuccessAlert(true);
         setError({ error: false, text: "" });
-        setTimeout(() => {
-          navigate("/login");
-        }, 3000);
+        // setTimeout(() => {
+        //   navigate("/login");
+        // }, 3000);
+
+        const formDataToLogin = new FormData();
+        formDataToLogin.append("username", formData.email);
+        formDataToLogin.append("password", newPassword);
+        try {
+          const loginResponse = await axios.post(
+            `${BASEURL}/api/user/login/`,
+            formDataToLogin
+          );
+          if (loginResponse.data.error === false) {
+            const token = loginResponse.data.data[0].token;
+            // setLoginError({ error: false, text: "" });
+            setAccessToken(token);
+            localStorage.setItem("user", JSON.stringify(loginResponse.data.data[0]));
+            dispatch(setUserDetails(loginResponse.data.data[0]));
+            navigate("/home");
+          } else {
+            // setLoginError({ error: true, text: loginResponse.data.message });
+            console.log(loginResponse.data.message)
+          }
+        } catch (error) {
+          // setLoginError({
+          //   error: true,
+          //   text: "An error occurred. Please try again later.",
+          // });
+          console.log(error)
+        }
+        // console.log(response);
       } else {
         setError({ error: true, text: response.data.message });
       }
@@ -202,6 +234,7 @@ const Signup = () => {
             </div>
           </div>
         </form>
+
         <CustomToast
           show={successAlert}
           title={"Successful"}
