@@ -102,11 +102,6 @@ const MultiAudioPlayerrr = () => {
     if (howlList.length) {
       howlList.filter((eachHowl, index) => {
         if(eachHowl.info.naration) {
-          // console.log('st here')
-          // howlList.unload()
-          // const updatedHowlList = [...howlList];
-          // updatedHowlList.splice(index, 1);
-          // setHowlList(updatedHowlList);
           handleRemoveSound(index)
         }
       })
