@@ -14,9 +14,11 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { playAudio } from "../../Store/Slices/AudioSlice";
 import { playSound } from "../../Store/Slices/SoundPlayerSlice";
+import CustomSearchBar from "../../Components/CustomSearchBar";
 
 const Home = () => {
   const dispatch = useDispatch();
+  const [searchTerm, setSearchTerm] = useState("");
 
   const [soundData, setSoundData] = useState([]);
   const [meditationData, setMeditationData] = useState([]);
@@ -87,9 +89,13 @@ const Home = () => {
     fetchData();
   }, []);
 
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
   const dispatchPlaySound = (source, title, thumbnail, naration) => {
-    dispatch(playSound({source, title, thumbnail, naration}))
-  }
+    dispatch(playSound({ source, title, thumbnail, naration }));
+  };
 
   // const dispatchSound = (source, title, thumbnail) => {
   //   dispatch(playAudio({ source, title, thumbnail }));
@@ -99,7 +105,14 @@ const Home = () => {
       <MainLayout>
         <div className="row mb-4">
           <div className="col-12">
-            <h2 className="pageTitle">Good Evening!</h2>
+            {/* <h2 className="pageTitle">Good Evening!</h2> */}
+            <CustomSearchBar
+              className="w-100"
+              placeholder="What do you want to listen to?"
+              onChange={(event) => {
+                handleSearch(event);
+              }}
+            />
           </div>
         </div>
         <div className="row mb-3">
@@ -127,7 +140,7 @@ const Home = () => {
                       item.audio,
                       item.title,
                       item.thumbnail,
-                      item.naration,
+                      item.naration
                     );
                   }}
                 />

@@ -1,13 +1,13 @@
 import "./style.css";
 
-const CustomSearchBar = (props) => {
+const CustomSearchBar = ({placeholder, onChange, className}) => {
   return (
     <>
       <input
         type="search"
-        className="searchBar"
-        placeholder={props?.placeholder}
-        onChange={props?.onChange}
+        className={`searchBar ${className}`}
+        placeholder={placeholder}
+        onChange={onChange}
       />
     </>
   );

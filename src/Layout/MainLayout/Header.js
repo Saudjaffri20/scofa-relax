@@ -47,7 +47,7 @@ export const Header = (props) => {
       <div className="row">
         <div className="col-12 text-end">
           <div className="d-flex align-items-center justify-content-end gap-2">
-            <div className="headerSearchWrapper">
+            {/* <div className="headerSearchWrapper">
               <p className="smallText d-none d-md-block mb-0 me-2">Search</p>
               <CustomSearchBar
                 placeholder="What do you want to listen to?"
@@ -55,7 +55,7 @@ export const Header = (props) => {
                   handleSearch(event);
                 }}
               />
-            </div>
+            </div> */}
             <Link to={"/upgrade"} className="headerUpgradeLink d-none d-md-block">
               Upgrade
             </Link>

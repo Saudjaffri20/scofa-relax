@@ -101,15 +101,12 @@ const MultiAudioPlayerrr = () => {
     // console.log(soundList[soundList.length - 1].naration);
     if (howlList.length) {
       howlList.filter((eachHowl, index) => {
-        if(eachHowl.info.naration) {
-          handleRemoveSound(index)
+        if (eachHowl.info.naration) {
+          handleRemoveSound(index);
         }
-      })
+      });
     }
   }, [soundList]);
-
-  console.log("soundList => ", soundList);
-  console.log("howlList => ", howlList);
 
   useEffect(() => {
     if (sourceList.length > 0 && soundList.length > howlCount) {
@@ -123,6 +120,7 @@ const MultiAudioPlayerrr = () => {
         autoUnlock: true,
         preload: true,
         volume: 0.5,
+        autoSuspend : false,
         // onload: () => {
         //   setLoadedSound((previousArray) => {
         //     const newArray = [...previousArray];
@@ -132,18 +130,31 @@ const MultiAudioPlayerrr = () => {
         // },
       });
 
-
       howl.info = soundInfo;
       const duplicateHowlList = [...howlList];
       duplicateHowlList.push(howl);
       setHowlList(duplicateHowlList);
+      checkAndUpdateMediaSession(howl)
     }
 
     setHowlCount(howlList.length);
   }, [lastSource]);
 
+  function checkAndUpdateMediaSession(howl) {
+    if (howl.info.narration) {
+      // Create a new MediaSession API
+      if ('mediaSession' in navigator) {
+        navigator.mediaSession.metadata = new MediaMetadata({
+          title: howl.info.title,
+          artwork: [{ src: howl.info.thumbnail, sizes: '512x512', type: 'image/png' }]
+        });
+      }
+    }
+  }
+ 
+
   useEffect(() => {
-    // firstSound();
+    firstSound();
     alreadyPlaying();
   }, [howlList]);
 
