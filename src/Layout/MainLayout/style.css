@@ -223,12 +223,12 @@
 }
 
 .desktopBody {
-    padding: 0rem 0.5rem 60px 0.5rem;
+    padding: 0rem 0.5rem 80px 0.5rem;
     margin-left: 260px;
 }
 
 .mobileBody {
-    padding: 0rem 0.5rem 100px 0.5rem;
+    padding: 0rem 0rem 140px 0rem;
 }
 
 /*----- General Layout End -----*/

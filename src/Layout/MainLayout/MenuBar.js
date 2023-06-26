@@ -46,7 +46,7 @@ export const Menubar = (props) => {
       icon: <MenuMoon />,
     },
     {
-      text: "Articles",
+      text: "Audio Articles",
       link: "/articles",
       path: "articles",
       icon: <MenuArticle />,

@@ -1,19 +1,21 @@
 .audioPlayerWrapper {
     position: fixed;
-    bottom: 0;
-    left: 0;
-    z-index: 99;
-    width: 100%;
-    background: #051d3f;
-    border-top: 1px solid var(--lightColor);
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 95%;
+    max-width: 991px;
+    background: #100b16;
+    border-radius: 8px;
     padding: 0.3rem 0;
+    z-index: 99;
 }
 
 .audioPlayerControls {
     display: flex;
     align-items: flex-end;
-    justify-content: center;
-}
+    justify-content: space-between;
+}   
 
 .playerAction {
     background: none;
@@ -169,7 +171,7 @@
 }
 
 .audioPlayerWrapper.mobileMenu {
-    bottom: 60px;
+    bottom: 80px;
 }
 
 

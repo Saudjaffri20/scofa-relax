@@ -44,3 +44,17 @@
     transform: translate(-50%, -50%);
     transition: 0.3s linear;
 }   
+
+
+
+.customCardSkeleton {
+    display: block;
+    overflow: hidden;
+    border-radius: 0.5rem;
+    margin: 0.5rem 0;
+    flex-grow: 1;
+    background: hsl(200, 20%, 80%);
+    width: 100%;
+    aspect-ratio: 16/9;
+    min-width: 190px;
+}

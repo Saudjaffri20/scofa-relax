@@ -96,7 +96,7 @@ const Home = () => {
   const dispatchPlaySound = (source, title, thumbnail, naration) => {
     dispatch(playSound({ source, title, thumbnail, naration }));
   };
-
+  
   // const dispatchSound = (source, title, thumbnail) => {
   //   dispatch(playAudio({ source, title, thumbnail }));
   // };
@@ -130,21 +130,21 @@ const Home = () => {
           <div className="col-12">
             <div className="homeboxesWrapper">
               {soundData.slice(0, 6).map((item, index) => (
-                <CustomCard
-                  key={index}
-                  title={item.title}
-                  image={`${BASEURL + item.image}`}
-                  alt={"In The News"}
-                  onClick={() => {
-                    dispatchPlaySound(
-                      item.audio,
-                      item.title,
-                      item.thumbnail,
-                      item.naration
-                    );
-                  }}
-                />
-              ))}
+                  <CustomCard
+                    key={index}
+                    title={item.title}
+                    image={`${BASEURL + item.image}`}
+                    alt={"In The News"}
+                    onClick={() => {
+                      dispatchPlaySound(
+                        item.audio,
+                        item.title,
+                        item.thumbnail,
+                        item.naration
+                      );
+                    }}
+                  />
+                ))}
             </div>
           </div>
         </div>

@@ -148,6 +148,39 @@ a:hover {
 
 
 
+/*----- Custom Accordion Css Start -----*/
+
+.customAccordion .accordion-item {
+    background: no-repeat;
+    border: none;
+    border-radius: 0;
+    margin-bottom: 0.5rem;
+}
+
+.customAccordion .accordion-button {
+    background: #00000080;
+    font-size: 18px;
+    font-weight: 600;
+    color: #E2E4E9;
+    text-transform: capitalize;
+    border-radius: 0 !important;
+    box-shadow: none;
+    margin: 0;
+}
+
+.customAccordion .accordion-button::after {
+    filter: brightness(0) invert(1);
+}
+
+.customAccordion .accordion-body {
+    padding: 1rem 0;
+
+}
+
+/*----- Custom Accordion Css End -----*/
+
+
+
 @media screen and (max-width: 991px) {
     .pageTitle {
         font-size: 26px;
@@ -162,16 +195,35 @@ a:hover {
 
 @media screen and (max-width: 768px) {
     .pageTitle {
-        font-size: 24px;
+        font-size: 22px;
+    }
+
+    .customAccordion .accordion-button {
+        font-size: 16px;
     }
 }
 
 @media screen and (max-width: 575px) {
     .pageTitle {
-        font-size: 22px;
+        font-size: 20px;
     }
 
     .sectionTitle {
         font-size: 18px;
     }
 }
+
+
+.skeleton {
+    position: relative;
+    animation: skeleton-loading 1s linear infinite alternate;
+  }
+
+  @keyframes skeleton-loading {
+    0% {
+      background-color: rgb(255 255 255 / 20%);
+    }
+    100% {
+      background-color: rgb(255 255 255 / 30%);
+    }
+  }
