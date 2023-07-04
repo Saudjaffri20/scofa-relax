@@ -7,13 +7,13 @@
 } */
 
 .searchBar {
-    font-size: 14px;
+    font-size: 13px;
     color: #fff;
     background: #040F2B;
     border: none;
     outline: none;
     border-radius: 99px;
-    padding: 0.8rem 1rem;
+    padding: 0.7rem 1rem;
 }
 
 .searchBar::placeholder {

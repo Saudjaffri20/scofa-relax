@@ -1,7 +1,7 @@
 .audioPlayerWrapper {
     position: fixed;
     bottom: 20px;
-    left: 50%;
+    left: calc(50% + 130px);
     transform: translateX(-50%);
     width: 95%;
     max-width: 991px;
@@ -13,7 +13,7 @@
 
 .audioPlayerControls {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     justify-content: space-between;
 }   
 
@@ -28,28 +28,32 @@
 
 .playerAction .playerActionText {
     font-size: 11px;
-    color: var(--lightColor);
+    /* color: var(--lightColor); */
+    color: #fff;
     text-align: center;
     margin: 0;
 }
 
 .playerAction .playerActionIcon {
     display: inline-block;
-    width: 22px;
-    height: 22px;
+    width: 18px;
+    height: 18px;
 }
 
 .playerAction path {
     fill: #fff0;
-    stroke: var(--lightColor);
+    /* stroke: var(--lightColor); */
+    stroke: #fff;
 }
 
 .mixerButton path {
-    fill: var(--lightColor);
+    /* fill: var(--lightColor); */
+    fill: #fff;
 }
 
 .playerAction rect {
-    fill: var(--lightColor);
+    /* fill: var(--lightColor); */
+    fill: #fff;
 }
 
 .spinner {
@@ -80,7 +84,8 @@
     width: 100%;
     height: 3px;
     outline: none;
-    background: var(--lightColor);
+    /* background: var(--lightColor); */
+    background: #fff;
     transition: 0.3s linear;
 
 }
@@ -95,7 +100,8 @@
 .volumeControl button {
     font-size: 20px;
     line-height: 1;
-    color: var(--lightColor);
+    /* color: var(--lightColor); */
+    color: #fff;
     background: none;
     border: none;
     padding: 0;
@@ -104,7 +110,8 @@
 .volumeControl p {
     font-size: 14px;
     line-height: 1;
-    color: var(--lightColor);
+    /* color: var(--lightColor); */
+    color: #fff;
     margin: 0;
 }
 
@@ -152,25 +159,30 @@
 .playerVolume input::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 1rem;
-    height: 1rem;
-    background: var(--secondaryColor);
-    border: 3px solid var(--lightColor);
+    width: 0.8rem;
+    height: 0.8rem;
+    /* background: var(--secondaryColor); */
+    /* border: 3px solid var(--lightColor); */
+    background: #fff;
+    border: 2px solid #fff;
     border-radius: 99px;
     cursor: grabbing;
 }
 
 .playerVolume input::-moz-range-thumb {
     appearance: none;
-    width: 1rem;
-    height: 1rem;
-    background: var(--secondaryColor);
-    border: 3px solid var(--lightColor);
+    width: 0.8rem;
+    height: 0.8rem;
+    /* background: var(--secondaryColor); */
+    /* border: 3px solid var(--lightColor); */
+    background: #fff;
+    border: 2px solid #fff;
     border-radius: 99px;
     cursor: grabbing;
 }
 
 .audioPlayerWrapper.mobileMenu {
+    left: 50%;
     bottom: 80px;
 }
 
@@ -212,7 +224,8 @@
     width: 100%;
     height: 3px;
     outline: none;
-    background: var(--lightColor);
+    /* background: var(--lightColor); */
+    background: #fff;
     transition: 0.3s linear;
 }
 
@@ -220,20 +233,24 @@
 .mixer input::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 1rem;
-    height: 1rem;
-    background: var(--secondaryColor);
-    border: 3px solid var(--lightColor);
+    width: 0.8rem;
+    height: 0.8rem;
+    /* background: var(--secondaryColor);
+    border: 3px solid var(--lightColor); */
+    background: #fff;
+    border: 2px solid #fff;
     border-radius: 99px;
     cursor: grabbing;
 }
 
 .mixer input::-moz-range-thumb {
     appearance: none;
-    width: 1rem;
-    height: 1rem;
-    background: var(--secondaryColor);
-    border: 3px solid var(--lightColor);
+    width: 0.8rem;
+    height: 0.8rem;
+    /* background: var(--secondaryColor); */
+    /* border: 3px solid var(--lightColor); */
+    background: #fff;
+    border: 2px solid #fff;
     border-radius: 99px;
     cursor: grabbing;
 }
@@ -267,7 +284,8 @@
     font-size: 12px !important;
     text-align: center !important;
     margin: 0.3rem !important;
-    color: var(--lightColor);
+    /* color: var(--lightColor); */
+    color: #fff;
 }
 
 .mixerFooter {

@@ -16,7 +16,7 @@
     height: 100vh;
     position: fixed;
     transition: all 0.35s ease-in-out, left 0.35s ease-in-out, margin-right 0.35s ease-in-out, right 0.35s ease-in-out;
-    background: #100b16;
+    background: #042047;
     z-index: 2;
     top: 0;
     padding-bottom: 100px;
@@ -32,7 +32,7 @@
 
 .menuLink {
     font-size: 15px;
-    font-weight: 400;
+    font-weight: 300;
     text-decoration: none;
     color: #fff;
     padding: 0.8rem 1rem;
@@ -45,26 +45,19 @@
 
 .menuLink:hover, .menuLink.active {
     color: #fff;
-    background: #051d3f;
+    background: #040F2B;
 }
 
 .menuIcon {
     margin-right: 1rem;
 }
 
-.menuIcon svg {
-    width: 22px;
-    height: 22px;
-    fill: #fff;
+.menuIcon {
+    margin-right: 1rem;
+    width: 20px;
+    aspect-ratio: 1/1;
 }
 
-.menuIcon path, .menuIcon rect {
-    stroke: #fff;
-}
-
-.menuIcon .cls-2 {
-    fill: #fff0;
-}
 
 /*----- Menu Bar End -----*/
 
@@ -75,7 +68,9 @@
 
 .headerWrapper {
     padding: 1rem 0;
+    margin-bottom: 1rem;
 }
+
 .headerSearchWrapper {
     display: flex;
     align-items: baseline;
@@ -90,18 +85,29 @@
 
 .headerDropdownButton {
     font-size: 14px !important;
-    background: var(--primaryColor) !important;
+    /* background: var(--primaryColor) !important; */
+    background: none !important;
     border: none !important;
     border-radius: 99px !important;
     outline: none !important;
-    display: flex !important;
+    padding: 0 !important;
+    /* display: flex !important;
     align-items: center;
     gap: 0.5rem;
-    margin-left: auto;
+    margin-left: auto; */
 }
 
 .headerDropdownButton:hover {
-    background: var(--primaryColor) !important;
+    /* background: var(--primaryColor) !important; */
+    /* background: none !important; */
+}
+
+.headerDropdownButton::after {
+    display: none !important;
+}
+
+.headerIcon {
+    width: 28px;
 }
 
 .avatar {
@@ -174,27 +180,28 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-    border-top: 2px solid #ffffff3b;
+    /* border-top: 2px solid #ffffff3b; */
     height: 100%;
 }
 
-.menubar.mobileMenu .menuLink:hover, .menubar.mobileMenu .menuLink.active {
+/* .menubar.mobileMenu .menuLink:hover, .menubar.mobileMenu .menuLink.active {
     border-top: 2px solid #fff;
-}
+} */
 
-.menubar.mobileMenu .menuIcon {
+/* .menubar.mobileMenu .menuIcon {
     margin: 0;
     width: 100%;
-    text-align: center;
-}
+} */
 
-.menubar.mobileMenu .menuIcon svg {
+.menubar.mobileMenu .menuIcon {
+    margin-right: 1rem;
     width: 20px;
-    height: 22px;
+    margin: 0 auto;
 }
 
 .menubar.mobileMenu .menuLinkText {
-    font-size: 10px;
+    font-size: 9px;
+    margin-top: 4px;
 }
 
 .menuSeperator {
@@ -211,7 +218,8 @@
 /*----- General Layout Start -----*/
 
 .secondaryBg {
-    background: url('./../../Assets/images/secondaryBg.png');
+    /* background: url('./../../Assets/images/secondaryBg.png'); */
+    background: url('./../../Assets/images/fullPageBg.png');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -232,7 +240,3 @@
 }
 
 /*----- General Layout End -----*/
-
-
-
-

@@ -25,31 +25,31 @@ export const Menubar = (props) => {
       text: "Home",
       link: "/home",
       path: "home",
-      icon: <MenuHome />,
+      icon: MenuHome,
     },
     {
       text: "Sounds",
       link: "/sounds",
       path: "sounds",
-      icon: <MenuSound />,
+      icon: MenuSound,
     },
     {
       text: "Meditation",
       link: "/meditation",
       path: "meditation",
-      icon: <MenuMeditation />,
+      icon: MenuMeditation,
     },
     {
       text: "Stories",
       link: "/stories",
       path: "stories",
-      icon: <MenuMoon />,
+      icon: MenuMoon,
     },
     {
       text: "Audio Articles",
       link: "/articles",
       path: "articles",
-      icon: <MenuArticle />,
+      icon: MenuArticle,
     },
   ];
 
@@ -69,7 +69,8 @@ export const Menubar = (props) => {
               }
               to={item.link}
             >
-              <span className="menuIcon">{item.icon}</span>
+              {/* <span className="menuIcon">{item.icon}</span> */}
+              <img src={item.icon} className="menuIcon" />
               <span className="menuLinkText">{item.text}</span>
             </Link>
           </li>
@@ -102,45 +103,52 @@ export const Menubar = (props) => {
           </Link>
         </li>
         <li className="menubar-li">
-            <Link
-              className="menuLink"
-              to={"https://scofa.com/articles/"}
-              target="_blank"
-              >
-              <span className="menuIcon"><ArticlesIcon/></span>
-              <span className="menuLinkText">Articles</span>
-            </Link>
-          </li>
+          <Link
+            className="menuLink"
+            to={"https://scofa.com/articles/"}
+            target="_blank"
+          >
+            <img src={ArticlesIcon} className="menuIcon" />
+            {/* <ArticlesIcon /> */}
+            {/* </span> */}
+            <span className="menuLinkText">Articles</span>
+          </Link>
+        </li>
         <li className="menubar-li">
-            <Link
-              className="menuLink"
-              to={"https://store.scofa.com/"}
-              target="_blank"
-            >
-              <span className="menuIcon"><StoreIcon/></span>
-              <span className="menuLinkText">Store</span>
-            </Link>
-          </li>
+          <Link
+            className="menuLink"
+            to={"https://store.scofa.com/"}
+            target="_blank"
+          >
+            {/* <span className="menuIcon">
+              <StoreIcon />
+            </span> */}
+            <img src={StoreIcon} className="menuIcon" />
+            <span className="menuLinkText">Store</span>
+          </Link>
+        </li>
         <li className="menubar-li">
-            <Link
-              className="menuLink"
-              to={"https://scofa.com/"} 
-              target="_blank"
-              >
-              <span className="menuIcon"><FindDoctorsIcon/></span>
-              <span className="menuLinkText">Find Doctors</span>
-            </Link>
-          </li>
+          <Link className="menuLink" to={"https://scofa.com/"} target="_blank">
+            {/* <span className="menuIcon">
+              <FindDoctorsIcon />
+            </span> */}
+            <img src={FindDoctorsIcon} className="menuIcon" />
+            <span className="menuLinkText">Find Doctors</span>
+          </Link>
+        </li>
         <li className="menubar-li">
-            <Link
-              className="menuLink"
-              to={"https://scofa.com/check-sleep-disorder-symptoms/"}
-              target="_blank"
-            >
-              <span className="menuIcon"><CheckSymptomsIcon/></span>
-              <span className="menuLinkText">Check Symptoms</span>
-            </Link>
-          </li>
+          <Link
+            className="menuLink"
+            to={"https://scofa.com/check-sleep-disorder-symptoms/"}
+            target="_blank"
+          >
+            <img src={CheckSymptomsIcon} className="menuIcon" />
+            {/* <span className="menuIcon">
+              <CheckSymptomsIcon />
+            </span> */}
+            <span className="menuLinkText">Check Symptoms</span>
+          </Link>
+        </li>
       </ul>
     </div>
   );

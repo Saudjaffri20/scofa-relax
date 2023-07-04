@@ -99,14 +99,14 @@
     gap: 0.4rem;
 }
 
-.externalLink svg {
+.externalLink img {
     width: 1rem;
     height: 1rem;
 }
-
+/* 
 .externalLink .cls-2 {
     fill: #fff0;
-}
+} */
 
 .mw-320 {
     min-width: 320px !important;
@@ -131,7 +131,7 @@
 @media screen and (max-width: 768px) {
 
     .logo img {
-        width: 120px;
+        width: 90px;
     }
 
     .mainCategoryTitle {

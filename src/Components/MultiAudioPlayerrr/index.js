@@ -61,7 +61,7 @@ const MultiAudioPlayerrr = () => {
 
   const [isPlaying, setIsPlaying] = useState(false);
   const [overallVolume, setOverallVolume] = useState(0.5);
-  const [isMixerDisabled, setIsMixerDisabled] = useState(true);
+  const [isMixerDisabled, setIsMixerDisabled] = useState(false);
   const [showTimerModal, setShowTimerModal] = useState(false);
 
   const [loader, setLoader] = useState([]);
@@ -151,25 +151,26 @@ const MultiAudioPlayerrr = () => {
   }
 
   useEffect(() => {
-    firstSound();
+    // firstSound();
     alreadyPlaying();
   }, [howlList]);
 
-  useEffect(() => {
-    if (howlList.length > 0) {
-      setIsMixerDisabled(false);
-    } else {
-      setIsMixerDisabled(true);
-    }
-  }, [howlList]);
+  // useEffect(() => {
+  //   if (howlList.length > 0) {
+  //     setIsMixerDisabled(false);
+  //   } else {
+  //     setIsMixerDisabled(true);
+  //   }
+  // }, [howlList]);
+
 
   const firstSound = () => {
-    if (howlList.length == 1) {
-      howlList.forEach((howl) => {
-        howl.play();
+      if (howlList.length == 1) {
+        howlList.forEach((howl) => {
+          howl.play();
+        });
         setIsPlaying(true);
-      });
-    }
+      }
   };
 
   const alreadyPlaying = () => {
@@ -264,7 +265,7 @@ const MultiAudioPlayerrr = () => {
       setHowlList([]);
       dispatch(clearAllSound());
       setIsPlaying(false);
-      setIsMixerDisabled(true);
+      // setIsMixerDisabled(true);
     }
   };
 

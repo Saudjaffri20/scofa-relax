@@ -39,7 +39,7 @@ const Sounds = () => {
   return (
     <>
       <MainLayout>
-        <div className="row mb-4">
+        <div className="row mb-3">
           <div className="col-12">
             <h2 className="pageTitle">Sounds</h2>
           </div>

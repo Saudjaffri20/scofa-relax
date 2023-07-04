@@ -5,6 +5,7 @@ import MainLayout from "./../../Layout/MainLayout";
 import {
   HeartButton,
   PauseButton,
+  Play,
   PlayButton,
   ShuffleButton,
 } from "../../Assets/svg";
@@ -110,7 +111,7 @@ const Meditation = () => {
           </div>
         </div> */}
         <div className="row mb-3">
-          <div className="col-12">
+          {/* <div className="col-12">
             <CustomTable headers={tableHeaders}>
               <tbody>
                 {data.map((item, index) => (
@@ -128,7 +129,6 @@ const Meditation = () => {
                           }}
                         >
                           <PlayButton />
-                        {/* <img src={playIcon} alt="" /> */}
                         </button></td>
                     <td>
                       <img
@@ -149,13 +149,43 @@ const Meditation = () => {
                           <HeartButton />
                         </button>
                        
-                        {/* {playingAudio.id == item.id ? <p>Playing</p> : <p>Not</p>} */}
                       </div>
                     </td>
                   </tr>
                 ))}
               </tbody>
             </CustomTable>
+          </div> */}
+          <div className="col-12 px-0">
+            <div className="audioStrips">
+              {data.map((item, index) => (
+                <>
+                  <div className="audioStrip" key={index}>
+                    <div className="audioStripDetails">
+                      <img src={`${BASEURL + item.thumbnail}`} alt="" />
+                      <p>{item.title}</p>
+                    </div>
+                    <div className="audioStripExtra">
+                      <p className="audioStripduration">00:00</p>
+                      <button
+                        type="button"
+                        className="audioStripButton audioStripPlay"
+                        onClick={() => {
+                          dispatchPlaySound(
+                            item.audio,
+                            item.title,
+                            item.thumbnail,
+                            item.naration
+                          );
+                        }}
+                      >
+                       <img src={Play} alt="" />
+                      </button>
+                    </div>
+                  </div>
+                </>
+              ))}
+            </div>
           </div>
         </div>
       </MainLayout>

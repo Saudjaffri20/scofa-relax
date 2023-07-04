@@ -66,25 +66,29 @@ const Main = () => {
                         to={"https://scofa.com/articles/"}
                         className="externalLink"
                       >
-                        <ArticlesIcon />
+                        {/* <ArticlesIcon /> */}
+                        <img src={ArticlesIcon} className="" />
                         Articles
                       </Link>
                       <Link
                         to={"https://store.scofa.com/"}
                         className="externalLink"
                       >
-                        <StoreIcon />
+                        {/* <StoreIcon /> */}
+                        <img src={StoreIcon} className="" />
                         Store
                       </Link>
                       <Link to={"https://scofa.com/"} className="externalLink">
-                        <FindDoctorsIcon />
+                        {/* <FindDoctorsIcon /> */}
+                        <img src={FindDoctorsIcon} className="" />
                         Find Doctors
                       </Link>
                       <Link
                         to={"https://scofa.com/check-sleep-disorder-symptoms/"}
                         className="externalLink"
                       >
-                        <CheckSymptomsIcon />
+                        {/* <CheckSymptomsIcon /> */}
+                        <img src={CheckSymptomsIcon} className="" />
                         Check Symptoms
                       </Link>
                     </div>
