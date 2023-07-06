@@ -157,7 +157,7 @@ const Meditation = () => {
             </CustomTable>
           </div> */}
           <div className="col-12 px-0">
-            <div className="audioStrips">
+            <div className="audioStrips stripedRows">
               {data.map((item, index) => (
                 <>
                   <div className="audioStrip" key={index}>

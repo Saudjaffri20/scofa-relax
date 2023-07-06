@@ -6,3 +6,6 @@
     border: 2px solid var(--lightColor);
     border-radius: 99px;
 }
+.linkWrapper {
+    padding: 1rem;
+}

@@ -5,7 +5,6 @@ import { playSound } from "./../../Store/Slices/SoundPlayerSlice";
 import "./style.css";
 import BASEURL from "../../Config/global";
 
-
 const RoundAudio = (props) => {
   const dispatch = useDispatch();
 
@@ -30,7 +29,12 @@ const RoundAudio = (props) => {
           );
         }}
       >
-        <img src={`${BASEURL + props.item.thumbnail}`} alt="Sound Thumbnail" />
+        <div className="imageWrapper">
+          <img
+            src={`${BASEURL + props.item.thumbnail}`}
+            alt="Sound Thumbnail"
+          />
+        </div>
         <p>{props.item.title}</p>
         {props.item.premium && (
           <span className="premiumBadge">

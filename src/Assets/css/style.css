@@ -179,18 +179,22 @@ a:hover {
 
 /*----- Custom Accordion Css End -----*/
 
+.stripedRows>div:nth-child(odd) {
+    background: #ffffff15;
+}
+
+.stripedRows>div:nth-child(even) {
+    background: #fff0;
+}
+
+/*----- Audio Strips Css Start -----*/
 
 .audioStrip {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
     gap: 1rem;
-    background: #0f294b;
     padding: 1rem;
-}
-
-.audioStrip:nth-child(even) {
-    background-color: #fff0;
 }
 
 .audioStrip p {
@@ -220,23 +224,25 @@ a:hover {
 }
 
 .audioStripButton {
+    background: #fff0;
     border: none;
-    outline: none;
     border-radius: 99px;
+    outline: none;
     width: 25px;
     aspect-ratio: 1/1;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 0;
 }
 
 .audioStripButton img {
-    width: 90%;
+    width: 100%;
 }
 
-.audioStripPlay {
-    background: #00678c;
-}
+
+/*----- Audio Strips Css En
+d -----*/
 
 
 
