@@ -8,7 +8,8 @@ const soundPlayerSlice2 = createSlice({
   },
   reducers: {
     playSound2(state, action) {
-      console.log("action.payload => ", action.payload);
+      const { audio, title, thumbnail, naration } = action.payload;
+      console.log("action.payload => ", action.payload.audio);
     },
   },
 });

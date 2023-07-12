@@ -21,7 +21,8 @@ const MultiAudioPlayer2 = () => {
     };
   }, []);
 
-  const sounds = useSelector((state) => state.soundPlayer.sounds);
+  const sounds = useSelector((state) => state.soundPlayer2);
+  console.log("sounds   =>", sounds)
 
   return <></>;
 };
