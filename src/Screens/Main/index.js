@@ -21,7 +21,7 @@ const Main = () => {
                 {/* <div className="row text-center my-4"></div> */}
                 <div className="row text-center mt-auto mb-auto">
                   <div className="col-12">
-                    <div className="logo my-5">
+                    <div className="logo my-4">
                       <img src={logo} alt="Logo" />
                     </div>
                   </div>

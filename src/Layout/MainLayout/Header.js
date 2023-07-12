@@ -65,7 +65,7 @@ export const Header = (props) => {
                 Upgrade
               </Link>
               <Link className="" to="/settings">
-                <img src={Cog} alt="Cog" className="headerIcon"/>
+                <img src={Cog} alt="Cog" className="headerIcon" />
               </Link>
               <Dropdown className="headerDropdown">
                 <Dropdown.Toggle
@@ -90,9 +90,35 @@ export const Header = (props) => {
                   <Link to={"#_"} className="headerDropdownAction d-md-none">
                     Favorites
                   </Link>
-                  {/* <Link to={"/settings"} className="headerDropdownAction">
-                    Settings
-                  </Link> */}
+                  <Link
+                    to={"https://scofa.com/articles/"}
+                    target="_blank"
+                    className="headerDropdownAction d-md-none"
+                  >
+                    Articles
+                  </Link>
+                  <Link
+                    to={"https://store.scofa.com/"}
+                    target="_blank"
+                    className="headerDropdownAction d-md-none"
+                  >
+                    Store
+                  </Link>
+                  <Link
+                    to={"https://scofa.com/"}
+                    target="_blank"
+                    className="headerDropdownAction d-md-none"
+                  >
+                    Find Doctors
+                  </Link>
+                  <Link
+                    to={"https://scofa.com/check-sleep-disorder-symptoms/"}
+                    target="_blank"
+                    className="headerDropdownAction d-md-none"
+                  >
+                    Check Symptoms
+                  </Link>
+
                   <button
                     type="button"
                     className="headerDropdownAction"

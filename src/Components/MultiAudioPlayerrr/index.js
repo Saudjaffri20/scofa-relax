@@ -61,7 +61,6 @@ const MultiAudioPlayerrr = () => {
 
   const [isPlaying, setIsPlaying] = useState(false);
   const [overallVolume, setOverallVolume] = useState(0.5);
-  const [isMixerDisabled, setIsMixerDisabled] = useState(false);
   const [showTimerModal, setShowTimerModal] = useState(false);
 
   const [loader, setLoader] = useState([]);
@@ -151,17 +150,9 @@ const MultiAudioPlayerrr = () => {
   }
 
   useEffect(() => {
-    // firstSound();
+    firstSound();
     alreadyPlaying();
   }, [howlList]);
-
-  // useEffect(() => {
-  //   if (howlList.length > 0) {
-  //     setIsMixerDisabled(false);
-  //   } else {
-  //     setIsMixerDisabled(true);
-  //   }
-  // }, [howlList]);
 
   const firstSound = () => {
     if (howlList.length == 1) {
@@ -262,7 +253,6 @@ const MultiAudioPlayerrr = () => {
       setHowlList([]);
       dispatch(clearAllSound());
       setIsPlaying(false);
-      // setIsMixerDisabled(true);
     }
   };
 
@@ -346,7 +336,6 @@ const MultiAudioPlayerrr = () => {
                 <div>
                   <DropdownButton
                     id="dropdown-basic-button"
-                    disabled={isMixerDisabled}
                     title={
                       <div className="currentMixButton">
                         <div className="currentMixIcons">
