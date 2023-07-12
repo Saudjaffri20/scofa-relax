@@ -114,8 +114,8 @@ const MultiAudioPlayerrr = () => {
         src: [lastSource],
         loop: true,
         autoplay: false,
+        webAudio: true, // Use Web Audio API if supported
         html5: true, // Use HTML5 audio if supported
-        // webAudio: true, // Use Web Audio API if supported
         autoUnlock: true,
         preload: true,
         volume: 0.5,
@@ -226,7 +226,6 @@ const MultiAudioPlayerrr = () => {
       howlList.forEach((howl) => {
         howl.volume(overallVolume);
       });
-      console.log(overallVolume);
     }
     if (value === "decrease" && howlList.length > 0 && overallVolume >= 0) {
       setOverallVolume(overallVolume - 0.01);
@@ -234,7 +233,6 @@ const MultiAudioPlayerrr = () => {
       howlList.forEach((howl) => {
         howl.volume(overallVolume);
       });
-      console.log(overallVolume);
     }
   };
 
@@ -293,7 +291,6 @@ const MultiAudioPlayerrr = () => {
     isPlayingRef.current = isPlaying;
   }, [isPlaying]);
 
-  console.log(howlList);
   return (
     <>
       {howlList.length > 0 && (

@@ -17,7 +17,7 @@ const Sounds = () => {
   const [categorizedFilteredData, setCategorizedFilteredData] = useState([]);
   const [featured, setFeatured] = useState([]);
 
-  console.log("categorizedFilteredData => ", categorizedFilteredData);
+  // console.log("categorizedFilteredData => ", categorizedFilteredData);
 
   useEffect(() => {
     async function fetchData() {
