@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { playSound2 } from "../../Store/Slices/SoundPlayerSlice2";
 
 import MainLayout from "./../../Layout/MainLayout";
 
@@ -12,11 +14,80 @@ import "./style.css";
 import axios from "axios";
 import BASEURL from "../../Config/global";
 
+const obj = [
+  {
+    audio: "/media/assets/Fire-Sounds.mp3",
+    created_datetime: "2023-06-23T20:56:26.128813Z",
+    featured: true,
+    id: 80,
+    image: "/media/assets/Scofa_Relax_Favicon-removebg-preview_8GSuApR.png",
+    naration: false,
+    premium: true,
+    soundcategory: 102,
+    soundscategoriesname: "Test 3",
+    thumbnail: "/media/assets/Scofa_Relax_Favicon-removebg-preview_zgGRd1Y.png",
+    title: "Test",
+    audio_list: [
+      "/media/assets/Fire-Sounds.mp3",
+      "/media/assets/Blizzard.mp3",
+      "/media/assets/Heavy_Wind.mp3",
+      "/media/assets/Fire-Sounds.mp3",
+      "/media/assets/Blizzard.mp3",
+    ],
+  },
+  {
+    audio: "/media/assets/Blizzard.mp3",
+    created_datetime: "2023-06-23T20:56:26.128813Z",
+    featured: true,
+    id: 80,
+    image: "/media/assets/Scofa_Relax_Favicon-removebg-preview_8GSuApR.png",
+    naration: false,
+    premium: true,
+    soundcategory: 102,
+    soundscategoriesname: "Test 3",
+    thumbnail: "/media/assets/Scofa_Relax_Favicon-removebg-preview_zgGRd1Y.png",
+    title: "Test 2",
+    audio_list: [
+      "/media/assets/Blizzard.mp3",
+      "/media/assets/Heavy_Wind.mp3",
+      "/media/assets/Fire-Sounds.mp3",
+      "/media/assets/Blizzard.mp3",
+      "/media/assets/Heavy_Wind.mp3",
+    ],
+  },
+  {
+    audio: "/media/assets/Heavy_Wind.mp3",
+    created_datetime: "2023-06-23T20:56:26.128813Z",
+    featured: true,
+    id: 80,
+    image: "/media/assets/Scofa_Relax_Favicon-removebg-preview_8GSuApR.png",
+    naration: false,
+    premium: true,
+    soundcategory: 102,
+    soundscategoriesname: "Test 3",
+    thumbnail: "/media/assets/Scofa_Relax_Favicon-removebg-preview_zgGRd1Y.png",
+    title: "Test 3",
+    audio_list: [
+      "/media/assets/Heavy_Wind.mp3",
+      "/media/assets/Fire-Sounds.mp3",
+      "/media/assets/Blizzard.mp3",
+      "/media/assets/Heavy_Wind.mp3",
+      "/media/assets/Fire-Sounds.mp3",
+    ],
+  },
+];
+
 const Sounds = () => {
   const [soundsData, setSoundsData] = useState([]);
   const [categorizedSoundsData, setCategorizedSoundsData] = useState([]);
   const [categorizedFilteredData, setCategorizedFilteredData] = useState([]);
   const [featured, setFeatured] = useState([]);
+
+  const dispatch = useDispatch();
+
+  const dispatchPlaySound = (item) => {
+    dispatch(playSound2(item));
+  };
 
   useEffect(() => {
     async function fetchData() {
@@ -73,6 +144,20 @@ const Sounds = () => {
         <div className="row mb-3">
           <div className="col-12">
             <h2 className="pageTitle">Sounds</h2>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-12">
+            {obj.map((item, index) => (
+              <p
+                key={index}
+                onClick={() => {
+                  dispatchPlaySound(item);
+                }}
+              >
+                {item.title}
+              </p>
+            ))}
           </div>
         </div>
         <div className="row g-0">

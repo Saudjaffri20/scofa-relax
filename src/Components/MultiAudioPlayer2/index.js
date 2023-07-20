@@ -2,12 +2,11 @@ import React, { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 
-import { Howl, Howler } from "howler";
 import { getAccessToken } from "../../Util/authHeader";
+import MainMixer from "./MainMixer";
 
 const MultiAudioPlayer2 = () => {
   const dispatch = useDispatch();
-
 
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const menuClass = windowWidth < 1024 ? "mobileMenu" : "desktopMenu";
@@ -21,10 +20,22 @@ const MultiAudioPlayer2 = () => {
     };
   }, []);
 
-  const sounds = useSelector((state) => state.soundPlayer2);
-  console.log("sounds   =>", sounds)
+  const sounds = useSelector((state) => state.soundPlayer2.sounds);
 
-  return <></>;
+  const [soundList, setSoundList] = useState([]);
+
+  // console.log(soundList);
+
+  // Setting the AUDIO SOURCE key in "sourceList" array state
+  useEffect(() => {
+    const duplicateArray = [];
+    sounds.forEach((sound) => {
+      duplicateArray.push(sound);
+    });
+    setSoundList(duplicateArray);
+  }, [sounds]);
+
+  return <>{soundList.length > 0 && <MainMixer sounds={soundList} />}</>;
 };
 
 export default MultiAudioPlayer2;

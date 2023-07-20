@@ -8,8 +8,13 @@ const soundPlayerSlice2 = createSlice({
   },
   reducers: {
     playSound2(state, action) {
-      const { audio, title, thumbnail, naration } = action.payload;
-      console.log("action.payload => ", action.payload.audio);
+      const firstAudio = action.payload.audio_list[0];
+      const soundExists = state.sounds.some((sound) => {
+        return sound.audio_list[0] === firstAudio; // Check if audio_list already exists in sounds array
+      });
+      if (!soundExists) {
+        state.sounds.push(action.payload);
+      }
     },
   },
 });

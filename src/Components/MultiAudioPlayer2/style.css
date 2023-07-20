@@ -418,3 +418,35 @@
     font-weight: 300;
     margin: 0;
 }
+
+.mixerPlayPause {
+    
+}
+
+.mixerTray {
+    position: absolute;
+    bottom: 100%;
+    right: 0;
+    width: 360px;
+    background: #ffffff36;
+    backdrop-filter: blur(81px) opacity(0.5);
+}
+
+
+.volumeBoxes {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+
+.volumeBox {
+    width: 20px;
+    height: 10px;
+    background: #898989;
+}
+
+
+.volumeBox.fill {
+    background: #000;
+}
