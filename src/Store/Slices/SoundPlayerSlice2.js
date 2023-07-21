@@ -16,9 +16,16 @@ const soundPlayerSlice2 = createSlice({
         state.sounds.push(action.payload);
       }
     },
+    removeSoundAction(state, action) {
+      const index = action.payload;
+      // state.sounds = state.sounds.filter(
+      //   (sound) => sound.audio_list !== action.payload.audio_list
+      // );
+      state.sounds.splice(index, 1);
+    },
   },
 });
 
-export const { playSound2 } = soundPlayerSlice2.actions;
+export const { playSound2, removeSoundAction } = soundPlayerSlice2.actions;
 
 export default soundPlayerSlice2.reducer;

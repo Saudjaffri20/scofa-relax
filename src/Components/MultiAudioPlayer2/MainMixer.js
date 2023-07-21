@@ -1,8 +1,14 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+
+import { removeSoundAction } from "../../Store/Slices/SoundPlayerSlice2";
 import IndividualSound from "./IndividualSound";
+
 import "./style.css";
 
-const MainMixer = ({ sounds }) => {
+const MainMixer = ({ soundList, setSoundList }) => {
+  const dispatch = useDispatch();
+
   const [isPlaying, setIsPlaying] = useState(true);
   const [openTray, setOpenTray] = useState(false);
 
@@ -12,6 +18,13 @@ const MainMixer = ({ sounds }) => {
 
   const handlePauseAll = () => {
     setIsPlaying(false);
+  };
+
+  const removeSound = (index) => {
+    const updatedSoundList = [...soundList];
+    updatedSoundList.splice(index, 1);
+    setSoundList(updatedSoundList);
+    dispatch(removeSoundAction(index));
   };
 
   return (
@@ -36,8 +49,15 @@ const MainMixer = ({ sounds }) => {
         </div>
       </div>
       <div className={`mixerTray ${!openTray ? "d-none" : "d-block"}`}>
-        {sounds.map((item, index) => (
-          <IndividualSound sound={item} isPlaying={isPlaying} key={index} />
+        {soundList.map((item, index) => (
+          <IndividualSound
+            sound={item}
+            isPlaying={isPlaying}
+            key={index}
+            removeSound={() => {
+              removeSound(index);
+            }}
+          />
         ))}
       </div>
     </div>

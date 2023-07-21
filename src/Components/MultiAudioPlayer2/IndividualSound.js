@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import BASEURL from "../../Config/global";
 import { Howl } from "howler";
 
-const IndividualSound = ({ sound, isPlaying }) => {
+const IndividualSound = ({ sound, isPlaying, removeSound }) => {
   const [audioLinks, setAudioLinks] = useState([]);
   const [howlInstances, setHowlInstances] = useState([]);
   const [currentLevel, setCurrentLevel] = useState(2);
@@ -69,10 +69,20 @@ const IndividualSound = ({ sound, isPlaying }) => {
     setCurrentLevel((prevLevel) => Math.max(prevLevel - 1, -1));
   };
 
+  const handleRemove = () => {
+    // Call the removeSound callback to remove the sound from the parent state
+    removeSound();
+    // Unload all the Howl instances
+    howlInstances.forEach((howl) => {
+      howl.unload();
+    });
+  };
+
   return (
     <div>
-      {sound.title} <button onClick={increaseVolume}>+</button>{" "}
+      {sound.title}
       <button onClick={decreaseVolume}>-</button>
+      <button onClick={increaseVolume}>+</button>{" "}
       <div className="volumeBoxes">
         <div className={`volumeBox ${currentLevel >= 0 ? "fill" : ""}`}></div>
         <div className={`volumeBox ${currentLevel >= 1 ? "fill" : ""}`}></div>
@@ -80,6 +90,7 @@ const IndividualSound = ({ sound, isPlaying }) => {
         <div className={`volumeBox ${currentLevel >= 3 ? "fill" : ""}`}></div>
         <div className={`volumeBox ${currentLevel >= 4 ? "fill" : ""}`}></div>
       </div>
+      <button onClick={handleRemove}>X</button>
     </div>
   );
 };

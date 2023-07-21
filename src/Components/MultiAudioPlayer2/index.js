@@ -35,7 +35,9 @@ const MultiAudioPlayer2 = () => {
     setSoundList(duplicateArray);
   }, [sounds]);
 
-  return <>{soundList.length > 0 && <MainMixer sounds={soundList} />}</>;
+
+
+  return <>{soundList.length > 0 && <MainMixer soundList={soundList} setSoundList={setSoundList} />}</>;
 };
 
 export default MultiAudioPlayer2;
