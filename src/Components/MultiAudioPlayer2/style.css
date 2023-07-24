@@ -1,8 +1,8 @@
 .audioPlayerWrapper {
     position: fixed;
     bottom: 20px;
-    left: calc(50% + 130px);
-    transform: translateX(-50%);
+    left: 0;
+    transform: translateX(0);
     width: 95%;
     max-width: 768px;
     background: #100b16;

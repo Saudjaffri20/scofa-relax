@@ -32,7 +32,7 @@ const WebRoutes = () => {
   const token = getAccessToken();
   return (
     <>
-      <BrowserRouter basename="/">
+      <BrowserRouter basename="/v2">
         <Routes>
           <Route path="/" element={<Main />} />
           {/* <Route
