@@ -5,6 +5,7 @@ import MainLayout from "./../../Layout/MainLayout";
 import {
   HeartButton,
   PauseButton,
+  Play,
   PlayButton,
   ShuffleButton,
   playIcon,
@@ -15,6 +16,8 @@ import CustomTable from "../../Components/CustomTable";
 import axios from "axios";
 import BASEURL from "../../Config/global";
 
+import Accordion from "react-bootstrap/Accordion";
+
 import { useDispatch } from "react-redux";
 import { playAudio } from "../../Store/Slices/AudioSlice";
 import { playSound } from "../../Store/Slices/SoundPlayerSlice";
@@ -23,7 +26,9 @@ const Articles = () => {
   const dispatch = useDispatch();
 
   const [data, setData] = useState([]);
-  const [playingAudio, setPlayingAudio] = useState({});
+  const [categorizedArticlesData, setCategorizedArticlesData] = useState([]);
+  const [categorizedFilteredData, setCategorizedFilteredData] = useState([]);
+  const [featured, setFeatured] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
@@ -40,6 +45,39 @@ const Articles = () => {
     }
     fetchData();
   }, []);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await axios.get(
+          `${BASEURL}/api/articles/articlecategories`
+        );
+        if (response.data.error != true) {
+          setCategorizedArticlesData(response.data.data);
+        } else {
+          console.log(response.data.message);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const filteredSound = data.filter((audio) => audio.featured);
+    setFeatured(filteredSound);
+  }, [data]);
+  
+  useEffect(() => {
+    const duplicateArray = [];
+    categorizedArticlesData.forEach((categoryData) => {
+      // if (categoryData.category_data.length > 0) {
+        duplicateArray.push(categoryData);
+      // }
+    });
+    setCategorizedFilteredData(duplicateArray);
+  }, [categorizedArticlesData]);
 
   // const playSound = (id, source, title, thumbnail) => {
   //   if (playingAudio.id == id) {
@@ -115,55 +153,83 @@ const Articles = () => {
           </div>
         </div> */}
         <div className="row mb-3">
-          <div className="col-12">
-            <CustomTable headers={tableHeaders}>
-              <tbody>
-                {data.map((item, index) => (
-                  <tr key={index}>
-                    <td>
-                      {" "}
-                      <button
-                        type="button"
-                        className="customTableAction svgButton notButton primaryFill"
-                        onClick={() => {
-                          dispatchPlaySound(
-                            item.audio,
-                            item.title,
-                            item.thumbnail,
-                            item.naration
-                          );
-                        }}
-                      >
-                        <PlayButton />
-                        {/* <img src={playIcon} alt="" /> */}
-                      </button>
-                    </td>
-                    <td>
-                      <img
-                        src={`${BASEURL + item.thumbnail}`}
-                        alt="Thumbnail"
-                        className="customTableThumbnail"
-                      />
-                      {item.title}
-                    </td>
-                    <td>{item.duration}</td>
-                    <td>{item.articlecategoriesname}</td>
-                    <td>
-                      <div className="customTableActions">
-                        <button
-                          type="button"
-                          className="customTableAction notButton lightStroke"
-                        >
-                          <HeartButton />
-                        </button>
-
-                        {/* {playingAudio.id == item.id ? <p>Playing</p> : <p>Not</p>} */}
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </CustomTable>
+          <div className="col-12 px-0">
+            <Accordion
+              defaultActiveKey={["0"]}
+              alwaysOpen
+              className="customAccordion"
+            >
+              <Accordion.Item eventKey="0">
+                <Accordion.Header>Featured</Accordion.Header>
+                <Accordion.Body>
+                  <div className="audioStrips stripedRows">
+                    {featured.map((item, index) => (
+                      <>
+                        <div className="audioStrip" key={index}>
+                          <div className="audioStripDetails">
+                            <img src={`${BASEURL + item.thumbnail}`} alt="" />
+                            <p>{item.title}</p>
+                          </div>
+                          <div className="audioStripExtra">
+                            <p className="audioStripduration">00:00</p>
+                            <button
+                              type="button"
+                              className="audioStripButton audioStripPlay"
+                              onClick={() => {
+                                dispatchPlaySound(
+                                  item.audio,
+                                  item.title,
+                                  item.thumbnail,
+                                  item.naration
+                                );
+                              }}
+                            >
+                              <img src={Play} alt="" />
+                            </button>
+                          </div>
+                        </div>
+                      </>
+                    ))}
+                  </div>
+                </Accordion.Body>
+              </Accordion.Item>
+              {categorizedFilteredData.map((categorizedData, index) => (
+                <Accordion.Item eventKey={index + 1} key={index + 1}>
+                  <Accordion.Header>{categorizedData.name}</Accordion.Header>
+                  <Accordion.Body>
+                    <div className="audioStrips stripedRows">
+                      {categorizedData.category_data.map((item, index) => (
+                        <>
+                          <div className="audioStrip" key={index}>
+                            <div className="audioStripDetails">
+                              <img src={`${BASEURL + item.thumbnail}`} alt="" />
+                              <p>{item.title}</p>
+                            </div>
+                            <div className="audioStripExtra">
+                              <p className="audioStripduration">00:00</p>
+                              <button
+                                type="button"
+                                className="audioStripButton audioStripPlay"
+                                onClick={() => {
+                                  dispatchPlaySound(
+                                    item.audio,
+                                    item.title,
+                                    item.thumbnail,
+                                    item.naration
+                                  );
+                                }}
+                              >
+                                <img src={Play} alt="" />
+                              </button>
+                            </div>
+                          </div>
+                        </>
+                      ))}
+                    </div>
+                  </Accordion.Body>
+                </Accordion.Item>
+              ))}
+            </Accordion>
           </div>
         </div>
       </MainLayout>

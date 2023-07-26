@@ -17,8 +17,6 @@ const Sounds = () => {
   const [categorizedFilteredData, setCategorizedFilteredData] = useState([]);
   const [featured, setFeatured] = useState([]);
 
-  console.log("categorizedFilteredData => ", categorizedSoundsData);
-
   useEffect(() => {
     async function fetchData() {
       try {
@@ -61,9 +59,9 @@ const Sounds = () => {
   useEffect(() => {
     const duplicateArray = [];
     categorizedSoundsData.forEach((categoryData) => {
-      if (categoryData.category_data.length > 0) {
+      // if (categoryData.category_data.length > 0) {
         duplicateArray.push(categoryData);
-      }
+      // }
     });
     setCategorizedFilteredData(duplicateArray);
   }, [categorizedSoundsData]);

@@ -71,14 +71,12 @@ const Meditation = () => {
   useEffect(() => {
     const duplicateArray = [];
     categorizedSoundsData.forEach((categoryData) => {
-      if (categoryData.category_data.length > 0) {
+      // if (categoryData.category_data.length > 0) {
         duplicateArray.push(categoryData);
-      }
+      // }
     });
     setCategorizedFilteredData(duplicateArray);
   }, [categorizedSoundsData]);
-
-  console.log("categorizedFilteredData => ", categorizedFilteredData);
 
   // const playSound = (id, source, title, thumbnail) => {
   //   if (playingAudio.id == id) {
