@@ -16,7 +16,7 @@ import BASEURL from "../../Config/global";
 
 const obj = [
   {
-    audio: "/media/assets/Rain_01.mp3",
+    audio: "/media/assets/Rain_20.mp3",
     created_datetime: "2023-06-23T20:56:26.128813Z",
     featured: true,
     id: 80,
@@ -28,11 +28,11 @@ const obj = [
     thumbnail: "/media/assets/Scofa_Relax_Favicon-removebg-preview_zgGRd1Y.png",
     title: "Test",
     audio_list: [
-      "/media/assets/Rain_01.mp3",
-      "/media/assets/Fire-Sounds_01.mp3",
-      "/media/assets/Water_Fall_01.mp3",
-      "/media/assets/Rain_01.mp3",
-      "/media/assets/Fire-Sounds_01.mp3",
+      "/media/assets/Rain_20.mp3",
+      "/media/assets/Rain_40.mp3",
+      "/media/assets/Rain_60.mp3",
+      "/media/assets/Rain_80.mp3",
+      "/media/assets/Rain_100.mp3",
     ],
   },
   {
@@ -48,11 +48,11 @@ const obj = [
     thumbnail: "/media/assets/Scofa_Relax_Favicon-removebg-preview_zgGRd1Y.png",
     title: "Test 2",
     audio_list: [
-      "/media/assets/Fire-Sounds_01.mp3",
-      "/media/assets/Water_Fall_01.mp3",
-      "/media/assets/Rain_01.mp3",
-      "/media/assets/Fire-Sounds_01.mp3",
-      "/media/assets/Water_Fall_01.mp3",
+      "/media/assets/Rain_20.mp3",
+      "/media/assets/Rain_40.mp3",
+      "/media/assets/Rain_60.mp3",
+      "/media/assets/Rain_80.mp3",
+      "/media/assets/Rain_100.mp3",
     ],
   },
   {
@@ -68,11 +68,11 @@ const obj = [
     thumbnail: "/media/assets/Scofa_Relax_Favicon-removebg-preview_zgGRd1Y.png",
     title: "Test 3",
     audio_list: [
-      "/media/assets/Water_Fall_01.mp3",
-      "/media/assets/Rain_01.mp3",
-      "/media/assets/Fire-Sounds_01.mp3",
-      "/media/assets/Water_Fall_01.mp3",
-      "/media/assets/Rain_01.mp3",
+      "/media/assets/Rain_20.mp3",
+      "/media/assets/Rain_40.mp3",
+      "/media/assets/Rain_60.mp3",
+      "/media/assets/Rain_80.mp3",
+      "/media/assets/Rain_100.mp3",
     ],
   },
 ];
@@ -88,6 +88,8 @@ const Sounds = () => {
   const dispatchPlaySound = (item) => {
     dispatch(playSound2(item));
   };
+
+  console.log(soundsData)
 
   useEffect(() => {
     async function fetchData() {
