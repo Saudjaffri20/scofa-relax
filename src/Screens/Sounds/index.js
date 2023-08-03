@@ -10,6 +10,8 @@ import Accordion from "react-bootstrap/Accordion";
 import "./style.css";
 import axios from "axios";
 import BASEURL from "../../Config/global";
+import { playSound } from "../../Store/Slices/SoundPlayerSlice";
+import { useDispatch } from "react-redux";
 
 const Sounds = () => {
   const [soundsData, setSoundsData] = useState([]);
@@ -60,7 +62,7 @@ const Sounds = () => {
     const duplicateArray = [];
     categorizedSoundsData.forEach((categoryData) => {
       // if (categoryData.category_data.length > 0) {
-        duplicateArray.push(categoryData);
+      duplicateArray.push(categoryData);
       // }
     });
     setCategorizedFilteredData(duplicateArray);
@@ -106,6 +108,7 @@ const Sounds = () => {
             </Accordion>
           </div>
         </div>
+      
       </MainLayout>
     </>
   );

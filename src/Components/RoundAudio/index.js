@@ -8,25 +8,16 @@ import BASEURL from "../../Config/global";
 const RoundAudio = (props) => {
   const dispatch = useDispatch();
 
-  const dispatchPlaySound = (source, title, thumbnail, naration) => {
-    dispatch(playSound({ source, title, thumbnail, naration }));
+  const dispatchPlaySound = (item) => {
+    dispatch(playSound(item));
   };
-
-  // const dispatchSound = (source, title, thumbnail) => {
-  //   dispatch(playAudio({ source, title, thumbnail }));
-  // };
 
   return (
     <div className="roundAudioWrapper">
       <div
         className="roundAudio"
         onClick={() => {
-          dispatchPlaySound(
-            props.item.audio,
-            props.item.title,
-            props.item.thumbnail,
-            props.item.naration
-          );
+          dispatchPlaySound(props?.item);
         }}
       >
         <div className="imageWrapper">

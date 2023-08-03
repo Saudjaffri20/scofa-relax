@@ -1,13 +1,13 @@
 .audioPlayerWrapper {
     position: fixed;
-    bottom: 20px;
-    left: calc(50% + 130px);
-    transform: translateX(-50%);
-    width: 95%;
-    max-width: 768px;
-    background: #100b16;
-    border-radius: 8px;
-    padding: 0.3rem 1rem;
+    bottom: 0px;
+    /* left: calc(50% + 130px); */
+    /* transform: translateX(-50%); */
+    width: 100%;
+    /* max-width: 768px; */
+    border-top: 1px solid var(--lightColor);
+    background: #042047;
+    padding: 0.5rem 1rem;
     z-index: 99;
 }
 
@@ -15,6 +15,11 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: relative;
+    width: 100%;
+    max-width: 768px;
+    padding: 0 0.2rem;
+    margin: 0 auto;
 }
 
 .playerAction {
@@ -260,13 +265,13 @@
 .individualAudio {
     display: flex;
     flex-direction: column;
-    padding: 1rem 0;
+    padding: 1rem 0.5rem;
 }
 
-.individualAudio:not(:last-child) {
+/* .individualAudio:not(:last-child) {
     border-bottom: 1px solid var(--lightColor);
 
-}
+}    */
 
 .mixerSoundDetail {
     display: flex;
@@ -275,7 +280,13 @@
 }
 
 .mixerSoundThumbnail {
-    width: 35px;
+    background: #2f9bbf;
+    border-radius: 99px;
+    padding: 0.2rem;
+}
+
+.mixerSoundThumbnail img {
+    width: 30px;
     aspect-ratio: 1/1;
     object-fit: cover;
     object-position: center;
@@ -417,4 +428,15 @@
     font-size: 9px;
     font-weight: 300;
     margin: 0;
+}
+
+.mixerTray {
+    position: absolute;
+    bottom: 100%;
+    right: 0;
+    width: 100%;
+    max-width: 360px;
+    background: #042047d9;
+    border-top-right-radius: 12px;
+    border-top-left-radius: 12px;
 }
