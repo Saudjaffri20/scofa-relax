@@ -4,20 +4,16 @@ import BASEURL from "../../Config/global";
 const audioSlice = createSlice({
   name: "audio",
   initialState: {
-    audioId: null,
-    audioSource: null,
-    audioTitle: null,
-    audioThumbnail: null,
+    audio: null,
   },
   reducers: {
     playAudio(state, action) {
-      const { id, source, title, thumbnail } = action.payload;
-      return {
-        audioId: id,
-        audioSource: BASEURL + source,
-        audioTitle: title,
-        audioThumbnail: BASEURL + thumbnail,
-      };
+      if (state.audio && state.audio.src === action.payload.src) {
+        return;
+      } else {
+        state.audio = action.payload;
+        console.log(action.payload);
+      }
     },
   },
 });

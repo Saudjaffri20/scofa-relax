@@ -19,7 +19,7 @@ import Accordion from "react-bootstrap/Accordion";
 
 import { useDispatch } from "react-redux";
 import { playAudio } from "../../Store/Slices/AudioSlice";
-import { playSound } from "../../Store/Slices/SoundPlayerSlice";
+// import { playSound } from "../../Store/Slices/SoundPlayerSlice";
 
 const Meditation = () => {
   const dispatch = useDispatch();
@@ -72,7 +72,7 @@ const Meditation = () => {
     const duplicateArray = [];
     categorizedSoundsData.forEach((categoryData) => {
       // if (categoryData.category_data.length > 0) {
-        duplicateArray.push(categoryData);
+      duplicateArray.push(categoryData);
       // }
     });
     setCategorizedFilteredData(duplicateArray);
@@ -87,8 +87,12 @@ const Meditation = () => {
   //   }
   // };
 
-  const dispatchPlaySound = (source, title, thumbnail, naration) => {
-    dispatch(playSound({ source, title, thumbnail, naration }));
+  // const dispatchPlayAudio = (source, title, thumbnail, naration) => {
+  //   dispatch(playSound({ source, title, thumbnail, naration }));
+  // };
+
+  const dispatchPlayAudio = (item) => {
+    dispatch(playAudio(item));
   };
 
   // const dispatchSound = (id, source, title, thumbnail) => {
@@ -103,27 +107,6 @@ const Meditation = () => {
             <h2 className="pageTitle">Meditation</h2>
           </div>
         </div>
-        {/* <div className="row mb-3">
-          <div className="col-12">
-            <div className="d-flex align-items-center gap-2">
-              <div className="customTableActionWrapper">
-                <button
-                  type="button"
-                  className="customTableAction notButton whiteFill"
-                >
-                  <ShuffleButton />
-                </button>
-                <p>Shuffle</p>
-              </div>
-              <button
-                type="button"
-                className="customTableAction roundButton primaryFill"
-              >
-                <PlayButton />
-              </button>
-            </div>
-          </div>
-        </div> */}
         <div className="row mb-3">
           <div className="col-12 px-0">
             <Accordion
@@ -148,12 +131,7 @@ const Meditation = () => {
                               type="button"
                               className="audioStripButton audioStripPlay"
                               onClick={() => {
-                                dispatchPlaySound(
-                                  item.audio,
-                                  item.title,
-                                  item.thumbnail,
-                                  item.naration
-                                );
+                                dispatchPlayAudio(item);
                               }}
                             >
                               <img src={Play} alt="" />
@@ -170,9 +148,9 @@ const Meditation = () => {
                   <Accordion.Header>{categorizedData.name}</Accordion.Header>
                   <Accordion.Body>
                     <div className="audioStrips stripedRows">
-                      {categorizedData.category_data.map((item, index) => (
+                      {categorizedData.category_data.map((item, idx) => (
                         <>
-                          <div className="audioStrip" key={index}>
+                          <div className="audioStrip" key={idx}>
                             <div className="audioStripDetails">
                               <img src={`${BASEURL + item.thumbnail}`} alt="" />
                               <p>{item.title}</p>
@@ -183,12 +161,7 @@ const Meditation = () => {
                                 type="button"
                                 className="audioStripButton audioStripPlay"
                                 onClick={() => {
-                                  dispatchPlaySound(
-                                    item.audio,
-                                    item.title,
-                                    item.thumbnail,
-                                    item.naration
-                                  );
+                                  dispatchPlayAudio(item);
                                 }}
                               >
                                 <img src={Play} alt="" />
