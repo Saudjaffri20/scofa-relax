@@ -3,13 +3,21 @@ import { useDispatch } from "react-redux";
 
 // import { removeSoundAction } from "../../Store/Slices/SoundPlayerSlice2";
 import { removeSound } from "../../Store/Slices/SoundPlayerSlice";
+import { removeAudio } from "../../Store/Slices/AudioSlice";
 
 import IndividualSound from "./IndividualSound";
+import IndividualAudio from "./IndividualAudio";
 
 import { PauseButton, PlayButton } from "../../Assets/svg";
 import "./style.css";
 
-const MainMixer = ({ menuClass, soundList, setSoundList }) => {
+const MainMixer = ({
+  menuClass,
+  soundList,
+  setSoundList,
+  otherAudio,
+  setOtherAudio,
+}) => {
   const dispatch = useDispatch();
 
   const [isPlaying, setIsPlaying] = useState(true);
@@ -30,7 +38,12 @@ const MainMixer = ({ menuClass, soundList, setSoundList }) => {
     dispatch(removeSound(index));
   };
 
-  console.log("soundList =>", soundList);
+
+  const handleRemoveAudio = () => {
+    setOtherAudio(null);
+    dispatch(removeAudio());
+  };
+
 
   return (
     <>
@@ -75,6 +88,15 @@ const MainMixer = ({ menuClass, soundList, setSoundList }) => {
                     }}
                   />
                 ))}
+                {otherAudio && (
+                  <IndividualAudio
+                    sound={otherAudio}
+                    isPlaying={isPlaying}
+                    individualRemoveAudio={() => {
+                      handleRemoveAudio();
+                    }}
+                  />
+                )}
               </div>
             </div>
           </div>

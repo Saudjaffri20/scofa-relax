@@ -18,10 +18,13 @@ const MultiAudioPlayerrr = () => {
     };
   }, []);
 
-
   const sounds = useSelector((state) => state.soundPlayer.sounds);
+  const audio = useSelector((state) => state.audio.audio);
+
+  // console.log("audioooooo", audio)
 
   const [soundList, setSoundList] = useState([]);
+  const [otherAudio, setOtherAudio] = useState(null);
 
   useEffect(() => {
     const duplicateArray = [];
@@ -31,16 +34,22 @@ const MultiAudioPlayerrr = () => {
     setSoundList(duplicateArray);
   }, [sounds]);
 
-  console.log("sounds =>", sounds)
+  useEffect(() => {
+    setOtherAudio(audio);
+  }, [audio]);
+
+  console.log("sounds =>", sounds);
 
   return (
     <>
-      {soundList.length > 0 && (
+      {(soundList.length > 0 || otherAudio) && (
         <>
           <MainMixer
             menuClass={menuClass}
             soundList={soundList}
             setSoundList={setSoundList}
+            otherAudio={otherAudio}
+            setOtherAudio={setOtherAudio}
           />
         </>
       )}

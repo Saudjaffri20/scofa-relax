@@ -8,15 +8,17 @@ const audioSlice = createSlice({
   },
   reducers: {
     playAudio(state, action) {
-      if (state.audio && state.audio.src === action.payload.src) {
+      if (state.audio?.audio == action.payload.audio) {
         return;
       } else {
         state.audio = action.payload;
-        console.log(action.payload);
       }
+    },
+    removeAudio(state, action) {
+      state.audio = null;
     },
   },
 });
 
 export default audioSlice.reducer;
-export const { playAudio } = audioSlice.actions;
+export const { playAudio, removeAudio } = audioSlice.actions;
