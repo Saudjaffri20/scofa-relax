@@ -89,8 +89,8 @@ const Stories = () => {
   //   }
   // };
 
-  const dispatchPlaySound = (source, title, thumbnail, naration) => {
-    dispatch(playSound({ source, title, thumbnail, naration }));
+  const dispatchPlayAudio = (item) => {
+    dispatch(playAudio(item));
   };
 
   // const dispatchSound = (id, source, title, thumbnail) => {
@@ -173,12 +173,7 @@ const Stories = () => {
                               type="button"
                               className="audioStripButton audioStripPlay"
                               onClick={() => {
-                                dispatchPlaySound(
-                                  item.audio,
-                                  item.title,
-                                  item.thumbnail,
-                                  item.naration
-                                );
+                                dispatchPlayAudio(item);
                               }}
                             >
                               <img src={Play} alt="" />
@@ -208,12 +203,7 @@ const Stories = () => {
                                 type="button"
                                 className="audioStripButton audioStripPlay"
                                 onClick={() => {
-                                  dispatchPlaySound(
-                                    item.audio,
-                                    item.title,
-                                    item.thumbnail,
-                                    item.naration
-                                  );
+                                  dispatchPlayAudio(item);
                                 }}
                               >
                                 <img src={Play} alt="" />

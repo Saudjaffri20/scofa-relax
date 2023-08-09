@@ -1,6 +1,5 @@
 import { LockBadge } from "../../Assets/svg";
 import { useDispatch } from "react-redux";
-import { playAudio } from "../../Store/Slices/AudioSlice";
 import { playSound } from "./../../Store/Slices/SoundPlayerSlice";
 import "./style.css";
 import BASEURL from "../../Config/global";

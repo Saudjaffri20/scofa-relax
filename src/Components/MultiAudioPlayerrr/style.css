@@ -68,13 +68,10 @@
     margin: 0;
 }
 
-.spinner svg {
+.spinner img {
     width: 30px;
-    height: 30px;
-}
-
-.spinner path {
-    fill: var(--lightColor) !important;
+    aspect-ratio: 1/1;
+    filter: brightness(0) invert(0.6);
 }
 
 .playerVolume {
@@ -189,10 +186,9 @@
 }
 
 .audioPlayerWrapper.mobileMenu {
-    left: 50%;
-    bottom: 80px;
+    left: 0%;
+    bottom: 60px;
 }
-
 
 
 
@@ -295,7 +291,7 @@
 
 .mixerAudioTitle {
     font-size: 12px !important;
-    text-align: center !important;
+    /* text-align: center !important; */
     margin: 0.3rem !important;
     /* color: var(--lightColor); */
     color: #fff;
@@ -436,7 +432,76 @@
     right: 0;
     width: 100%;
     max-width: 360px;
-    background: #042047d9;
-    border-top-right-radius: 12px;
-    border-top-left-radius: 12px;
+    background: #042047e3;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+    padding: 0.5rem;
+}
+
+.mixerHeader {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: 0.5rem 0.5rem;
+}
+
+.mixerHeader h3 {
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.mixerHeader button img {
+    width: 12px;
+    aspect-ratio: 1/1;
+    filter: brightness(0) invert(1);
+}
+
+.individualSoundsWrapper {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.clearMixWrapper {
+    text-align: center;
+    border-top: 1px solid #ffffff15;
+    padding: 0.8rem;
+}
+
+.clearMixButton {
+    display: inline-block;
+    background: #ffffff15;
+    border: none;
+    color: #fff;
+    border-radius: 99px;
+    padding: 0.6rem 2rem;
+    font-size: 14px;
+    outline: #fff0;
+}
+
+.soundControlButton {
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 15px;
+    height: 15px;
+    border: none;
+    border-radius: 99px;
+    outline: #fff0;
+}
+
+.soundControlButton img {
+    width: 0.5em;
+    filter: brightness(0);
+}
+
+.mixerSoundThumbnailWrapper {
+    position: relative;
+}
+
+.audioRemoveButton {
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    z-index: 11;
 }

@@ -1,7 +1,8 @@
-import { Link } from "react-router-dom";
-import { useLocation } from "react-router-dom";
-
+import { useEffect } from "react";
+import { useLocation, Link } from "react-router-dom";
 import { logo } from "../../Assets/images";
+
+import { Howl } from "howler";
 
 import {
   MenuHome,
@@ -19,6 +20,27 @@ import "./style.css";
 
 export const Menubar = (props) => {
   const location = useLocation();
+
+  useEffect(() => {
+    const sound = new Howl({
+      src: [require(`./../../../src/Assets/audio/silent.mp3`)], // Update the path accordingly
+      autoplay: true,
+      html5: true,
+      autoUnlock: true,
+      preload: true,
+      volume: 0,
+      mute: true,
+      autoSuspend: false,
+    });
+
+    // Play the sound
+    sound.play();
+
+    // Clean up
+    return () => {
+      sound.unload();
+    };
+  }, []);
 
   const menu = [
     {

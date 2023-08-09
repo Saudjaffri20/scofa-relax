@@ -23,7 +23,7 @@ import { ReactComponent as ShuffleButton } from "./shuffleButton.svg";
 // import { ReactComponent as StoreIcon } from "./store.svg";
 
 import { ReactComponent as LockBadge } from "./lockBadge.svg";
-import { ReactComponent as Spinner } from "./spinner.svg";
+// import { ReactComponent as Spinner } from "./spinner.svg";
 import { ReactComponent as Eye } from "./eye.svg";
 import { ReactComponent as EyeSlash } from "./eye-slash.svg";
 import { ReactComponent as CrossIcon } from "./cross.svg";
@@ -46,6 +46,7 @@ import playIcon from "./playIcon.png";
 import ThreeDots from "./threeDots.svg";
 import Cog from "./cog.svg";
 import Play from "./play.svg";
+import Spinner from './spinner.svg'
 
 
 export {

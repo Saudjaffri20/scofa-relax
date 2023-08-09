@@ -93,10 +93,14 @@ const Home = () => {
     setSearchTerm(event.target.value);
   };
 
-  const dispatchPlaySound = (source, title, thumbnail, naration) => {
-    dispatch(playSound({ source, title, thumbnail, naration }));
+  const dispatchPlaySound = (item) => {
+    dispatch(playSound(item));
   };
-  
+
+  const dispatchPlayAudio = (item) => {
+    dispatch(playAudio(item));
+  };
+
   // const dispatchSound = (source, title, thumbnail) => {
   //   dispatch(playAudio({ source, title, thumbnail }));
   // };
@@ -130,21 +134,16 @@ const Home = () => {
           <div className="col-12">
             <div className="homeboxesWrapper">
               {soundData.slice(0, 6).map((item, index) => (
-                  <CustomCard
-                    key={index}
-                    title={item.title}
-                    image={`${BASEURL + item.image}`}
-                    alt={"In The News"}
-                    onClick={() => {
-                      dispatchPlaySound(
-                        item.audio,
-                        item.title,
-                        item.thumbnail,
-                        item.naration
-                      );
-                    }}
-                  />
-                ))}
+                <CustomCard
+                  key={index}
+                  title={item.title}
+                  image={`${BASEURL + item.image}`}
+                  alt={"In The News"}
+                  onClick={() => {
+                    dispatchPlaySound(item);
+                  }}
+                />
+              ))}
             </div>
           </div>
         </div>
@@ -169,12 +168,7 @@ const Home = () => {
                   image={`${BASEURL + item.image}`}
                   alt={"Meditation"}
                   onClick={() => {
-                    dispatchPlaySound(
-                      item.audio,
-                      item.title,
-                      item.thumbnail,
-                      item.naration
-                    );
+                    dispatchPlayAudio(item);
                   }}
                 />
               ))}
@@ -202,12 +196,7 @@ const Home = () => {
                   image={`${BASEURL + item.image}`}
                   alt={"Stories"}
                   onClick={() => {
-                    dispatchPlaySound(
-                      item.audio,
-                      item.title,
-                      item.thumbnail,
-                      item.naration
-                    );
+                    dispatchPlayAudio(item);
                   }}
                 />
               ))}
@@ -235,12 +224,7 @@ const Home = () => {
                   image={`${BASEURL + item.image}`}
                   alt={"Articles"}
                   onClick={() => {
-                    dispatchPlaySound(
-                      item.audio,
-                      item.title,
-                      item.thumbnail,
-                      item.naration
-                    );
+                    dispatchPlayAudio(item);
                   }}
                 />
               ))}
