@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
 // import { removeSoundAction } from "../../Store/Slices/SoundPlayerSlice2";
@@ -8,7 +8,13 @@ import { removeAudio } from "../../Store/Slices/AudioSlice";
 import IndividualSound from "./IndividualSound";
 import IndividualAudio from "./IndividualAudio";
 
-import { PauseButton, PlayButton, crossIcon } from "../../Assets/svg";
+import {
+  PauseButton,
+  PlayButton,
+  // MixerButton,
+  crossIcon,
+  mixerIcon,
+} from "../../Assets/svg";
 
 import "./style.css";
 
@@ -46,10 +52,7 @@ const MainMixer = ({
   };
 
   const handleClearMix = () => {
-    // Set the state to indicate that the "Clear Mix" button is clicked
     setClearMixClicked(true);
-
-    // Additional logic if needed
   };
 
   return (
@@ -58,33 +61,45 @@ const MainMixer = ({
         <div className="row">
           <div className="col-12">
             <div className="audioPlayerControls">
-              {isPlaying ? (
-                <button
-                  className="playButton playerAction"
-                  onClick={handlePauseAll}
-                >
-                  <PauseButton className="playerActionIcon" />
-                  <p className="playerActionText">Pause</p>
-                </button>
-              ) : (
-                <button
-                  className="playButton playerAction"
-                  onClick={handlePlayAll}
-                >
-                  <PlayButton className="playerActionIcon" />
+              <div className="mixerLeft">
+                {isPlaying ? (
+                  <button
+                    className="playButton playerAction"
+                    onClick={handlePauseAll}
+                  >
+                    <PauseButton className="playerActionIcon" />
+                    <p className="playerActionText">Pause</p>
+                  </button>
+                ) : (
+                  <button
+                    className="playButton playerAction"
+                    onClick={handlePlayAll}
+                  >
+                    <PlayButton className="playerActionIcon" />
 
-                  <p className="playerActionText">Play</p>
+                    <p className="playerActionText">Play</p>
+                  </button>
+                )}
+              </div>
+
+              <div className="mixerRight">
+                <button
+                  className="playerAction"
+                  onClick={() => {
+                    setOpenTray(!openTray);
+                  }}
+                >
+                  <img
+                    src={mixerIcon}
+                    alt="Mixer Icon"
+                    className="playerActionIcon"
+                  />
+                  <p className="playerActionText">Mixer</p>
+                  {/* <MixerButton className="playerActionIcon" /> */}
                 </button>
-              )}
-              <p
-                className="m-0"
-                onClick={() => {
-                  setOpenTray(!openTray);
-                }}
-              >
-                Mixer
-              </p>
-              <div className={`mixerTray ${!openTray ? "d-none" : "d-block"}`}>
+              </div>
+
+              <div className={`mixerTray ${openTray ? "open" : "close"}`}>
                 <div className="mixerHeader">
                   <h3>Mixer</h3>
                   <button
@@ -106,7 +121,7 @@ const MainMixer = ({
                         handleRemoveSound(index);
                       }}
                       clearMixClicked={clearMixClicked}
-                      resetClearMix={() => setClearMixClicked(false)}
+                      setSoundList={setSoundList}
                     />
                   ))}
                 </div>
@@ -119,12 +134,14 @@ const MainMixer = ({
                         handleRemoveAudio();
                       }}
                       clearMixClicked={clearMixClicked}
-                      resetClearMix={() => setClearMixClicked(false)}
+                      setOtherAudio={setOtherAudio}
                     />
                   )}
                 </div>
                 <div className="clearMixWrapper">
-                  {/* <button className="clearMixButton" onClick={handleClearMix}>Clear Mix</button> */}
+                  <button className="clearMixButton" onClick={handleClearMix}>
+                    Clear Mix
+                  </button>
                 </div>
               </div>
             </div>

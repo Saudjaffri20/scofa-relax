@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/v2/static/css/main.c5219559.css",
-    "main.js": "/v2/static/js/main.3ec27b80.js",
+    "main.css": "/v2/static/css/main.cd9b4748.css",
+    "main.js": "/v2/static/js/main.1f14581e.js",
     "static/js/787.eb2dfd17.chunk.js": "/v2/static/js/787.eb2dfd17.chunk.js",
     "static/media/fullPageBg.png": "/v2/static/media/fullPageBg.03028ed386f17f0e368a.png",
     "static/media/silent.mp3": "/v2/static/media/silent.d3fbe776e4699c899ccf.mp3",
@@ -56,7 +56,7 @@
     "static/media/cog.svg": "/v2/static/media/cog.d006e3bfa62a59233c326d3adb44848c.svg",
     "static/media/premiumQuality.svg": "/v2/static/media/premiumQuality.707e2df2fd7a52cafd55da9c96bdc19e.svg",
     "static/media/eye-slash.svg": "/v2/static/media/eye-slash.72993fd4e515b01bbb1df52b5a26171e.svg",
-    "static/media/mixerButton.svg": "/v2/static/media/mixerButton.cf04d9c1fc2be1378694b12b5b7a43dd.svg",
+    "static/media/mixerButtonIcon.svg": "/v2/static/media/mixerButtonIcon.65c11568f2d53668fb728772129de210.svg",
     "static/media/shuffleButton.svg": "/v2/static/media/shuffleButton.f98610bc1da032fab5abd80fce20a6f5.svg",
     "static/media/pauseButton.svg": "/v2/static/media/pauseButton.2dc0931634bc9255ccd1cd3492b201c5.svg",
     "static/media/threeDots.svg": "/v2/static/media/threeDots.36a61c7d9e2b3f193871069bb2fbe4fb.svg",
@@ -82,12 +82,12 @@
     "static/media/play.svg": "/v2/static/media/play.37e932581b5724e5a649c694471bc115.svg",
     "static/media/menuMeditation.svg": "/v2/static/media/menuMeditation.8eb50b4834070d72e3c20e2ca90a3df2.svg",
     "static/media/premiumSound.svg": "/v2/static/media/premiumSound.0a284ffbfac9dd765adb790f9f0c144f.svg",
-    "main.c5219559.css.map": "/v2/static/css/main.c5219559.css.map",
-    "main.3ec27b80.js.map": "/v2/static/js/main.3ec27b80.js.map",
+    "main.cd9b4748.css.map": "/v2/static/css/main.cd9b4748.css.map",
+    "main.1f14581e.js.map": "/v2/static/js/main.1f14581e.js.map",
     "787.eb2dfd17.chunk.js.map": "/v2/static/js/787.eb2dfd17.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.c5219559.css",
-    "static/js/main.3ec27b80.js"
+    "static/css/main.cd9b4748.css",
+    "static/js/main.1f14581e.js"
   ]
 }

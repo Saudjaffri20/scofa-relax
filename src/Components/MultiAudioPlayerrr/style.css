@@ -45,6 +45,11 @@
     height: 18px;
 }
 
+/* .playerAction img {
+    width: 25px;
+    height: 20px;
+} */
+
 .playerAction path {
     fill: #fff0;
     /* stroke: var(--lightColor); */
@@ -261,7 +266,7 @@
 .individualAudio {
     display: flex;
     flex-direction: column;
-    padding: 1rem 0.5rem;
+    padding: 1rem 0.8rem;
 }
 
 /* .individualAudio:not(:last-child) {
@@ -428,26 +433,44 @@
 
 .mixerTray {
     position: absolute;
-    bottom: 100%;
+    bottom: calc(100% + 0.5rem);
     right: 0;
     width: 100%;
     max-width: 360px;
-    background: #042047e3;
+    background: #042047f7;
     border-top-right-radius: 8px;
     border-top-left-radius: 8px;
-    padding: 0.5rem;
+    overflow: hidden;
+    transition: 0.5s linear;
+}
+
+.mixerTray.open {
+    bottom: calc(100% + 0.5rem);
+    height: auto;
+    opacity: 1;
+    transition: 0.5s linear;
+}
+
+.mixerTray.close {
+    bottom: 0;
+    height: 0;
+    opacity: 0;
+    transition: 0.5s linear;
 }
 
 .mixerHeader {
     display: flex;
     align-items: baseline;
     justify-content: space-between;
-    padding: 0.5rem 0.5rem;
+    padding: 1rem 1rem;
+    box-shadow: 0px 1px 10px #000;
+    background: #042047;
 }
 
 .mixerHeader h3 {
     font-size: 18px;
     font-weight: 400;
+    margin: 0;
 }
 
 .mixerHeader button img {
@@ -463,7 +486,7 @@
 
 .clearMixWrapper {
     text-align: center;
-    border-top: 1px solid #ffffff15;
+    border-top: 1px solid #ffffff38;
     padding: 0.8rem;
 }
 

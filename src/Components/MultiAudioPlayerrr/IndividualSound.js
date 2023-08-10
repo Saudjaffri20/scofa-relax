@@ -2,14 +2,17 @@ import React, { useEffect, useRef, useState } from "react";
 import BASEURL from "../../Config/global";
 import { Howl } from "howler";
 import { crossIcon, Spinner } from "../../Assets/svg";
+import { useDispatch } from "react-redux";
+import { removeAllSound } from "../../Store/Slices/SoundPlayerSlice";
 
 const IndividualSound = ({
   sound,
   isPlaying,
   individualRemoveSound,
   clearMixClicked,
-  resetClearMix,
+  setSoundList
 }) => {
+  const dispatch = useDispatch();
   const howlInstanceRef = useRef(null);
   const [volume, setVolume] = useState(0.5);
   const [isLoading, setIsLoading] = useState(true);
@@ -49,21 +52,19 @@ const IndividualSound = ({
 
   useEffect(() => {
     if (howlInstanceRef.current) {
+      if (clearMixClicked) {
+        howlInstanceRef.current.unload();
+        dispatch(removeAllSound());
+        setSoundList([]);
+      }
+    }
+  }, [clearMixClicked]);
+
+  useEffect(() => {
+    if (howlInstanceRef.current) {
       howlInstanceRef.current.volume(volume);
     }
   }, [volume]);
-
-  // useEffect(() => {
-  //   if (howlInstanceRef.current) {
-  //     if (isPlaying) {
-  //       // Pause and then play to ensure playback
-  //       howlInstanceRef.current.pause();
-  //       howlInstanceRef.current.play();
-  //     } else {
-  //       howlInstanceRef.current.pause();
-  //     }
-  //   }
-  // }, [isPlaying]);
 
   const handleVolume = (value) => {
     if (value === "Increase") {
@@ -79,13 +80,6 @@ const IndividualSound = ({
     }
     individualRemoveSound();
   };
-
-  // useEffect(() => {
-  //   // Check if the "Clear Mix" button is clicked
-  //   handleRemove();
-  //   // Reset the clearMixClicked state in the parent
-  //   resetClearMix();
-  // }, [clearMixClicked]);
 
   return (
     <div className="individualAudio">

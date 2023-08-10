@@ -20,12 +20,13 @@ const soundPlayerSlice = createSlice({
       const index = action.payload;
       state.sounds.splice(index, 1);
     },
+    removeAllSound(state, action) {
+      state.sounds = [];
+    },
   },
 });
 
-export const {
-  playSound,
-  removeSound,
-} = soundPlayerSlice.actions;
+export const { playSound, removeSound, removeAllSound } =
+  soundPlayerSlice.actions;
 
 export default soundPlayerSlice.reducer;

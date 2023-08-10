@@ -28,10 +28,12 @@ const MultiAudioPlayerrr = () => {
 
   useEffect(() => {
     const duplicateArray = [];
-    sounds.forEach((sound) => {
-      duplicateArray.push(sound);
-    });
-    setSoundList(duplicateArray);
+    if (sounds.length > 0) {
+      sounds.forEach((sound) => {
+        duplicateArray.push(sound);
+      });
+      setSoundList(duplicateArray);
+    }
   }, [sounds]);
 
   useEffect(() => {

@@ -12,7 +12,7 @@ import { ReactComponent as PremiumShuffle } from "./premiumShuffle.svg";
 
 import { ReactComponent as PlayButton } from "./playButton.svg";
 import { ReactComponent as PauseButton } from "./pauseButton.svg";
-import { ReactComponent as MixerButton } from "./mixerButton.svg";
+// import { ReactComponent as MixerButton } from "./mixerButton.svg";
 import { ReactComponent as TimerButton } from "./timer.svg";
 import { ReactComponent as HeartButton } from "./heartButton.svg";
 import { ReactComponent as ShuffleButton } from "./shuffleButton.svg";
@@ -42,11 +42,13 @@ import StoreIcon from "./store.svg";
 
 import crossIcon from "./crossIcon.png";
 import playIcon from "./playIcon.png";
+import mixerIcon from "./mixerButtonIcon.svg"
 
 import ThreeDots from "./threeDots.svg";
 import Cog from "./cog.svg";
 import Play from "./play.svg";
 import Spinner from './spinner.svg'
+
 
 
 export {
@@ -57,7 +59,7 @@ export {
   PremiumShuffle,
   PlayButton,
   PauseButton,
-  MixerButton,
+  // MixerButton,
   TimerButton,
   HeartButton,
   ShuffleButton,
@@ -77,6 +79,7 @@ export {
   CrossIcon,
   crossIcon,
   playIcon,
+  mixerIcon,
   ThreeDots,
   Cog,
   Play

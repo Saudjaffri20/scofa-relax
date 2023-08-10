@@ -1,15 +1,19 @@
 import React, { useEffect, useRef, useState } from "react";
 import BASEURL from "../../Config/global";
 import { Howl } from "howler";
+
 import { crossIcon, Spinner } from "../../Assets/svg";
+import { useDispatch } from "react-redux";
+import { removeAudio } from "../../Store/Slices/AudioSlice";
 
 const IndividualAudio = ({
   sound,
   isPlaying,
   individualRemoveAudio,
   clearMixClicked,
-  resetClearMix,
+  setOtherAudio,
 }) => {
+  const dispatch = useDispatch();
   const howlInstanceRef = useRef(null);
   const [volume, setVolume] = useState(0.5);
   const [isLoading, setIsLoading] = useState(true);
@@ -49,6 +53,16 @@ const IndividualAudio = ({
       }
     }
   }, [isPlaying]);
+
+  useEffect(() => {
+    if (howlInstanceRef.current) {
+      if (clearMixClicked) {
+        howlInstanceRef.current.unload();
+        setOtherAudio(null);
+        dispatch(removeAudio());
+      }
+    }
+  }, [clearMixClicked]);
 
   useEffect(() => {
     if (howlInstanceRef.current) {
