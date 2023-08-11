@@ -431,6 +431,11 @@
     margin: 0;
 }
 
+.mixerLeft, .mixerRight {
+    display: flex;
+    gap: 1rem;
+}
+
 .mixerTray {
     position: absolute;
     bottom: calc(100% + 0.5rem);
@@ -503,6 +508,7 @@
 
 .soundControlButton {
     background: #fff;
+    color: #000;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -511,6 +517,7 @@
     border: none;
     border-radius: 99px;
     outline: #fff0;
+    cursor: pointer;
 }
 
 .soundControlButton img {

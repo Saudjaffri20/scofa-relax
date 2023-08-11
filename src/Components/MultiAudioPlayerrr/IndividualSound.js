@@ -14,7 +14,7 @@ const IndividualSound = ({
 }) => {
   const dispatch = useDispatch();
   const howlInstanceRef = useRef(null);
-  const [volume, setVolume] = useState(0.5);
+  const [volume, setVolume] = useState(0.6);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -68,9 +68,9 @@ const IndividualSound = ({
 
   const handleVolume = (value) => {
     if (value === "Increase") {
-      setVolume((prevVolume) => Math.min(prevVolume + 0.1, 1));
+      setVolume((prevVolume) => Math.min(prevVolume + 0.2, 1));
     } else if (value === "Decrease") {
-      setVolume((prevVolume) => Math.max(prevVolume - 0.1, 0));
+      setVolume((prevVolume) => Math.max(prevVolume - 0.2, 0));
     }
   };
 
@@ -85,12 +85,12 @@ const IndividualSound = ({
     <div className="individualAudio">
       <div className="mixerSoundDetail">
         <div className="mixerSoundThumbnailWrapper flex-shrink-0">
-          <button
+          <span
             className="soundControlButton audioRemoveButton"
             onClick={handleRemove}
           >
             <img src={crossIcon} alt="Cross Icon" />
-          </button>
+          </span>
           {isLoading ? (
             <div className="spinner">
               <img src={Spinner} alt="Spinner" />
@@ -107,18 +107,18 @@ const IndividualSound = ({
           <p className="mixerAudioTitle">{sound.title}</p>
         </div>
         <div className="d-flex align-center gap-2 flex-shrink-0">
-          <button
+          <span
             className="soundControlButton"
             onClick={() => handleVolume("Decrease")}
           >
             -
-          </button>
-          <button
+          </span>
+          <span
             className="soundControlButton"
             onClick={() => handleVolume("Increase")}
           >
             +
-          </button>
+          </span>
         </div>
       </div>
     </div>

@@ -56,7 +56,7 @@ export const Menubar = (props) => {
       icon: MenuSound,
     },
     {
-      text: "Meditation",
+      text: "Relaxation",
       link: "/meditation",
       path: "meditation",
       icon: MenuMeditation,
@@ -72,6 +72,29 @@ export const Menubar = (props) => {
       link: "/articles",
       path: "articles",
       icon: MenuArticle,
+    },
+  ];
+
+  const externalMenu = [
+    {
+      text: "Scofa Articles",
+      link: "https://scofa.com/articles/",
+      icon: ArticlesIcon,
+    },
+    {
+      text: "Scofa Store",
+      link: "https://store.scofa.com/",
+      icon: StoreIcon,
+    },
+    {
+      text: "Find Sleep Doctors",
+      link: "https://scofa.com/",
+      icon: FindDoctorsIcon,
+    },
+    {
+      text: "Check Sleep Symptoms",
+      link: "https://scofa.com/check-sleep-disorder-symptoms/",
+      icon: CheckSymptomsIcon,
     },
   ];
 
@@ -100,7 +123,7 @@ export const Menubar = (props) => {
       </ul>
       <hr className="menuSeperator d-none d-md-block" />
       <ul className="list-unstyled d-none d-md-block">
-        <li className="menubar-li">
+        {/* <li className="menubar-li">
           <Link
             className={
               location.pathname.includes("playist")
@@ -111,7 +134,7 @@ export const Menubar = (props) => {
           >
             <span className="menuLinkText">Playlist</span>
           </Link>
-        </li>
+        </li> */}
         <li className="menubar-li">
           <Link
             className={
@@ -121,56 +144,24 @@ export const Menubar = (props) => {
             }
             to={"#_"}
           >
-            <span className="menuLinkText">Favourites</span>
+            <span className="menuLinkText">Favourite</span>
           </Link>
         </li>
-        <li className="menubar-li">
-          <Link
-            className="menuLink"
-            to={"https://scofa.com/articles/"}
-            target="_blank"
-          >
-            <img src={ArticlesIcon} className="menuIcon" />
-            {/* <ArticlesIcon /> */}
-            {/* </span> */}
-            <span className="menuLinkText">Articles</span>
-          </Link>
-        </li>
-        <li className="menubar-li">
-          <Link
-            className="menuLink"
-            to={"https://store.scofa.com/"}
-            target="_blank"
-          >
-            {/* <span className="menuIcon">
-              <StoreIcon />
-            </span> */}
-            <img src={StoreIcon} className="menuIcon" />
-            <span className="menuLinkText">Store</span>
-          </Link>
-        </li>
-        <li className="menubar-li">
-          <Link className="menuLink" to={"https://scofa.com/"} target="_blank">
-            {/* <span className="menuIcon">
-              <FindDoctorsIcon />
-            </span> */}
-            <img src={FindDoctorsIcon} className="menuIcon" />
-            <span className="menuLinkText">Find Doctors</span>
-          </Link>
-        </li>
-        <li className="menubar-li">
-          <Link
-            className="menuLink"
-            to={"https://scofa.com/check-sleep-disorder-symptoms/"}
-            target="_blank"
-          >
-            <img src={CheckSymptomsIcon} className="menuIcon" />
-            {/* <span className="menuIcon">
-              <CheckSymptomsIcon />
-            </span> */}
-            <span className="menuLinkText">Check Symptoms</span>
-          </Link>
-        </li>
+        {externalMenu.map((item, index) => (
+          <li className="menubar-li">
+            <Link
+              className="menuLink"
+              to={item.link}
+              target="_blank"
+            >
+              <img src={item.icon} className="menuIcon" />
+              {/* <ArticlesIcon /> */}
+              {/* </span> */}
+              <span className="menuLinkText">{item.text}</span>
+            </Link>
+          </li>
+        ))}
+
       </ul>
     </div>
   );

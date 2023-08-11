@@ -76,13 +76,40 @@ const MainMixer = ({
                     onClick={handlePlayAll}
                   >
                     <PlayButton className="playerActionIcon" />
-
                     <p className="playerActionText">Play</p>
                   </button>
                 )}
+                <button
+                  className="playerAction"
+                  // onClick={() => {
+                  //   setOpenTray(!openTray);
+                  // }}
+                >
+                  <img
+                    src={mixerIcon}
+                    alt="Save Icon"
+                    className="playerActionIcon"
+                  />
+                  <p className="playerActionText">Save Mix</p>
+                  {/* <MixerButton className="playerActionIcon" /> */}
+                </button>
               </div>
 
               <div className="mixerRight">
+                <button
+                  className="playerAction"
+                  // onClick={() => {
+                  //   setOpenTray(!openTray);
+                  // }}
+                >
+                  <img
+                    src={mixerIcon}
+                    alt="Timer Icon"
+                    className="playerActionIcon"
+                  />
+                  <p className="playerActionText">Add Timer</p>
+                  {/* <MixerButton className="playerActionIcon" /> */}
+                </button>
                 <button
                   className="playerAction"
                   onClick={() => {
@@ -98,6 +125,7 @@ const MainMixer = ({
                   {/* <MixerButton className="playerActionIcon" /> */}
                 </button>
               </div>
+              
 
               <div className={`mixerTray ${openTray ? "open" : "close"}`}>
                 <div className="mixerHeader">
