@@ -1,0 +1,19 @@
+.audioImage img {
+    max-width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 0.6rem;
+}
+
+.audioTitle {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+}
+
+.audioCategory {
+    font-size: 16px;
+    font-weight: 300;
+    margin: 0;
+}

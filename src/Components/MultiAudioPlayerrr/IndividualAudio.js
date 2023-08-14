@@ -17,7 +17,6 @@ const IndividualAudio = ({
   const howlInstanceRef = useRef(null);
   const [volume, setVolume] = useState(0.6);
   const [isLoading, setIsLoading] = useState(true);
-
   useEffect(() => {
     howlInstanceRef.current = new Howl({
       src: [BASEURL + sound.audio],
@@ -71,10 +70,17 @@ const IndividualAudio = ({
   }, [volume]);
 
   const handleVolume = (value) => {
-    if (value === "Increase") {
-      setVolume((prevVolume) => Math.min(prevVolume + 0.2, 1));
-    } else if (value === "Decrease") {
-      setVolume((prevVolume) => Math.max(prevVolume - 0.2, 0));
+    if (howlInstanceRef.current) {
+      const currentVolume = howlInstanceRef.current.volume();
+      if (value === "Increase") {
+        const newVolume = Math.min(currentVolume + 0.2, 1);
+        howlInstanceRef.current.volume(newVolume);
+        setVolume(newVolume); // Update local state for UI display
+      } else if (value === "Decrease") {
+        const newVolume = Math.max(currentVolume - 0.2, 0);
+        howlInstanceRef.current.volume(newVolume);
+        setVolume(newVolume); // Update local state for UI display
+      }
     }
   };
 
@@ -84,13 +90,6 @@ const IndividualAudio = ({
     }
     individualRemoveAudio();
   };
-
-  // useEffect(() => {
-  //   // Check if the "Clear Mix" button is clicked
-  //   handleRemove();
-  //   // Reset the clearMixClicked state in the parent
-  //   resetClearMix();
-  // }, [clearMixClicked]);
 
   return (
     <div className="individualAudio">

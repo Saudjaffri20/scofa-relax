@@ -29,20 +29,21 @@
     padding: 0;
     margin: 0;
     flex-shrink: 0;
+    color: #fff;
 }
 
 .playerAction .playerActionText {
-    font-size: 11px;
-    /* color: var(--lightColor); */
+    font-size: 10px;
+    font-weight: 300;
     color: #fff;
     text-align: center;
-    margin: 0;
+    margin: 3px 0 0 0;
 }
 
 .playerAction .playerActionIcon {
     display: inline-block;
-    width: 18px;
-    height: 18px;
+    width: 22px;
+    height: 22px;
 }
 
 /* .playerAction img {
@@ -387,6 +388,8 @@
     position: relative;
     color: #fff;
     display: flex;
+    align-items: center;
+    cursor: pointer;
 }
 
 .currentMixIcons {
@@ -411,7 +414,7 @@
 }
 
 .currentImageWrapper img {
-    width: 60%;
+    width: 80%;
 }
 
 .currentMixContent {
@@ -420,7 +423,7 @@
 }
 
 .currentMixTitle {
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 300;
     margin: 0;
 }
@@ -433,7 +436,7 @@
 
 .mixerLeft, .mixerRight {
     display: flex;
-    gap: 1rem;
+    gap: 1.2rem;
 }
 
 .mixerTray {
@@ -450,7 +453,7 @@
 }
 
 .mixerTray.open {
-    bottom: calc(100% + 0.5rem);
+    bottom: calc(100% + 0.6rem);
     height: auto;
     opacity: 1;
     transition: 0.5s linear;
@@ -534,4 +537,49 @@
     top: -3px;
     left: -3px;
     z-index: 11;
+}
+
+.overallVolumeText {
+    font-size: 14px;
+    font-weight: 300;
+    text-align: center;
+    margin: 0;
+}
+
+.overallVolumeAction {
+    font-size: 20px;
+    font-weight: 300;
+    color: #fff;
+}
+
+.overallVolumeControl {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.volumeBars {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.volumeBar {
+    background: #fff;
+    width: 1rem;
+    height: 8px;
+    cursor: pointer;
+}
+
+.volumeBar.active {
+    background: #2f9bbf;
+}
+
+
+
+@media screen and (max-width: 575px) {
+    .mixerTray {
+        right: 50%;
+        transform: translateX(50%);
+    }
 }

@@ -43,6 +43,8 @@ import StoreIcon from "./store.svg";
 import crossIcon from "./crossIcon.png";
 import playIcon from "./playIcon.png";
 import mixerIcon from "./mixerButtonIcon.svg"
+import timerIcon from "./add-timer.svg"
+import saveMixIcon from "./save-mix.svg"
 
 import ThreeDots from "./threeDots.svg";
 import Cog from "./cog.svg";
@@ -80,6 +82,8 @@ export {
   crossIcon,
   playIcon,
   mixerIcon,
+  timerIcon,
+  saveMixIcon,
   ThreeDots,
   Cog,
   Play

@@ -11,6 +11,7 @@ import { getAccessToken } from "../Util/authHeader";
 // import MainAudioPlayer from "../Components/MainAudioPlayer";
 // import MultiAudioPlayer from "../Components/MultiAudioPlayer";
 import MultiAudioPlayerrr from "../Components/MultiAudioPlayerrr";
+// import MultiAudioPlayerrr from "../Components/CustomAudioPlayer";
 import { useEffect, useState } from "react";
 
 import Main from "../Screens/Main/";
@@ -23,6 +24,7 @@ import Stories from "../Screens/Stories";
 import Meditation from "../Screens/Meditation";
 import Articles from "../Screens/Articles";
 import Sounds from "../Screens/Sounds";
+import AudioDetail from "../Screens/AudioDetail";
 // import Sounds from "../Screens/Sounds2";
 import Settings from "../Screens/Settings";
 import Upgrade from "../Screens/Upgrade";
@@ -95,6 +97,14 @@ const WebRoutes = () => {
             }
           />
           <Route
+            path="/audio-detail"
+            element={
+              <PrivateRoutes>
+                <AudioDetail />
+              </PrivateRoutes>
+            }
+          />
+          <Route
             path="/settings"
             element={
               <PrivateRoutes>
@@ -133,7 +143,6 @@ const MainAudioPlayerWrapper = () => {
       setTokenStatus(false);
     }
   }, [location, token]);
-
 
   // return tokenStatus ? <MainAudioPlayer /> : null;
   // return tokenStatus ? <MultiAudioPlayer /> : null;

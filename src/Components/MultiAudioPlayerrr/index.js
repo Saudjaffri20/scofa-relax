@@ -40,8 +40,6 @@ const MultiAudioPlayerrr = () => {
     setOtherAudio(audio);
   }, [audio]);
 
-  console.log("sounds =>", sounds);
-
   return (
     <>
       {(soundList.length > 0 || otherAudio) && (

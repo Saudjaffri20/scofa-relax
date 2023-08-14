@@ -197,6 +197,13 @@ a:hover {
     padding: 1rem;
 }
 
+.audioStripDetails {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+}
+
 .audioStrip p {
     font-size: 14px;
     font-weight: 300;
@@ -210,12 +217,6 @@ a:hover {
     object-fit: cover;
     object-position: center;
     border-radius: 99px;
-}
-
-.audioStripDetails {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
 }
 
 .audioStripExtra {

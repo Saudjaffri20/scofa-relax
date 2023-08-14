@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
+import { Howler } from "howler";
+
 // import { removeSoundAction } from "../../Store/Slices/SoundPlayerSlice2";
 import { removeSound } from "../../Store/Slices/SoundPlayerSlice";
 import { removeAudio } from "../../Store/Slices/AudioSlice";
@@ -14,9 +16,12 @@ import {
   // MixerButton,
   crossIcon,
   mixerIcon,
+  timerIcon,
+  saveMixIcon,
 } from "../../Assets/svg";
 
 import "./style.css";
+import BASEURL from "../../Config/global";
 
 const MainMixer = ({
   menuClass,
@@ -30,6 +35,7 @@ const MainMixer = ({
   const [isPlaying, setIsPlaying] = useState(true);
   const [openTray, setOpenTray] = useState(false);
   const [clearMixClicked, setClearMixClicked] = useState(false);
+  const [overAllVolume, setOverAllVolume] = useState(0.6);
 
   const handlePlayAll = () => {
     setIsPlaying(true);
@@ -55,6 +61,18 @@ const MainMixer = ({
     setClearMixClicked(true);
   };
 
+  const increaseVolume = () => {
+    const newVolume = Math.min(overAllVolume + 0.2, 1);
+    setOverAllVolume(newVolume);
+    Howler.volume(newVolume); // Update the global volume
+  };
+
+  const decreaseVolume = () => {
+    const newVolume = Math.max(overAllVolume - 0.2, 0);
+    setOverAllVolume(newVolume);
+    Howler.volume(newVolume); // Update the global volume
+  };
+
   return (
     <>
       <div className={`audioPlayerWrapper ${menuClass}`}>
@@ -68,7 +86,7 @@ const MainMixer = ({
                     onClick={handlePauseAll}
                   >
                     <PauseButton className="playerActionIcon" />
-                    <p className="playerActionText">Pause</p>
+                    {/* <p className="playerActionText">Pause</p> */}
                   </button>
                 ) : (
                   <button
@@ -76,7 +94,7 @@ const MainMixer = ({
                     onClick={handlePlayAll}
                   >
                     <PlayButton className="playerActionIcon" />
-                    <p className="playerActionText">Play</p>
+                    {/* <p className="playerActionText">Play</p> */}
                   </button>
                 )}
                 <button
@@ -86,15 +104,58 @@ const MainMixer = ({
                   // }}
                 >
                   <img
-                    src={mixerIcon}
+                    src={saveMixIcon}
                     alt="Save Icon"
                     className="playerActionIcon"
                   />
-                  <p className="playerActionText">Save Mix</p>
+                  {/* <p className="playerActionText">Save Mix</p> */}
                   {/* <MixerButton className="playerActionIcon" /> */}
                 </button>
               </div>
-
+              <div className="mixerCenter d-md-block d-none">
+                <p className="overallVolumeText">Volume</p>
+                <div className="overallVolumeControl">
+                  <button
+                    className="playerAction overallVolumeAction"
+                    onClick={decreaseVolume}
+                  >
+                    -
+                  </button>
+                  <div className="volumeBars">
+                    <div
+                      className={`volumeBar ${
+                        overAllVolume >= 0.2 ? "active" : ""
+                      }`}
+                    ></div>
+                    <div
+                      className={`volumeBar ${
+                        overAllVolume >= 0.4 ? "active" : ""
+                      }`}
+                    ></div>
+                    <div
+                      className={`volumeBar ${
+                        overAllVolume >= 0.6 ? "active" : ""
+                      }`}
+                    ></div>
+                    <div
+                      className={`volumeBar ${
+                        overAllVolume >= 0.8 ? "active" : ""
+                      }`}
+                    ></div>
+                    <div
+                      className={`volumeBar ${
+                        overAllVolume >= 1 ? "active" : ""
+                      }`}
+                    ></div>
+                  </div>
+                  <button
+                    className="playerAction overallVolumeAction"
+                    onClick={increaseVolume}
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
               <div className="mixerRight">
                 <button
                   className="playerAction"
@@ -103,14 +164,14 @@ const MainMixer = ({
                   // }}
                 >
                   <img
-                    src={mixerIcon}
+                    src={timerIcon}
                     alt="Timer Icon"
                     className="playerActionIcon"
                   />
-                  <p className="playerActionText">Add Timer</p>
+                  {/* <p className="playerActionText">Add Timer</p> */}
                   {/* <MixerButton className="playerActionIcon" /> */}
                 </button>
-                <button
+                {/* <button
                   className="playerAction"
                   onClick={() => {
                     setOpenTray(!openTray);
@@ -122,11 +183,65 @@ const MainMixer = ({
                     className="playerActionIcon"
                   />
                   <p className="playerActionText">Mixer</p>
-                  {/* <MixerButton className="playerActionIcon" /> */}
-                </button>
-              </div>
-              
+                  <MixerButton className="playerActionIcon" />
+                </button> */}
+                {(soundList.length > 0 || otherAudio) && (
+                  <div
+                    className="currentMixButton"
+                    onClick={() => {
+                      setOpenTray(!openTray);
+                    }}
+                  >
+                    {otherAudio ? (
+                      <div className="currentMixIcons">
+                        <div className="currentImageWrapper">
+                          <img
+                            src={BASEURL + otherAudio?.thumbnail}
+                            alt="Thumbnail"
+                          />
+                        </div>
+                        {soundList.length > 0 && (
+                          <div className="currentImageWrapper">
+                            <img
+                              src={BASEURL + soundList[0]?.thumbnail}
+                              alt="Thumbnail"
+                            />
+                          </div>
+                        )}
+                      </div>
+                    ) : (
+                      <div className="currentMixIcons">
+                        {soundList.slice(0, 2).map((sound, index) => (
+                          <div className="currentImageWrapper" key={index}>
+                            <img
+                              src={BASEURL + sound?.thumbnail}
+                              alt="Thumbnail"
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    )}
 
+                    {soundList.length < 2 ? (
+                      <>
+                        <div className="currentMixContent ms-1">
+                          <p className="currentMixTitle">Current Mix</p>
+                          <p className="currentMixText">1 Item</p>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <div className="currentMixContent">
+                          <p className="currentMixTitle">Current Mix</p>
+                          <p className="currentMixText">
+                            {soundList.length} Items
+                          </p>
+                        </div>
+                      </>
+                    )}
+                  </div>
+                )}
+              </div>
               <div className={`mixerTray ${openTray ? "open" : "close"}`}>
                 <div className="mixerHeader">
                   <h3>Mixer</h3>

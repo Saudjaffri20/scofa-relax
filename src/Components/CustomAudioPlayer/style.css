@@ -1,0 +1,575 @@
+.audioPlayerWrapper {
+    position: fixed;
+    bottom: 0px;
+    /* left: calc(50% + 130px); */
+    /* transform: translateX(-50%); */
+    width: 100%;
+    /* max-width: 768px; */
+    border-top: 1px solid var(--lightColor);
+    background: #042047;
+    padding: 0.5rem 1rem;
+    z-index: 99;
+}
+
+.audioPlayerControls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    width: 100%;
+    max-width: 768px;
+    padding: 0 0.2rem;
+    margin: 0 auto;
+}
+
+.playerAction {
+    background: none;
+    border: none;
+    outline: none;
+    padding: 0;
+    margin: 0;
+    flex-shrink: 0;
+    color: #fff;
+}
+
+.playerAction .playerActionText {
+    font-size: 10px;
+    font-weight: 300;
+    color: #fff;
+    text-align: center;
+    margin: 3px 0 0 0;
+}
+
+.playerAction .playerActionIcon {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+}
+
+/* .playerAction img {
+    width: 25px;
+    height: 20px;
+} */
+
+.playerAction path {
+    fill: #fff0;
+    /* stroke: var(--lightColor); */
+    stroke: #fff;
+}
+
+.mixerButton path {
+    /* fill: var(--lightColor); */
+    fill: #fff;
+}
+
+.playerAction rect {
+    /* fill: var(--lightColor); */
+    fill: #fff;
+}
+
+.spinner {
+    -webkit-animation: spin 3s linear infinite;
+    animation: spin 3s linear infinite;
+    transform-origin: center;
+    margin: 0;
+}
+
+.spinner img {
+    width: 30px;
+    aspect-ratio: 1/1;
+    filter: brightness(0) invert(0.6);
+}
+
+.playerVolume {
+    flex-grow: 1;
+    max-width: 280px;
+    position: relative;
+    margin: 6px 1rem;
+}
+
+.playerVolume input {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 1px;
+    outline: none;
+    background: #fff;
+    transition: 0.3s linear;
+
+}
+
+.volumeControl {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+    margin-bottom: -5px;
+}
+
+.volumeControl button {
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1;
+    color: #fff;
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+.volumeControl p {
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 1;
+    /* color: var(--lightColor); */
+    color: #fff;
+    margin: 0;
+}
+
+.soundTitle {
+    position: absolute;
+    top: -18px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    text-align: center;
+}
+
+.audioRemoveButton {
+    width: 25px;
+    height: 20px;
+    border: none;
+    border-radius: 99px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 
+.audioRemoveButton svg {
+    width: 20px;
+    height: 20px;
+} */
+
+.audioRemoveButton svg, .closeButton svg {
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border-radius: 99px;
+    padding: 0.2rem;
+}
+
+.audioRemoveButton path {
+    fill: var(--primaryColor);
+}
+
+.audioRemoveButton img {
+    width: 100%;
+    max-width: 20px;
+}
+
+.playerVolume input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 0.5rem;
+    height: 0.5rem;
+    /* background: var(--secondaryColor); */
+    /* border: 3px solid var(--lightColor); */
+    background: #fff;
+    border: 1px solid #fff;
+    border-radius: 99px;
+    cursor: grabbing;
+}
+
+.playerVolume input::-moz-range-thumb {
+    appearance: none;
+    width: 0.8rem;
+    height: 0.8rem;
+    /* background: var(--secondaryColor); */
+    /* border: 3px solid var(--lightColor); */
+    background: #fff;
+    border: 2px solid #fff;
+    border-radius: 99px;
+    cursor: grabbing;
+}
+
+.audioPlayerWrapper.mobileMenu {
+    left: 0%;
+    bottom: 60px;
+}
+
+
+
+
+
+
+
+.customDropdownButton>button {
+    outline: #fff0 !important;
+    border: none !important;
+    padding: 0;
+}
+
+.customDropdownButton button::after {
+    display: none !important;
+}
+
+
+.customDropdownButton .dropdown-menu {
+    background: #051d3fe3;
+    border: 1px solid #89a8b9;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    min-width: 340px;
+    padding: 0;
+}
+
+.mixerBody {
+    padding: 0rem 1rem;
+    max-height: 240px;
+    overflow-y: scroll;
+}
+
+.mixer input {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 3px;
+    outline: none;
+    /* background: var(--lightColor); */
+    background: #fff;
+    transition: 0.3s linear;
+}
+
+
+.mixer input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 0.8rem;
+    height: 0.8rem;
+    /* background: var(--secondaryColor);
+    border: 3px solid var(--lightColor); */
+    background: #fff;
+    border: 2px solid #fff;
+    border-radius: 99px;
+    cursor: grabbing;
+}
+
+.mixer input::-moz-range-thumb {
+    appearance: none;
+    width: 0.8rem;
+    height: 0.8rem;
+    /* background: var(--secondaryColor); */
+    /* border: 3px solid var(--lightColor); */
+    background: #fff;
+    border: 2px solid #fff;
+    border-radius: 99px;
+    cursor: grabbing;
+}
+
+.individualAudio {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 0.8rem;
+}
+
+/* .individualAudio:not(:last-child) {
+    border-bottom: 1px solid var(--lightColor);
+
+}    */
+
+.mixerSoundDetail {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.mixerSoundThumbnail {
+    background: #2f9bbf;
+    border-radius: 99px;
+    padding: 0.2rem;
+}
+
+.mixerSoundThumbnail img {
+    width: 30px;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 99px;
+}
+
+.mixerAudioTitle {
+    font-size: 12px !important;
+    /* text-align: center !important; */
+    margin: 0.3rem !important;
+    /* color: var(--lightColor); */
+    color: #fff;
+}
+
+.mixerFooter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.8rem 1rem;
+    border-top: 1px solid var(--lightColor);
+}
+
+/* .customDropdownButton .dropdown-menu {
+    opacity: 0;
+    visibility: hidden;
+    transition: 1s linear;
+  }
+  
+  .customDropdownButton.show .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+  } */
+
+.timerButton path {
+    fill: #fff0 !important;
+}
+
+.timerOptions p {
+    padding: 0.5rem;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+
+.soundModal {
+    backdrop-filter: blur(12px);
+}
+
+.soundModal .modal-content {
+    background: var(--primaryColor);
+    border: 1px solid var(--lightColor);
+}
+
+.timerOptions button {
+    display: block;
+    min-width: 240px;
+    margin: 1rem auto;
+}
+
+.customModalContent {
+    padding: 1rem 1rem;
+}
+
+.soundModalError {
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+
+
+
+
+
+
+.currentMixButton {
+    position: relative;
+    color: #fff;
+    display: flex;
+    align-items: center;
+}
+
+.currentMixIcons {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.currentImageWrapper {
+    background: #2f9bbf;
+    border-radius: 99px;
+    width: 25px;
+    aspect-ratio: 1/1;
+    transform: translateX(0px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.currentImageWrapper:nth-child(2) {
+    transform: translateX(-12.5px);
+}
+
+.currentImageWrapper img {
+    width: 80%;
+}
+
+.currentMixContent {
+    margin-left: -5px;
+    text-align: left;
+}
+
+.currentMixTitle {
+    font-size: 11px;
+    font-weight: 300;
+    margin: 0;
+}
+
+.currentMixText {
+    font-size: 9px;
+    font-weight: 300;
+    margin: 0;
+}
+
+.mixerLeft, .mixerRight {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.mixerTray {
+    position: absolute;
+    bottom: calc(100% + 0.5rem);
+    right: 0;
+    width: 100%;
+    max-width: 360px;
+    background: #042047f7;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+    overflow: hidden;
+    transition: 0.5s linear;
+}
+
+.mixerTray.open {
+    bottom: calc(100% + 0.5rem);
+    height: auto;
+    opacity: 1;
+    transition: 0.5s linear;
+}
+
+.mixerTray.close {
+    bottom: 0;
+    height: 0;
+    opacity: 0;
+    transition: 0.5s linear;
+}
+
+.mixerHeader {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: 1rem 1rem;
+    box-shadow: 0px 1px 10px #000;
+    background: #042047;
+}
+
+.mixerHeader h3 {
+    font-size: 18px;
+    font-weight: 400;
+    margin: 0;
+}
+
+.mixerHeader button img {
+    width: 12px;
+    aspect-ratio: 1/1;
+    filter: brightness(0) invert(1);
+}
+
+.individualSoundsWrapper {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.clearMixWrapper {
+    text-align: center;
+    border-top: 1px solid #ffffff38;
+    padding: 0.8rem;
+}
+
+.clearMixButton {
+    display: inline-block;
+    background: #ffffff15;
+    border: none;
+    color: #fff;
+    border-radius: 99px;
+    padding: 0.6rem 2rem;
+    font-size: 14px;
+    outline: #fff0;
+}
+
+.soundControlButton {
+    background: #fff;
+    color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 15px;
+    height: 15px;
+    border: none;
+    border-radius: 99px;
+    outline: #fff0;
+    cursor: pointer;
+}
+
+.soundControlButton img {
+    width: 0.5em;
+    filter: brightness(0);
+}
+
+.mixerSoundThumbnailWrapper {
+    position: relative;
+}
+
+.audioRemoveButton {
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    z-index: 11;
+}
+
+.overallVolumeText {
+    font-size: 14px;
+    font-weight: 300;
+    text-align: center;
+    margin: 0;
+}
+
+.overallVolumeAction {
+    font-size: 20px;
+    font-weight: 300;
+    color: #fff;
+}
+
+.overallVolumeControl {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.volumeBars {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.volumeBar {
+    background: #fff;
+    width: 1rem;
+    height: 8px;
+    cursor: pointer;
+}
+
+.volumeBar.active {
+    background: #2f9bbf;
+}

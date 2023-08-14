@@ -77,18 +77,18 @@ export const Menubar = (props) => {
 
   const externalMenu = [
     {
-      text: "Scofa Articles",
+      text: "Sleep Articles",
       link: "https://scofa.com/articles/",
       icon: ArticlesIcon,
     },
     {
-      text: "Scofa Store",
+      text: "Sleep Store",
       link: "https://store.scofa.com/",
       icon: StoreIcon,
     },
     {
       text: "Find Sleep Doctors",
-      link: "https://scofa.com/",
+      link: "https://scofa.com/featured-search/",
       icon: FindDoctorsIcon,
     },
     {
@@ -123,7 +123,7 @@ export const Menubar = (props) => {
       </ul>
       <hr className="menuSeperator d-none d-md-block" />
       <ul className="list-unstyled d-none d-md-block">
-        {/* <li className="menubar-li">
+        <li className="menubar-li">
           <Link
             className={
               location.pathname.includes("playist")
@@ -134,17 +134,17 @@ export const Menubar = (props) => {
           >
             <span className="menuLinkText">Playlist</span>
           </Link>
-        </li> */}
+        </li>
         <li className="menubar-li">
           <Link
             className={
-              location.pathname.includes("favourites")
+              location.pathname.includes("favorite")
                 ? "menuLink active"
                 : "menuLink"
             }
             to={"#_"}
           >
-            <span className="menuLinkText">Favourite</span>
+            <span className="menuLinkText">Favorite</span>
           </Link>
         </li>
         {externalMenu.map((item, index) => (

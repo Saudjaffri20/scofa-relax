@@ -88,35 +88,35 @@ export const Header = (props) => {
                     Playlist
                   </Link>
                   <Link to={"#_"} className="headerDropdownAction d-md-none">
-                    Favorites
+                    Favorite
                   </Link>
                   <Link
                     to={"https://scofa.com/articles/"}
                     target="_blank"
                     className="headerDropdownAction d-md-none"
                   >
-                    Articles
+                    Sleep Articles
                   </Link>
                   <Link
                     to={"https://store.scofa.com/"}
                     target="_blank"
                     className="headerDropdownAction d-md-none"
                   >
-                    Store
+                    Sleep Store
                   </Link>
                   <Link
-                    to={"https://scofa.com/"}
+                    to={"https://scofa.com/featured-search/"}
                     target="_blank"
                     className="headerDropdownAction d-md-none"
                   >
-                    Find Doctors
+                    Find Sleep Doctors
                   </Link>
                   <Link
                     to={"https://scofa.com/check-sleep-disorder-symptoms/"}
                     target="_blank"
                     className="headerDropdownAction d-md-none"
                   >
-                    Check Symptoms
+                    Check Sleep Symptoms
                   </Link>
 
                   <button
