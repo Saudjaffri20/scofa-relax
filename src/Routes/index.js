@@ -97,7 +97,7 @@ const WebRoutes = () => {
             }
           />
           <Route
-            path="/audio-detail"
+            path="/audio-detail/:type/:id"
             element={
               <PrivateRoutes>
                 <AudioDetail />

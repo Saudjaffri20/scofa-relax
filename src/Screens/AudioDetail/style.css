@@ -9,11 +9,57 @@
 .audioTitle {
     font-size: 24px;
     font-weight: 600;
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.5rem;
 }
 
 .audioCategory {
     font-size: 16px;
     font-weight: 300;
     margin: 0;
+}
+
+.audioType {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--lightColor);
+    text-transform: capitalize;
+    margin-bottom: 0.2rem;
+}
+
+
+.audioButton {
+    background: #fff0;
+    border: none;
+    border-radius: 99px;
+    outline: none;
+    width: 45px;
+    aspect-ratio: 1/1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+.audioButton img {
+    width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+    .audioTitle {
+        font-size: 20px;
+    }
+    
+    .audioCategory {
+        font-size: 14px;
+    }
+    
+    .audioType {
+        font-size: 12px;
+    }
+    
+    
+    .audioButton {
+        width: 35px;
+    }
+    
 }

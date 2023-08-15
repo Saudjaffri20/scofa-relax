@@ -148,7 +148,7 @@ export const Menubar = (props) => {
           </Link>
         </li>
         {externalMenu.map((item, index) => (
-          <li className="menubar-li">
+          <li className="menubar-li" key={index}>
             <Link
               className="menuLink"
               to={item.link}

@@ -20,6 +20,7 @@ import Accordion from "react-bootstrap/Accordion";
 
 import { useDispatch } from "react-redux";
 import { playAudio } from "../../Store/Slices/AudioSlice";
+import { Link } from "react-router-dom";
 // import { playSound } from "../../Store/Slices/SoundPlayerSlice";
 
 const Articles = () => {
@@ -165,7 +166,11 @@ const Articles = () => {
                   <div className="audioStrips stripedRows">
                     {featured.map((item, index) => (
                       <>
-                        <div className="audioStrip" key={index}>
+                        <Link
+                          to={`/audio-detail/${item.type}/${item.id}`}
+                          className="audioStrip"
+                          key={index}
+                        >
                           <div className="audioStripDetails">
                             <img src={`${BASEURL + item.thumbnail}`} alt="" />
                             <p>{item.title}</p>
@@ -182,7 +187,7 @@ const Articles = () => {
                               <img src={Play} alt="" />
                             </button>
                           </div>
-                        </div>
+                        </Link>
                       </>
                     ))}
                   </div>
@@ -195,7 +200,11 @@ const Articles = () => {
                     <div className="audioStrips stripedRows">
                       {categorizedData.category_data.map((item, index) => (
                         <>
-                          <div className="audioStrip" key={index}>
+                          <Link
+                            to={`/audio-detail/${item.type}/${item.id}`}
+                            className="audioStrip"
+                            key={index}
+                          >
                             <div className="audioStripDetails">
                               <img src={`${BASEURL + item.thumbnail}`} alt="" />
                               <p>{item.title}</p>
@@ -212,7 +221,7 @@ const Articles = () => {
                                 <img src={Play} alt="" />
                               </button>
                             </div>
-                          </div>
+                          </Link>
                         </>
                       ))}
                     </div>

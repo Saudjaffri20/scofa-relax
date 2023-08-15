@@ -254,33 +254,46 @@ const MainMixer = ({
                     <img src={crossIcon} alt="Close Button" />
                   </button>
                 </div>
-                <div className="individualSoundsWrapper">
-                  {soundList.map((item, index) => (
-                    <IndividualSound
-                      key={index}
-                      sound={item}
-                      isPlaying={isPlaying}
-                      individualRemoveSound={() => {
-                        handleRemoveSound(index);
-                      }}
-                      clearMixClicked={clearMixClicked}
-                      setSoundList={setSoundList}
-                    />
-                  ))}
-                </div>
-                <div className="otherAudioWrapper">
-                  {otherAudio && (
-                    <IndividualAudio
-                      sound={otherAudio}
-                      isPlaying={isPlaying}
-                      individualRemoveAudio={() => {
-                        handleRemoveAudio();
-                      }}
-                      clearMixClicked={clearMixClicked}
-                      setOtherAudio={setOtherAudio}
-                    />
-                  )}
-                </div>
+                {soundList.length > 0 && (
+                  <>
+                    <div className="audioHeader">
+                      <p>Sounds</p>
+                    </div>
+                    <div className="individualSoundsWrapper">
+                      {soundList.map((item, index) => (
+                        <IndividualSound
+                          key={index}
+                          sound={item}
+                          isPlaying={isPlaying}
+                          individualRemoveSound={() => {
+                            handleRemoveSound(index);
+                          }}
+                          clearMixClicked={clearMixClicked}
+                          setSoundList={setSoundList}
+                        />
+                      ))}
+                    </div>
+                  </>
+                )}
+                {otherAudio && (
+                  <>
+                    <div className="audioHeader">
+                      <p>{otherAudio.type}</p>
+                    </div>
+                    <div className="otherAudioWrapper">
+                      <IndividualAudio
+                        sound={otherAudio}
+                        isPlaying={isPlaying}
+                        individualRemoveAudio={() => {
+                          handleRemoveAudio();
+                        }}
+                        clearMixClicked={clearMixClicked}
+                        setOtherAudio={setOtherAudio}
+                      />
+                    </div>
+                  </>
+                )}
+
                 <div className="clearMixWrapper">
                   <button className="clearMixButton" onClick={handleClearMix}>
                     Clear Mix

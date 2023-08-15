@@ -264,6 +264,17 @@
     cursor: grabbing;
 }
 
+.audioHeader {
+    padding: 0.8rem 1rem;
+}
+
+.audioHeader p {
+    font-size: 14px;
+    font-weight: 300;
+    text-transform: capitalize;
+    margin: 0;
+}
+
 .individualAudio {
     display: flex;
     flex-direction: column;
@@ -445,7 +456,7 @@
     right: 0;
     width: 100%;
     max-width: 360px;
-    background: #042047f7;
+    background: #042047fa;
     border-top-right-radius: 8px;
     border-top-left-radius: 8px;
     overflow: hidden;
@@ -490,13 +501,20 @@
 .individualSoundsWrapper {
     max-height: 200px;
     overflow-y: auto;
+    border-bottom: 2px solid #ffffff38;
+}
+
+.otherAudioWrapper {
+    border-bottom: 2px solid #ffffff38;
+
 }
 
 .clearMixWrapper {
     text-align: center;
-    border-top: 1px solid #ffffff38;
+    /* border-top: 1px solid #ffffff38; */
     padding: 0.8rem;
 }
+
 
 .clearMixButton {
     display: inline-block;

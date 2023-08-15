@@ -286,6 +286,18 @@ d -----*/
     animation: skeleton-loading 1s linear infinite alternate;
 }
 
+.skeletonText {
+    display: block;
+    overflow: hidden;
+    border-radius: 0.3rem;
+    margin: 0.5rem 0;
+    flex-grow: 1;
+    background: hsl(200, 20%, 80%);
+    width: 100%;
+    height: 15px;
+    max-width: 320px;
+}
+
 @keyframes skeleton-loading {
     0% {
         background-color: rgb(255 255 255 / 20%);

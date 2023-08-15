@@ -21,6 +21,7 @@ import Accordion from "react-bootstrap/Accordion";
 import { useDispatch } from "react-redux";
 import { playAudio } from "../../Store/Slices/AudioSlice";
 import { playSound } from "../../Store/Slices/SoundPlayerSlice";
+import { Link } from "react-router-dom";
 
 const Stories = () => {
   const dispatch = useDispatch();
@@ -29,7 +30,6 @@ const Stories = () => {
   const [categorizedStoriesData, setCategorizedStoriesData] = useState([]);
   const [categorizedFilteredData, setCategorizedFilteredData] = useState([]);
   const [featured, setFeatured] = useState([]);
-
 
   useEffect(() => {
     async function fetchData() {
@@ -74,7 +74,7 @@ const Stories = () => {
     const duplicateArray = [];
     categorizedStoriesData.forEach((categoryData) => {
       // if (categoryData.category_data.length > 0) {
-        duplicateArray.push(categoryData);
+      duplicateArray.push(categoryData);
       // }
     });
     setCategorizedFilteredData(duplicateArray);
@@ -162,7 +162,11 @@ const Stories = () => {
                   <div className="audioStrips stripedRows">
                     {featured.map((item, index) => (
                       <>
-                        <div className="audioStrip" key={index}>
+                        <Link
+                          to={`/audio-detail/${item.type}/${item.id}`}
+                          className="audioStrip"
+                          key={index}
+                        >
                           <div className="audioStripDetails">
                             <img src={`${BASEURL + item.thumbnail}`} alt="" />
                             <p>{item.title}</p>
@@ -179,7 +183,7 @@ const Stories = () => {
                               <img src={Play} alt="" />
                             </button>
                           </div>
-                        </div>
+                        </Link>
                       </>
                     ))}
                   </div>
@@ -192,7 +196,11 @@ const Stories = () => {
                     <div className="audioStrips stripedRows">
                       {categorizedData.category_data.map((item, index) => (
                         <>
-                          <div className="audioStrip" key={index}>
+                          <Link
+                            to={`/audio-detail/${item.type}/${item.id}`}
+                            className="audioStrip"
+                            key={index}
+                          >
                             <div className="audioStripDetails">
                               <img src={`${BASEURL + item.thumbnail}`} alt="" />
                               <p>{item.title}</p>
@@ -209,7 +217,7 @@ const Stories = () => {
                                 <img src={Play} alt="" />
                               </button>
                             </div>
-                          </div>
+                          </Link>
                         </>
                       ))}
                     </div>
