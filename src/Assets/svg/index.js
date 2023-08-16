@@ -41,7 +41,8 @@ import FindDoctorsIcon from "./findDoctors.svg";
 import StoreIcon from "./store.svg";
 
 import crossIcon from "./crossIcon.png";
-import playIcon from "./playIcon.png";
+import playIcon from "./playButton.svg";
+import pauseIcon from "./pauseButton.svg";
 import mixerIcon from "./mixerButtonIcon.svg"
 import timerIcon from "./add-timer.svg"
 import saveMixIcon from "./save-mix.svg"
@@ -49,6 +50,7 @@ import saveMixIcon from "./save-mix.svg"
 import ThreeDots from "./threeDots.svg";
 import Cog from "./cog.svg";
 import Play from "./play.svg";
+import Pause from "./pause.svg";
 import Spinner from './spinner.svg'
 
 
@@ -81,10 +83,12 @@ export {
   CrossIcon,
   crossIcon,
   playIcon,
+  pauseIcon,
   mixerIcon,
   timerIcon,
   saveMixIcon,
   ThreeDots,
   Cog,
-  Play
+  Play,
+  Pause
 };

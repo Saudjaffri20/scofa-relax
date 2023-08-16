@@ -149,11 +149,11 @@ const Home = () => {
         </div>
         <div className="row mb-3">
           <div className="col-8">
-            <h2 className="sectionTitle">Meditation</h2>
+            <h2 className="sectionTitle">Relaxation</h2>
           </div>
           <div className="col-4 text-end">
             <Link
-              to={"/meditation"}
+              to={"/relaxation"}
               className="smallText lightColor text-decoration-none"
             >
               See More
@@ -166,7 +166,7 @@ const Home = () => {
                   key={index}
                   title={item.title}
                   image={`${BASEURL + item.image}`}
-                  alt={"Meditation"}
+                  alt={"Relaxation"}
                   onClick={() => {
                     dispatchPlayAudio(item);
                   }}

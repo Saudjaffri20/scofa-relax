@@ -8,7 +8,6 @@ import {
   Play,
   PlayButton,
   ShuffleButton,
-  playIcon,
 } from "../../Assets/svg";
 
 import "./style.css";

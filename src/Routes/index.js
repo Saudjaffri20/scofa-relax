@@ -21,7 +21,7 @@ import Signup from "../Screens/Auth/Signup";
 
 import Home from "../Screens/Home";
 import Stories from "../Screens/Stories";
-import Meditation from "../Screens/Meditation";
+import Relaxation from "../Screens/Relaxation";
 import Articles from "../Screens/Articles";
 import Sounds from "../Screens/Sounds";
 import AudioDetail from "../Screens/AudioDetail";
@@ -73,10 +73,10 @@ const WebRoutes = () => {
             }
           />
           <Route
-            path="/meditation"
+            path="/relaxation"
             element={
               <PrivateRoutes>
-                <Meditation />
+                <Relaxation />
               </PrivateRoutes>
             }
           />

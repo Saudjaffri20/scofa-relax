@@ -57,8 +57,8 @@ export const Menubar = (props) => {
     },
     {
       text: "Relaxation",
-      link: "/meditation",
-      path: "meditation",
+      link: "/relaxation",
+      path: "relaxation",
       icon: MenuMeditation,
     },
     {

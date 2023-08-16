@@ -184,7 +184,7 @@ a:hover {
 }
 
 .stripedRows>div:nth-child(even) {
-    background: #fff0;
+    background: #ffffff15;
 }
 
 /*----- Audio Strips Css Start -----*/
@@ -195,12 +195,14 @@ a:hover {
     justify-content: space-between;
     gap: 1rem;
     padding: 1rem;
+    margin: 0.5rem 0;
 }
 
 .audioStripDetails {
     display: flex;
     align-items: center;
     gap: 1rem;
+    text-decoration: none;
     cursor: pointer;
 }
 

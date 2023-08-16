@@ -9,22 +9,27 @@ import axios from "axios";
 import BASEURL from "../../Config/global";
 import MainLayout from "../../Layout/MainLayout";
 
-import { Play } from "../../Assets/svg";
+import { Play, Pause } from "../../Assets/svg";
 import "./style.css";
+import { pauseMixer, playMixer } from "../../Store/Slices/MixerSlice";
 
 const AudioDetail = () => {
   const { type, id } = useParams();
   const dispatch = useDispatch();
 
   const audio = useSelector((state) => state.audio.audio);
+  const isPlaying = useSelector((state) => state.mixer.play);
+
+  console.log(audio);
 
   const [data, setData] = useState({});
+  const [isActiveAudio, setIsActiveAudio] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isImageLoading, setIsImageLoading] = useState(true);
 
   useEffect(() => {
-    if (type === "meditation") {
-      fetchMeditation();
+    if (type === "relaxation") {
+      fetchRelaxation();
     } else if (type === "stories") {
       fetchStory();
     } else if (type === "articles") {
@@ -32,7 +37,13 @@ const AudioDetail = () => {
     }
   }, [type, id]);
 
-  const fetchMeditation = async () => {
+  useEffect(() => {
+    if (audio && audio.audio == data.audio) {
+      setIsActiveAudio(true);
+    }
+  }, [type, id, audio]);
+
+  const fetchRelaxation = async () => {
     try {
       const response = await axios.get(`${BASEURL}/api/meditation/${id}`);
       if (response.data.error != true) {
@@ -76,6 +87,17 @@ const AudioDetail = () => {
 
   const dispatchPlayAudio = (item) => {
     dispatch(playAudio(item));
+    if (isPlaying) {
+      handlePlay();
+    }
+  };
+
+  const handlePlay = () => {
+    dispatch(playMixer());
+  };
+
+  const handlePause = () => {
+    dispatch(pauseMixer());
   };
 
   return (
@@ -114,15 +136,35 @@ const AudioDetail = () => {
       <div className="row mb-4">
         <div className="col-12">
           <div className="audioAction">
-            <button
-              type="button"
-              className="audioButton"
-              onClick={() => {
-                dispatchPlayAudio(data);
-              }}
-            >
-              <img src={Play} alt="" />
-            </button>
+            {!isActiveAudio && (
+              <button
+                type="button"
+                className="audioButton"
+                onClick={() => {
+                  dispatchPlayAudio(data);
+                }}
+              >
+                <img src={Play} alt="" />
+              </button>
+            )}
+            {isActiveAudio && !isPlaying && (
+              <button
+                type="button"
+                className="audioButton"
+                onClick={handlePlay}
+              >
+                <img src={Play} alt="" />
+              </button>
+            )}
+            {isActiveAudio && isPlaying && (
+              <button
+                type="button"
+                className="audioButton"
+                onClick={handlePause}
+              >
+                <img src={Pause} alt="" />
+              </button>
+            )}
           </div>
         </div>
       </div>

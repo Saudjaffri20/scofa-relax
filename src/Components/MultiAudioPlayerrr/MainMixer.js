@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { Howler } from "howler";
 
 // import { removeSoundAction } from "../../Store/Slices/SoundPlayerSlice2";
+
 import { removeSound } from "../../Store/Slices/SoundPlayerSlice";
 import { removeAudio } from "../../Store/Slices/AudioSlice";
 
@@ -22,6 +23,7 @@ import {
 
 import "./style.css";
 import BASEURL from "../../Config/global";
+import { pauseMixer, playMixer } from "../../Store/Slices/MixerSlice";
 
 const MainMixer = ({
   menuClass,
@@ -32,17 +34,27 @@ const MainMixer = ({
 }) => {
   const dispatch = useDispatch();
 
-  const [isPlaying, setIsPlaying] = useState(true);
+  const isPlaying = useSelector((state) => state.mixer.play);
+
+  // const [isPlaying, setIsPlaying] = useState(true);
   const [openTray, setOpenTray] = useState(false);
   const [clearMixClicked, setClearMixClicked] = useState(false);
   const [overAllVolume, setOverAllVolume] = useState(0.6);
 
+  useEffect(() => {
+    dispatch(playMixer());
+
+    return () => {
+      dispatch(pauseMixer());
+    };
+  }, []);
+
   const handlePlayAll = () => {
-    setIsPlaying(true);
+    dispatch(playMixer());
   };
 
   const handlePauseAll = () => {
-    setIsPlaying(false);
+    dispatch(pauseMixer());
   };
 
   const handleRemoveSound = (index) => {
@@ -97,6 +109,7 @@ const MainMixer = ({
                     {/* <p className="playerActionText">Play</p> */}
                   </button>
                 )}
+
                 <button
                   className="playerAction"
                   // onClick={() => {
