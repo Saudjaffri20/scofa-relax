@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { Howler } from "howler";
+// import { Howler } from "howler";
 
 // import { removeSoundAction } from "../../Store/Slices/SoundPlayerSlice2";
 
@@ -23,7 +23,8 @@ import {
 
 import "./style.css";
 import BASEURL from "../../Config/global";
-import { pauseMixer, playMixer } from "../../Store/Slices/MixerSlice";
+import { pauseMixer, playMixer, resetMixerVolume } from "../../Store/Slices/MixerSlice";
+import VolumeBar from "../VolumeBar";
 
 const MainMixer = ({
   menuClass,
@@ -46,6 +47,7 @@ const MainMixer = ({
 
     return () => {
       dispatch(pauseMixer());
+      dispatch(resetMixerVolume());
     };
   }, []);
 
@@ -73,17 +75,17 @@ const MainMixer = ({
     setClearMixClicked(true);
   };
 
-  const increaseVolume = () => {
-    const newVolume = Math.min(overAllVolume + 0.2, 1);
-    setOverAllVolume(newVolume);
-    Howler.volume(newVolume); // Update the global volume
-  };
+  // const increaseVolume = () => {
+  //   const newVolume = Math.min(overAllVolume + 0.2, 1);
+  //   setOverAllVolume(newVolume);
+  //   Howler.volume(newVolume); // Update the global volume
+  // };
 
-  const decreaseVolume = () => {
-    const newVolume = Math.max(overAllVolume - 0.2, 0);
-    setOverAllVolume(newVolume);
-    Howler.volume(newVolume); // Update the global volume
-  };
+  // const decreaseVolume = () => {
+  //   const newVolume = Math.max(overAllVolume - 0.2, 0);
+  //   setOverAllVolume(newVolume);
+  //   Howler.volume(newVolume); // Update the global volume
+  // };
 
   return (
     <>
@@ -127,7 +129,7 @@ const MainMixer = ({
               </div>
               <div className="mixerCenter d-md-block d-none">
                 <p className="overallVolumeText">Volume</p>
-                <div className="overallVolumeControl">
+                {/* <div className="overallVolumeControl">
                   <button
                     className="playerAction overallVolumeAction"
                     onClick={decreaseVolume}
@@ -167,7 +169,8 @@ const MainMixer = ({
                   >
                     +
                   </button>
-                </div>
+                </div> */}
+                <VolumeBar />
               </div>
               <div className="mixerRight">
                 <button

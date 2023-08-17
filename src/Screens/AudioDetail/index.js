@@ -12,6 +12,7 @@ import MainLayout from "../../Layout/MainLayout";
 import { Play, Pause } from "../../Assets/svg";
 import "./style.css";
 import { pauseMixer, playMixer } from "../../Store/Slices/MixerSlice";
+import VolumeBar from "../../Components/VolumeBar";
 
 const AudioDetail = () => {
   const { type, id } = useParams();
@@ -40,6 +41,9 @@ const AudioDetail = () => {
   useEffect(() => {
     if (audio && audio.audio == data.audio) {
       setIsActiveAudio(true);
+    }
+    else {
+      setIsActiveAudio(false);
     }
   }, [type, id, audio]);
 
@@ -134,37 +138,42 @@ const AudioDetail = () => {
         </div>
       </div>
       <div className="row mb-4">
-        <div className="col-12">
-          <div className="audioAction">
-            {!isActiveAudio && (
-              <button
-                type="button"
-                className="audioButton"
-                onClick={() => {
-                  dispatchPlayAudio(data);
-                }}
-              >
-                <img src={Play} alt="" />
-              </button>
-            )}
-            {isActiveAudio && !isPlaying && (
-              <button
-                type="button"
-                className="audioButton"
-                onClick={handlePlay}
-              >
-                <img src={Play} alt="" />
-              </button>
-            )}
-            {isActiveAudio && isPlaying && (
-              <button
-                type="button"
-                className="audioButton"
-                onClick={handlePause}
-              >
-                <img src={Pause} alt="" />
-              </button>
-            )}
+        <div className="col-10 col-lg-12">
+          <div className="row">
+            <div className="col-lg-5">
+              <div className="audioAction">
+                {!isActiveAudio && (
+                  <button
+                    type="button"
+                    className="audioButton"
+                    onClick={() => {
+                      dispatchPlayAudio(data);
+                    }}
+                  >
+                    <img src={Play} alt="" />
+                  </button>
+                )}
+                {isActiveAudio && !isPlaying && (
+                  <button
+                    type="button"
+                    className="audioButton"
+                    onClick={handlePlay}
+                  >
+                    <img src={Play} alt="" />
+                  </button>
+                )}
+                {isActiveAudio && isPlaying && (
+                  <button
+                    type="button"
+                    className="audioButton"
+                    onClick={handlePause}
+                  >
+                    <img src={Pause} alt="" />
+                  </button>
+                )}
+                {isActiveAudio && <VolumeBar />}
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -1,20 +1,25 @@
-import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  decreaseMixerVolume,
+  increaseMixerVolume,
+} from "../../Store/Slices/MixerSlice";
 
 import "./style.css";
 
 const VolumeBar = () => {
-  const [overAllVolume, setOverAllVolume] = useState(0.6);
+  const dispatch = useDispatch();
+
+  const volume = useSelector((state) => state.mixer.volume);
+  console.log(volume);
+
   const increaseVolume = () => {
-    const newVolume = Math.min(overAllVolume + 0.2, 1);
-    setOverAllVolume(newVolume);
-    Howler.volume(newVolume); // Update the global volume
+    dispatch(increaseMixerVolume());
   };
 
   const decreaseVolume = () => {
-    const newVolume = Math.max(overAllVolume - 0.2, 0);
-    setOverAllVolume(newVolume);
-    Howler.volume(newVolume); // Update the global volume
+    dispatch(decreaseMixerVolume());
   };
+
   return (
     <div className="overallVolumeControl">
       <button
