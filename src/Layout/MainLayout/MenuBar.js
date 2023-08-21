@@ -16,9 +16,32 @@ import {
 } from "../../Assets/svg";
 
 import "./style.css";
+import { Howl } from "howler";
+import { useEffect } from "react";
 
 export const Menubar = (props) => {
   const location = useLocation();
+
+  useEffect(() => {
+    const sound = new Howl({
+      src: [require(`./../../../src/Assets/audio/silent.mp3`)], // Update the path accordingly
+      autoplay: true,
+      html5: true,
+      autoUnlock: true,
+      preload: true,
+      volume: 0,
+      mute: true,
+      autoSuspend: false,
+    });
+
+    // Play the sound
+    sound.play();
+
+    // Clean up
+    return () => {
+      sound.unload();
+    };
+  }, []);
 
   const menu = [
     {

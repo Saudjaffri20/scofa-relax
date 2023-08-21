@@ -129,25 +129,25 @@ const MultiAudioPlayerrr = () => {
       const duplicateHowlList = [...howlList];
       duplicateHowlList.push(howl);
       setHowlList(duplicateHowlList);
-      checkAndUpdateMediaSession(howl);
+      // checkAndUpdateMediaSession(howl);
     }
 
     setHowlCount(howlList.length);
   }, [lastSource]);
 
-  function checkAndUpdateMediaSession(howl) {
-    if (howl.info.narration) {
-      // Create a new MediaSession API
-      if ("mediaSession" in navigator) {
-        navigator.mediaSession.metadata = new MediaMetadata({
-          title: howl.info.title,
-          artwork: [
-            { src: howl.info.thumbnail, sizes: "512x512", type: "image/png" },
-          ],
-        });
-      }
-    }
-  }
+  // function checkAndUpdateMediaSession(howl) {
+  //   if (howl.info.narration) {
+  //     // Create a new MediaSession API
+  //     if ("mediaSession" in navigator) {
+  //       navigator.mediaSession.metadata = new MediaMetadata({
+  //         title: howl.info.title,
+  //         artwork: [
+  //           { src: howl.info.thumbnail, sizes: "512x512", type: "image/png" },
+  //         ],
+  //       });
+  //     }
+  //   }
+  // }
 
   useEffect(() => {
     firstSound();
