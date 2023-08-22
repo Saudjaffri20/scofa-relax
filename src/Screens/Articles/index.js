@@ -19,8 +19,8 @@ import BASEURL from "../../Config/global";
 import Accordion from "react-bootstrap/Accordion";
 
 import { useDispatch } from "react-redux";
-import { playAudio } from "../../Store/Slices/AudioSlice";
-import { playSound } from "../../Store/Slices/SoundPlayerSlice";
+// import { playAudio } from "../../Store/Slices/AudioSlice";
+import { playAudio } from "../../Store/Slices/SoundPlayerSlice";
 
 const Articles = () => {
   const dispatch = useDispatch();
@@ -68,12 +68,12 @@ const Articles = () => {
     const filteredSound = data.filter((audio) => audio.featured);
     setFeatured(filteredSound);
   }, [data]);
-  
+
   useEffect(() => {
     const duplicateArray = [];
     categorizedArticlesData.forEach((categoryData) => {
       // if (categoryData.category_data.length > 0) {
-        duplicateArray.push(categoryData);
+      duplicateArray.push(categoryData);
       // }
     });
     setCategorizedFilteredData(duplicateArray);
@@ -88,8 +88,8 @@ const Articles = () => {
   //   }
   // };
 
-  const dispatchPlaySound = (source, title, thumbnail, naration) => {
-    dispatch(playSound({ source, title, thumbnail, naration }));
+  const dispatchPlayAudio = (item) => {
+    dispatch(playAudio(item));
   };
 
   // const dispatchPlaySound = (source, title, thumbnail) => {
@@ -176,12 +176,7 @@ const Articles = () => {
                               type="button"
                               className="audioStripButton audioStripPlay"
                               onClick={() => {
-                                dispatchPlaySound(
-                                  item.audio,
-                                  item.title,
-                                  item.thumbnail,
-                                  item.naration
-                                );
+                                dispatchPlayAudio(item);
                               }}
                             >
                               <img src={Play} alt="" />
@@ -211,12 +206,7 @@ const Articles = () => {
                                 type="button"
                                 className="audioStripButton audioStripPlay"
                                 onClick={() => {
-                                  dispatchPlaySound(
-                                    item.audio,
-                                    item.title,
-                                    item.thumbnail,
-                                    item.naration
-                                  );
+                                  dispatchPlayAudio(item);
                                 }}
                               >
                                 <img src={Play} alt="" />

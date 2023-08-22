@@ -7,6 +7,7 @@ import { Modal } from "react-bootstrap";
 import {
   clearAllSound,
   removeSound,
+  removeAudio,
   hideErrorMessage,
 } from "../../Store/Slices/SoundPlayerSlice";
 
@@ -46,20 +47,23 @@ const MultiAudioPlayerrr = () => {
   const location = useLocation();
 
   const sounds = useSelector((state) => state.soundPlayer.sounds);
-  const soundErrorMessage = useSelector(
-    (state) => state.soundPlayer.errorMessage
-  );
+  const audio = useSelector((state) => state.soundPlayer.audio);
+  console.log(audio);
+
   const dispatch = useDispatch();
 
   const [soundList, setSoundList] = useState([]);
+  const [audioState, setAudioState] = useState({});
   const [sourceList, setSourceList] = useState([]);
   const [lastSource, setLastSource] = useState(null);
   const [soundInfo, setSoundInfo] = useState(false);
+  const [audioInfo, setAudioInfo] = useState(false);
   const [howlList, setHowlList] = useState([]);
+  const [audioHowl, setAudioHowl] = useState(null);
   const [howlCount, setHowlCount] = useState(0);
   const [mixerTimer, setMixerTimer] = useState(null);
 
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
   const [overallVolume, setOverallVolume] = useState(0.5);
   const [showTimerModal, setShowTimerModal] = useState(false);
 
@@ -81,38 +85,49 @@ const MultiAudioPlayerrr = () => {
   }, [sounds]);
 
   useEffect(() => {
-    const duplicateArray = [];
-    soundList.forEach((sound) => {
-      duplicateArray.push(sound.audioSource);
-    });
-    setSourceList(duplicateArray);
+    // const duplicateArray = [];
+    // soundList.forEach((sound) => {
+    //   duplicateArray.push(sound.source);
+    // });
+    // setSourceList(duplicateArray);
+    const lastElem = soundList[soundList.length - 1];
+    setLastSource(BASEURL + lastElem?.audio);
+    setSoundInfo(lastElem);
+    // const lastSoundInfo = soundList[soundList.length - 1];
   }, [soundList]);
 
   useEffect(() => {
-    const lastElem = sourceList[sourceList.length - 1];
-    setLastSource(lastElem);
+    setAudioState(audio);
+  }, [audio]);
 
-    const lastSoundInfo = soundList[soundList.length - 1];
-    setSoundInfo(lastSoundInfo);
-  }, [sourceList]);
+  // console.log(soundList)
+  // console.log(lastSource);
+
+  // useEffect(() => {
+  //   const lastElem = sourceList[sourceList.length - 1];
+  //   setLastSource(lastElem);
+
+  //   const lastSoundInfo = soundList[soundList.length - 1];
+  //   setSoundInfo(lastSoundInfo);
+  // }, [sourceList]);
+
+  // useEffect(() => {
+  //   // console.log(soundList[soundList.length - 1].naration);
+  //   if (howlList.length) {
+  //     howlList.filter((eachHowl, index) => {
+  //       if (eachHowl.info.naration) {
+  //         handleRemoveSound(index);
+  //       }
+  //     });
+  //   }
+  // }, [soundList]);
 
   useEffect(() => {
-    // console.log(soundList[soundList.length - 1].naration);
-    if (howlList.length) {
-      howlList.filter((eachHowl, index) => {
-        if (eachHowl.info.naration) {
-          handleRemoveSound(index);
-        }
-      });
-    }
-  }, [soundList]);
-
-  useEffect(() => {
-    if (sourceList.length > 0 && soundList.length > howlCount) {
+    if (soundList.length > 0 && soundList.length > howlCount) {
       const howl = new Howl({
         src: [lastSource],
         loop: true,
-        autoplay: false,
+        autoplay: isPlaying,
         webAudio: true, // Use Web Audio API if supported
         html5: true, // Use HTML5 audio if supported
         autoUnlock: true,
@@ -135,6 +150,36 @@ const MultiAudioPlayerrr = () => {
     setHowlCount(howlList.length);
   }, [lastSource]);
 
+  useEffect(() => {
+    if (audioHowl) {
+      // If an existing audioHowl instance exists, unload it
+      audioHowl.unload();
+    }
+    const howl = new Howl({
+      src: [BASEURL + audioState?.audio],
+      loop: false,
+      autoplay: isPlaying,
+      webAudio: true, // Use Web Audio API if supported
+      html5: true, // Use HTML5 audio if supported
+      autoUnlock: true,
+      preload: true,
+      volume: 0.5,
+      autoSuspend: false,
+      onload: function () {
+        this.loaded = true;
+        setLoader((prevLoader) => [...prevLoader, true]);
+      },
+    });
+    // howl.loaded = false;
+    // howl.info = audioInfo;
+
+    // const duplicateHowlList = [...howlList];
+    // duplicateHowlList.push(howl);
+    setAudioHowl(howl);
+  }, [audioState]);
+
+  // console.log(howlList);
+
   // function checkAndUpdateMediaSession(howl) {
   //   if (howl.info.narration) {
   //     // Create a new MediaSession API
@@ -149,48 +194,59 @@ const MultiAudioPlayerrr = () => {
   //   }
   // }
 
-  useEffect(() => {
-    firstSound();
-    alreadyPlaying();
-  }, [howlList]);
+  // useEffect(() => {
+  //   // firstSound();
+  //   alreadyPlaying();
+  // }, [howlList]);
 
-  const firstSound = () => {
-    if (howlList.length == 1) {
-      howlList.forEach((howl) => {
-        howl.play();
-      });
-      setIsPlaying(true);
+  // const firstSound = () => {
+  //   if (howlList.length == 1) {
+  //     howlList.forEach((howl) => {
+  //       howl.play();
+  //     });
+  //     setIsPlaying(true);
+  //   }
+  // };
+
+  // const alreadyPlaying = () => {
+  //   if (isPlaying) {
+  //     howlList.forEach((howl) => {
+  //       const nowPlaying = howl.playing();
+  //       if (!nowPlaying) {
+  //         howl.play();
+  //       }
+  //     });
+  //   }
+  // };
+
+  const handlePauseAll = () => {
+    if (audioHowl && audioHowl.playing()) {
+      audioHowl.pause();
     }
-  };
 
-  const alreadyPlaying = () => {
-    if (isPlaying) {
+    if (howlList.length > 0) {
       howlList.forEach((howl) => {
-        const nowPlaying = howl.playing();
-        if (!nowPlaying) {
-          howl.play();
+        if (howl.playing()) {
+          howl.pause();
         }
       });
     }
-  };
 
-  const handlePauseAll = () => {
-    if (howlList.length > 0) {
-      howlList.forEach((howl) => {
-        howl.pausedPosition = howl.seek();
-        howl.pause();
-      });
-      setIsPlaying(false);
-    }
+    setIsPlaying(false);
   };
 
   const handlePlayAll = () => {
+    if (audioHowl && !audioHowl.playing()) {
+      audioHowl.play();
+      setIsPlaying(true);
+    }
+
     if (howlList.length > 0) {
       howlList.forEach((howl) => {
-        howl.seek(howl.pausedPosition);
-        howl.play();
+        if (!howl.playing()) {
+          howl.play();
+        }
       });
-      setIsPlaying(true);
     }
   };
 
@@ -245,6 +301,30 @@ const MultiAudioPlayerrr = () => {
     }
   };
 
+  const handleRemoveAudio = (index) => {
+    // howlList[index].unload();
+
+    // const updatedHowlList = [...howlList];
+    // updatedHowlList.splice(index, 1);
+    // setHowlList(updatedHowlList);
+
+    // const updatedSoundList = [...soundList];
+    // updatedSoundList.splice(index, 1);
+    // setSoundList(updatedSoundList);
+    if (audioState.audio) {
+      audioHowl.unload();
+      setAudioHowl(null);
+      setAudioState(null);
+      dispatch(removeAudio());
+    }
+    // dispatch(removeSound(index));
+
+    // if (howlList > 1) {
+    //   setIsPlaying(false);
+    // }
+  };
+  console.log("audioState", audioState);
+
   const handleClearMix = () => {
     if (howlList.length > 0) {
       howlList.forEach((howl) => {
@@ -253,6 +333,12 @@ const MultiAudioPlayerrr = () => {
       setHowlList([]);
       dispatch(clearAllSound());
       setIsPlaying(false);
+    }
+    if (audioState.audio) {
+      audioHowl.unload();
+      setAudioHowl(null);
+      setAudioState(null);
+      dispatch(clearAllSound());
     }
   };
 
@@ -283,7 +369,7 @@ const MultiAudioPlayerrr = () => {
 
   return (
     <>
-      {howlList.length > 0 && (
+      {(howlList.length > 0 || audioState?.audio) && (
         <div className={`audioPlayerWrapper ${menuClass}`}>
           <div className="row">
             <div className="col-12">
@@ -338,34 +424,27 @@ const MultiAudioPlayerrr = () => {
                     id="dropdown-basic-button"
                     title={
                       <div className="currentMixButton">
-                        <div className="currentMixIcons">
-                          {howlList.slice(0, 2).map((sound, index) => (
-                            <div className="currentImageWrapper" key={index}>
-                              <img
-                                src={sound.info.audioThumbnail}
-                                alt="Thumbnail"
-                              />
-                            </div>
-                          ))}
-                        </div>
-                        {howlList.length < 2 ? (
-                          <>
-                            <div className="currentMixContent ms-1">
-                              <p className="currentMixTitle">Current Mix</p>
-                              <p className="currentMixText">1 Item</p>
-                            </div>
-                          </>
-                        ) : (
-                          <>
-                            <div className="currentMixContent">
-                              <p className="currentMixTitle">Current Mix</p>
-                              <p className="currentMixText">
-                                {howlList.length} Items
-                              </p>
-                            </div>
-                          </>
-                        )}
-                      </div>
+  <div className="currentMixIcons">
+    {howlList.length > 0 && (
+      <div className="currentImageWrapper">
+        <img src={BASEURL + soundList[0].thumbnail} alt="Thumbnail" />
+      </div>
+    )}
+    {audioState?.audio && (
+      <div className="currentImageWrapper">
+        <img src={BASEURL + audioState.thumbnail} alt="Thumbnail" />
+      </div>
+    )}
+  </div>
+  <div className="currentMixContent">
+    <p className="currentMixTitle">Current Mix</p>
+    <p className="currentMixText">
+      {howlList.length + (audioState?.audio ? 1 : 0)}{" "}
+      Item{howlList.length + (audioState?.audio ? 1 : 0) > 1 && "s"}
+    </p>
+  </div>
+</div>
+
                     }
                     // title={<div>aa</div>}
                     drop="up"
@@ -375,12 +454,12 @@ const MultiAudioPlayerrr = () => {
                     <div className="mixer">
                       <div className="mixerHeader"></div>
                       <div className="mixerBody">
-                        {howlList.map((sound, index) => (
+                        {soundList.map((sound, index) => (
                           <div className="individualAudio" key={index}>
                             <div className="mixerSoundDetail">
                               {loader[index] ? (
                                 <img
-                                  src={sound.info.audioThumbnail}
+                                  src={BASEURL + sound.thumbnail}
                                   alt=""
                                   className="mixerSoundThumbnail"
                                 />
@@ -408,11 +487,40 @@ const MultiAudioPlayerrr = () => {
                                 {/* <img src={crossIcon} alt="" /> */}
                               </button>
                             </div>
-                            <p className="mixerAudioTitle">
-                              {sound.info.audioTitle}
-                            </p>
+                            <p className="mixerAudioTitle">{sound.title}</p>
                           </div>
                         ))}
+                        {audioState?.audio && (
+                          <div className="individualAudio">
+                            <div className="mixerSoundDetail">
+                              s{" "}
+                              <img
+                                src={BASEURL + audioState.thumbnail}
+                                alt=""
+                                className="mixerSoundThumbnail"
+                              />
+                              <input
+                                type="range"
+                                min="0"
+                                max="1"
+                                step="0.01"
+                                // onChange={(e) => {
+                                //   handleIndividualVolume(e, index);
+                                // }}
+                              />
+                              <button
+                                className="notButton audioRemoveButton"
+                                onClick={handleRemoveAudio}
+                              >
+                                <CrossIcon />
+                                {/* <img src={crossIcon} alt="" /> */}
+                              </button>
+                            </div>
+                            <p className="mixerAudioTitle">
+                              {audioState.title}
+                            </p>
+                          </div>
+                        )}
                       </div>
                       <div className="mixerFooter">
                         <button

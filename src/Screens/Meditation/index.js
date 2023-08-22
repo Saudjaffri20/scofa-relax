@@ -18,8 +18,8 @@ import BASEURL from "../../Config/global";
 import Accordion from "react-bootstrap/Accordion";
 
 import { useDispatch } from "react-redux";
-import { playAudio } from "../../Store/Slices/AudioSlice";
-import { playSound } from "../../Store/Slices/SoundPlayerSlice";
+// import { playAudio } from "../../Store/Slices/AudioSlice";
+import { playAudio } from "../../Store/Slices/SoundPlayerSlice";
 
 const Meditation = () => {
   const dispatch = useDispatch();
@@ -87,8 +87,8 @@ const Meditation = () => {
   //   }
   // };
 
-  const dispatchPlaySound = (source, title, thumbnail, naration) => {
-    dispatch(playSound({ source, title, thumbnail, naration }));
+  const dispatchPlayAudio = (item) => {
+    dispatch(playAudio(item));
   };
 
   // const dispatchSound = (id, source, title, thumbnail) => {
@@ -148,12 +148,7 @@ const Meditation = () => {
                               type="button"
                               className="audioStripButton audioStripPlay"
                               onClick={() => {
-                                dispatchPlaySound(
-                                  item.audio,
-                                  item.title,
-                                  item.thumbnail,
-                                  item.naration
-                                );
+                                dispatchPlayAudio(item);
                               }}
                             >
                               <img src={Play} alt="" />
@@ -183,12 +178,7 @@ const Meditation = () => {
                                 type="button"
                                 className="audioStripButton audioStripPlay"
                                 onClick={() => {
-                                  dispatchPlaySound(
-                                    item.audio,
-                                    item.title,
-                                    item.thumbnail,
-                                    item.naration
-                                  );
+                                  dispatchPlayAudio(item);
                                 }}
                               >
                                 <img src={Play} alt="" />
