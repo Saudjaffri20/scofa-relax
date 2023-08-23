@@ -30,6 +30,8 @@ import { Howl, Howler } from "howler";
 import CustomButton from "../CustomButton";
 import { getAccessToken } from "../../Util/authHeader";
 import { useLocation } from "react-router";
+import { pauseMixer, playMixer } from "../../Store/Slices/MixerSlice";
+import VolumeBar from "../VolumeBar";
 
 const MultiAudioPlayerrr = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -48,7 +50,7 @@ const MultiAudioPlayerrr = () => {
 
   const sounds = useSelector((state) => state.soundPlayer.sounds);
   const audio = useSelector((state) => state.soundPlayer.audio);
-  console.log(audio);
+  const isPlaying = useSelector((state) => state.mixer.play);
 
   const dispatch = useDispatch();
 
@@ -63,7 +65,6 @@ const MultiAudioPlayerrr = () => {
   const [howlCount, setHowlCount] = useState(0);
   const [mixerTimer, setMixerTimer] = useState(null);
 
-  const [isPlaying, setIsPlaying] = useState(true);
   const [overallVolume, setOverallVolume] = useState(0.5);
   const [showTimerModal, setShowTimerModal] = useState(false);
 
@@ -178,109 +179,37 @@ const MultiAudioPlayerrr = () => {
     setAudioHowl(howl);
   }, [audioState]);
 
-  // console.log(howlList);
-
-  // function checkAndUpdateMediaSession(howl) {
-  //   if (howl.info.narration) {
-  //     // Create a new MediaSession API
-  //     if ("mediaSession" in navigator) {
-  //       navigator.mediaSession.metadata = new MediaMetadata({
-  //         title: howl.info.title,
-  //         artwork: [
-  //           { src: howl.info.thumbnail, sizes: "512x512", type: "image/png" },
-  //         ],
-  //       });
-  //     }
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   // firstSound();
-  //   alreadyPlaying();
-  // }, [howlList]);
-
-  // const firstSound = () => {
-  //   if (howlList.length == 1) {
-  //     howlList.forEach((howl) => {
-  //       howl.play();
-  //     });
-  //     setIsPlaying(true);
-  //   }
-  // };
-
-  // const alreadyPlaying = () => {
-  //   if (isPlaying) {
-  //     howlList.forEach((howl) => {
-  //       const nowPlaying = howl.playing();
-  //       if (!nowPlaying) {
-  //         howl.play();
-  //       }
-  //     });
-  //   }
-  // };
-
-  const handlePauseAll = () => {
-    if (audioHowl && audioHowl.playing()) {
-      audioHowl.pause();
+  useEffect(() => {
+    if (audioHowl) {
+      if (audioHowl.playing()) {
+        audioHowl.pause();
+      } else {
+        audioHowl.play();
+      }
     }
 
     if (howlList.length > 0) {
       howlList.forEach((howl) => {
         if (howl.playing()) {
           howl.pause();
-        }
-      });
-    }
-
-    setIsPlaying(false);
-  };
-
-  const handlePlayAll = () => {
-    if (audioHowl && !audioHowl.playing()) {
-      audioHowl.play();
-      setIsPlaying(true);
-    }
-
-    if (howlList.length > 0) {
-      howlList.forEach((howl) => {
-        if (!howl.playing()) {
+        } else {
           howl.play();
         }
       });
     }
+  }, [isPlaying]);
+
+  const handlePauseAll = () => {
+    dispatch(pauseMixer());
   };
 
-  const handleChangeOverallVolume = (e) => {
-    const volumeLevel = parseFloat(e.target.value);
-    if (howlList.length > 0) {
-      setOverallVolume(volumeLevel);
-      Howler.volume(volumeLevel);
-      // howlList.forEach((howl) => {
-      //   howl.volume(volumeLevel);
-      // });
-    }
+  const handlePlayAll = () => {
+    dispatch(playMixer());
   };
 
   const handleIndividualVolume = (e, index) => {
     const volumeLevel = parseFloat(e.target.value);
     howlList[index].volume(volumeLevel);
-  };
-
-  const volumeControl = (value) => {
-    if (value === "increase" && howlList.length > 0 && overallVolume <= 1) {
-      setOverallVolume(overallVolume + 0.01);
-      Howler.volume(overallVolume);
-      howlList.forEach((howl) => {
-        howl.volume(overallVolume);
-      });
-    }
-    if (value === "decrease" && howlList.length > 0 && overallVolume >= 0) {
-      setOverallVolume(overallVolume - 0.01);
-      Howler.volume(overallVolume);
-      howlList.forEach((howl) => {
-        howl.volume(overallVolume);
-      });
-    }
   };
 
   const handleRemoveSound = (index) => {
@@ -297,7 +226,7 @@ const MultiAudioPlayerrr = () => {
     dispatch(removeSound(index));
 
     if (howlList > 1) {
-      setIsPlaying(false);
+      // setIsPlaying(false);
     }
   };
 
@@ -323,7 +252,6 @@ const MultiAudioPlayerrr = () => {
     //   setIsPlaying(false);
     // }
   };
-  console.log("audioState", audioState);
 
   const handleClearMix = () => {
     if (howlList.length > 0) {
@@ -332,7 +260,7 @@ const MultiAudioPlayerrr = () => {
       });
       setHowlList([]);
       dispatch(clearAllSound());
-      setIsPlaying(false);
+      // setIsPlaying(false);
     }
     if (audioState.audio) {
       audioHowl.unload();
@@ -361,12 +289,6 @@ const MultiAudioPlayerrr = () => {
   const handleCloseTimer = () => setShowTimerModal(false);
   const handleShowTimer = () => setShowTimerModal(true);
 
-  const isPlayingRef = useRef(null);
-
-  useEffect(() => {
-    isPlayingRef.current = isPlaying;
-  }, [isPlaying]);
-
   return (
     <>
       {(howlList.length > 0 || audioState?.audio) && (
@@ -391,7 +313,7 @@ const MultiAudioPlayerrr = () => {
                     {/* <p className="playerActionText">Play</p> */}
                   </button>
                 )}
-                <div className="playerVolume">
+                {/* <div className="playerVolume">
                   <div className="volumeControl">
                     <button
                       onClick={() => {
@@ -417,34 +339,40 @@ const MultiAudioPlayerrr = () => {
                     value={overallVolume}
                     onChange={handleChangeOverallVolume}
                   />
-                </div>
-
+                </div> */}
+                <VolumeBar />
                 <div>
                   <DropdownButton
                     id="dropdown-basic-button"
                     title={
                       <div className="currentMixButton">
-  <div className="currentMixIcons">
-    {howlList.length > 0 && (
-      <div className="currentImageWrapper">
-        <img src={BASEURL + soundList[0].thumbnail} alt="Thumbnail" />
-      </div>
-    )}
-    {audioState?.audio && (
-      <div className="currentImageWrapper">
-        <img src={BASEURL + audioState.thumbnail} alt="Thumbnail" />
-      </div>
-    )}
-  </div>
-  <div className="currentMixContent">
-    <p className="currentMixTitle">Current Mix</p>
-    <p className="currentMixText">
-      {howlList.length + (audioState?.audio ? 1 : 0)}{" "}
-      Item{howlList.length + (audioState?.audio ? 1 : 0) > 1 && "s"}
-    </p>
-  </div>
-</div>
-
+                        <div className="currentMixIcons">
+                          {howlList.length > 0 && (
+                            <div className="currentImageWrapper">
+                              <img
+                                src={BASEURL + soundList[0].thumbnail}
+                                alt="Thumbnail"
+                              />
+                            </div>
+                          )}
+                          {audioState?.audio && (
+                            <div className="currentImageWrapper">
+                              <img
+                                src={BASEURL + audioState.thumbnail}
+                                alt="Thumbnail"
+                              />
+                            </div>
+                          )}
+                        </div>
+                        <div className="currentMixContent">
+                          <p className="currentMixTitle">Current Mix</p>
+                          <p className="currentMixText">
+                            {howlList.length + (audioState?.audio ? 1 : 0)} Item
+                            {howlList.length + (audioState?.audio ? 1 : 0) >
+                              1 && "s"}
+                          </p>
+                        </div>
+                      </div>
                     }
                     // title={<div>aa</div>}
                     drop="up"
