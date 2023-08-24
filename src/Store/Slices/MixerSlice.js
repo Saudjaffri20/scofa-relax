@@ -26,7 +26,6 @@ const mixerSlice = createSlice({
       state.volume = newVolume;
       Howler.volume(newVolume);
     },
-
     decreaseMixerVolume(state, action) {
       const newVolume = Math.max(
         Math.round((state.volume - 0.2) * 100) / 100,
@@ -40,6 +39,9 @@ const mixerSlice = createSlice({
       state.volume = newVolume;
       Howler.volume(newVolume);
     },
+    resetMixer(state, action) {
+      state.play = true;
+    },
   },
 });
 
@@ -49,6 +51,7 @@ export const {
   increaseMixerVolume,
   decreaseMixerVolume,
   resetMixerVolume,
+  resetMixer
 } = mixerSlice.actions;
 
 export default mixerSlice.reducer;

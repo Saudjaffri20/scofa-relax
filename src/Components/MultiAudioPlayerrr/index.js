@@ -22,6 +22,10 @@ import {
   CrossIcon,
   crossIcon,
   playIcon,
+
+  // mixerIcon,
+  // timerIcon,
+  // saveMixIcon,
 } from "../../Assets/svg";
 import "./style.css";
 import BASEURL from "../../Config/global";
@@ -30,7 +34,7 @@ import { Howl, Howler } from "howler";
 import CustomButton from "../CustomButton";
 import { getAccessToken } from "../../Util/authHeader";
 import { useLocation } from "react-router";
-import { pauseMixer, playMixer } from "../../Store/Slices/MixerSlice";
+import { pauseMixer, playMixer, resetMixer } from "../../Store/Slices/MixerSlice";
 import VolumeBar from "../VolumeBar";
 
 const MultiAudioPlayerrr = () => {
@@ -69,6 +73,7 @@ const MultiAudioPlayerrr = () => {
   const [showTimerModal, setShowTimerModal] = useState(false);
 
   const [loader, setLoader] = useState([]);
+  const [openTray, setOpenTray] = useState(false);
 
   useEffect(() => {
     const token = getAccessToken();
@@ -103,6 +108,7 @@ const MultiAudioPlayerrr = () => {
 
   // console.log(soundList)
   // console.log(lastSource);
+  console.log(isPlaying);
 
   // useEffect(() => {
   //   const lastElem = sourceList[sourceList.length - 1];
@@ -179,31 +185,47 @@ const MultiAudioPlayerrr = () => {
     setAudioHowl(howl);
   }, [audioState]);
 
-  useEffect(() => {
-    if (audioHowl) {
-      if (audioHowl.playing()) {
-        audioHowl.pause();
-      } else {
-        audioHowl.play();
-      }
-    }
+  // useEffect(() => {
+  //   if (audioHowl) {
+  //     if (isPlaying) {
+  //       audioHowl.pause();
+  //     } else {
+  //       audioHowl.play();
+  //     }
+  //   }
 
-    if (howlList.length > 0) {
-      howlList.forEach((howl) => {
-        if (howl.playing()) {
-          howl.pause();
-        } else {
-          howl.play();
-        }
-      });
-    }
-  }, [isPlaying]);
+  //   if (howlList.length > 0) {
+  //     howlList.forEach((howl) => {
+  //       if (isPlaying) {
+  //         howl.pause();
+  //       } else {
+  //         howl.play();
+  //       }
+  //     });
+  //   }
+  // }, [isPlaying]);
 
   const handlePauseAll = () => {
+    if (audioHowl) {
+      audioHowl.pause();
+    }
+    if (howlList.length > 0) {
+      howlList.forEach((howl) => {
+        howl.pause();
+      });
+    }
     dispatch(pauseMixer());
   };
 
   const handlePlayAll = () => {
+    if (audioHowl) {
+      audioHowl.play();
+    }
+    if (howlList.length > 0) {
+      howlList.forEach((howl) => {
+        howl.play();
+      });
+    }
     dispatch(playMixer());
   };
 
@@ -260,6 +282,7 @@ const MultiAudioPlayerrr = () => {
       });
       setHowlList([]);
       dispatch(clearAllSound());
+      dispatch(resetMixer())
       // setIsPlaying(false);
     }
     if (audioState.audio) {
@@ -267,6 +290,7 @@ const MultiAudioPlayerrr = () => {
       setAudioHowl(null);
       setAudioState(null);
       dispatch(clearAllSound());
+      dispatch(resetMixer())
     }
   };
 
@@ -313,159 +337,180 @@ const MultiAudioPlayerrr = () => {
                     {/* <p className="playerActionText">Play</p> */}
                   </button>
                 )}
-                {/* <div className="playerVolume">
-                  <div className="volumeControl">
+                <div className="mixerCenter d-md-block d-none">
+                  <p className="overallVolumeText">Volume</p>
+                  <VolumeBar />
+                </div>
+                <div className="mixerRight">
+                  <button className="playerAction">
+                    <img
+                      src={crossIcon}
+                      alt="Timer Icon"
+                      className="playerActionIcon"
+                      onClick={handleClearMix}
+                    />
+                    {/* <p className="playerActionText">Add Timer</p> */}
+                    {/* <MixerButton className="playerActionIcon" /> */}
+                  </button>
+                  <div
+                    className="currentMixButton"
+                    onClick={() => {
+                      setOpenTray(!openTray);
+                    }}
+                  >
+                    <div className="currentMixIcons">
+                      {howlList.length > 0 && (
+                        <div className="currentImageWrapper">
+                          <img
+                            src={BASEURL + soundList[0].thumbnail}
+                            alt="Thumbnail"
+                          />
+                        </div>
+                      )}
+                      {audioState?.audio && (
+                        <div className="currentImageWrapper">
+                          <img
+                            src={BASEURL + audioState.thumbnail}
+                            alt="Thumbnail"
+                          />
+                        </div>
+                      )}
+                    </div>
+                    <div
+                      className={`currentMixContent ${
+                        (!audioState?.audio && soundList.length) ||
+                        (audioState?.audio && soundList.length < 1)
+                          ? "ms-1"
+                          : ""
+                      }`}
+                    >
+                      <p className="currentMixTitle">Current Mix</p>
+                      <p className="currentMixText">
+                        {howlList.length + (audioState?.audio ? 1 : 0)} Item
+                        {howlList.length + (audioState?.audio ? 1 : 0) > 1 &&
+                          "s"}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div className={`mixerTray ${openTray ? "open" : "close"}`}>
+                  <div className="mixerHeader">
+                    <h3>Mixer</h3>
                     <button
+                      className="notButton"
                       onClick={() => {
-                        volumeControl("decrease");
+                        setOpenTray(false);
                       }}
                     >
-                      -
-                    </button>
-                    <p>Volume</p>
-                    <button
-                      onClick={() => {
-                        volumeControl("increase");
-                      }}
-                    >
-                      +
+                      <img src={crossIcon} alt="Close Button" />
                     </button>
                   </div>
-                  <input
-                    type="range"
-                    min="0"
-                    max="1"
-                    step="0.01"
-                    value={overallVolume}
-                    onChange={handleChangeOverallVolume}
-                  />
-                </div> */}
-                <VolumeBar />
-                <div>
-                  <DropdownButton
-                    id="dropdown-basic-button"
-                    title={
-                      <div className="currentMixButton">
-                        <div className="currentMixIcons">
-                          {howlList.length > 0 && (
-                            <div className="currentImageWrapper">
-                              <img
-                                src={BASEURL + soundList[0].thumbnail}
-                                alt="Thumbnail"
-                              />
-                            </div>
-                          )}
-                          {audioState?.audio && (
-                            <div className="currentImageWrapper">
-                              <img
-                                src={BASEURL + audioState.thumbnail}
-                                alt="Thumbnail"
-                              />
-                            </div>
-                          )}
-                        </div>
-                        <div className="currentMixContent">
-                          <p className="currentMixTitle">Current Mix</p>
-                          <p className="currentMixText">
-                            {howlList.length + (audioState?.audio ? 1 : 0)} Item
-                            {howlList.length + (audioState?.audio ? 1 : 0) >
-                              1 && "s"}
-                          </p>
-                        </div>
+                  {soundList.length > 0 && (
+                    <>
+                      <div className="audioHeader">
+                        <p>Sounds</p>
                       </div>
-                    }
-                    // title={<div>aa</div>}
-                    drop="up"
-                    variant="transparent"
-                    className="mixerButton playerAction customDropdownButton"
-                  >
-                    <div className="mixer">
-                      <div className="mixerHeader"></div>
-                      <div className="mixerBody">
+                      <div className="individualSoundsWrapper">
                         {soundList.map((sound, index) => (
-                          <div className="individualAudio" key={index}>
-                            <div className="mixerSoundDetail">
-                              {loader[index] ? (
-                                <img
-                                  src={BASEURL + sound.thumbnail}
-                                  alt=""
-                                  className="mixerSoundThumbnail"
-                                />
-                              ) : (
-                                <div className="spinner">
-                                  <Spinner />
+                          <>
+                            <div className="individualAudio" key={index}>
+                              <div className="mixerSoundDetail">
+                                <div className="mixerSoundThumbnailWrapper flex-shrink-0">
+                                  <span
+                                    className="soundControlButton audioRemoveButton"
+                                    onClick={() => {
+                                      handleRemoveSound(index);
+                                    }}
+                                  >
+                                    <img src={crossIcon} alt="Cross Icon" />
+                                  </span>
+
+                                  <div className="mixerSoundThumbnail">
+                                    <img
+                                      src={BASEURL + sound.thumbnail}
+                                      alt="Thumbnail"
+                                    />
+                                  </div>
                                 </div>
-                              )}
-                              <input
-                                type="range"
-                                min="0"
-                                max="1"
-                                step="0.01"
-                                onChange={(e) => {
-                                  handleIndividualVolume(e, index);
-                                }}
-                              />
-                              <button
-                                className="notButton audioRemoveButton"
-                                onClick={() => {
-                                  handleRemoveSound(index);
-                                }}
-                              >
-                                <CrossIcon />
-                                {/* <img src={crossIcon} alt="" /> */}
-                              </button>
+                                <div className="flex-grow-1">
+                                  <p className="mixerAudioTitle">
+                                    {sound.title}
+                                  </p>
+                                </div>
+                                <div className="d-flex align-center gap-2 flex-shrink-0">
+                                  <span
+                                    className="soundControlButton"
+                                    // onClick={() => handleVolume("Decrease")}
+                                  >
+                                    -
+                                  </span>
+                                  <span
+                                    className="soundControlButton"
+                                    // onClick={() => handleVolume("Increase")}
+                                  >
+                                    +
+                                  </span>
+                                </div>
+                              </div>
                             </div>
-                            <p className="mixerAudioTitle">{sound.title}</p>
-                          </div>
+                          </>
                         ))}
-                        {audioState?.audio && (
-                          <div className="individualAudio">
-                            <div className="mixerSoundDetail">
-                              s{" "}
-                              <img
-                                src={BASEURL + audioState.thumbnail}
-                                alt=""
-                                className="mixerSoundThumbnail"
-                              />
-                              <input
-                                type="range"
-                                min="0"
-                                max="1"
-                                step="0.01"
-                                // onChange={(e) => {
-                                //   handleIndividualVolume(e, index);
-                                // }}
-                              />
-                              <button
-                                className="notButton audioRemoveButton"
+                      </div>
+                    </>
+                  )}
+                  {audioState?.audio && (
+                    <>
+                      <div className="audioHeader">
+                        <p>{audioState.type}</p>
+                      </div>
+                      <div className="otherAudioWrapper">
+                        <div className="individualAudio">
+                          <div className="mixerSoundDetail">
+                            <div className="mixerSoundThumbnailWrapper flex-shrink-0">
+                              <span
+                                className="soundControlButton audioRemoveButton"
                                 onClick={handleRemoveAudio}
                               >
-                                <CrossIcon />
-                                {/* <img src={crossIcon} alt="" /> */}
-                              </button>
+                                <img src={crossIcon} alt="Cross Icon" />
+                              </span>
+
+                              <div className="mixerAudioThumbnail">
+                                <img
+                                  src={BASEURL + audioState.thumbnail}
+                                  alt="Thumbnail"
+                                />
+                              </div>
                             </div>
-                            <p className="mixerAudioTitle">
-                              {audioState.title}
-                            </p>
+                            <div className="flex-grow-1">
+                              <p className="mixerAudioTitle">
+                                {audioState.title}
+                              </p>
+                            </div>
+                            <div className="d-flex align-center gap-2 flex-shrink-0">
+                              <span
+                                className="soundControlButton"
+                                // onClick={() => handleVolume("Decrease")}
+                              >
+                                -
+                              </span>
+                              <span
+                                className="soundControlButton"
+                                // onClick={() => handleVolume("Increase")}
+                              >
+                                +
+                              </span>
+                            </div>
                           </div>
-                        )}
+                        </div>
                       </div>
-                      <div className="mixerFooter">
-                        <button
-                          className="timerButton notButton"
-                          onClick={handleShowTimer}
-                        >
-                          <TimerButton className="playerActionIcon" />
-                          <p className="playerActionText">Timer</p>
-                        </button>
-                        <CustomButton
-                          variant="primaryButton fw-normal"
-                          text="Clear Mix"
-                          onClick={handleClearMix}
-                        />
-                      </div>
-                    </div>
-                  </DropdownButton>
+                    </>
+                  )}
+
+                  <div className="clearMixWrapper">
+                    <button className="clearMixButton" onClick={handleClearMix}>
+                      Clear Mix
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
