@@ -40,6 +40,7 @@
     display: inline-block;
     width: 18px;
     height: 18px;
+    filter: brightness(0) invert(1);
 }
 
 .playerAction path {
@@ -74,13 +75,13 @@
     fill: var(--lightColor) !important;
 }
 
-.playerVolume {
+/* .playerVolume {
     flex-grow: 1;
     max-width: 280px;
     position: relative;
     margin: 6px 1rem;
-}
-
+} */
+/* 
 .playerVolume input {
     -webkit-appearance: none;
     width: 100%;
@@ -89,7 +90,7 @@
     background: #fff;
     transition: 0.3s linear;
 
-}
+} */
 
 .volumeControl {
     display: flex;
@@ -146,6 +147,12 @@
     background: #fff;
     border-radius: 99px;
     padding: 0.2rem;
+}
+
+.closeButton img {
+    width: 12px;
+    aspect-ratio: 1/1;
+    filter: brightness(0) invert(1);
 }
 
 .audioRemoveButton path {
@@ -340,8 +347,7 @@
 }
 
 .soundModal .modal-content {
-    background: var(--primaryColor);
-    border: 1px solid var(--lightColor);
+    background: #042047c7;
 }
 
 .timerOptions button {
@@ -447,7 +453,7 @@
     right: 0;
     width: 100%;
     max-width: 360px;
-    background: #042047fa;
+    background: #042047f2;
     border-top-right-radius: 8px;
     border-top-left-radius: 8px;
     overflow: hidden;

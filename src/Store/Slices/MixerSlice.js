@@ -5,7 +5,7 @@ const mixerSlice = createSlice({
   name: "mixer",
   initialState: {
     play: true,
-    volume: 0.6,
+    volume: 0.5,
   },
   reducers: {
     playMixer(state, action) {
@@ -34,6 +34,10 @@ const mixerSlice = createSlice({
       state.volume = newVolume;
       Howler.volume(newVolume);
     },
+    changeVolume(state, action) {
+      state.volume = action.payload;
+      Howler.volume(action.payload);
+    },
     resetMixerVolume(state, action) {
       const newVolume = 0.6;
       state.volume = newVolume;
@@ -41,6 +45,7 @@ const mixerSlice = createSlice({
     },
     resetMixer(state, action) {
       state.play = true;
+      state.volume = 0.6;
     },
   },
 });
@@ -50,6 +55,7 @@ export const {
   pauseMixer,
   increaseMixerVolume,
   decreaseMixerVolume,
+  changeVolume,
   resetMixerVolume,
   resetMixer
 } = mixerSlice.actions;

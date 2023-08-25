@@ -10,12 +10,12 @@ import { ReactComponent as PremiumShuffle } from "./premiumShuffle.svg";
 // import { ReactComponent as MenuMoon } from "./menuMoon.svg";
 // import { ReactComponent as MenuArticle } from "./menuArticle.svg";
 
-import { ReactComponent as PlayButton } from "./playButton.svg";
-import { ReactComponent as PauseButton } from "./pauseButton.svg";
-import { ReactComponent as MixerButton } from "./mixerButton.svg";
-import { ReactComponent as TimerButton } from "./timer.svg";
-import { ReactComponent as HeartButton } from "./heartButton.svg";
-import { ReactComponent as ShuffleButton } from "./shuffleButton.svg";
+// import { ReactComponent as PlayButton } from "./playButton.svg";
+// import { ReactComponent as PauseButton } from "./pauseButton.svg";
+// import { ReactComponent as MixerButton } from "./mixerButton.svg";
+// import { ReactComponent as TimerButton } from "./timer.svg";
+// import { ReactComponent as HeartButton } from "./heartButton.svg";
+// import { ReactComponent as ShuffleButton } from "./shuffleButton.svg";
 
 // import { ReactComponent as CheckSymptomsIcon } from "./checkSymptoms.svg";
 // import { ReactComponent as ArticlesIcon } from "./articles.svg";
@@ -43,6 +43,12 @@ import StoreIcon from "./store.svg";
 import crossIcon from "./crossIcon.png";
 import playIcon from "./playIcon.png";
 
+import playButton from './play-button.svg'
+import pauseButton from './pause-button.svg'
+import saveMixButton from './save-mix.svg'
+import timerButton from './timer.svg'
+
+
 import ThreeDots from "./threeDots.svg";
 import Cog from "./cog.svg";
 import Play from "./play.svg";
@@ -54,12 +60,12 @@ export {
   PremiumSound,
   PremiumTracks,
   PremiumShuffle,
-  PlayButton,
-  PauseButton,
-  MixerButton,
-  TimerButton,
-  HeartButton,
-  ShuffleButton,
+  // PlayButton,
+  // PauseButton,
+  // MixerButton,
+  // TimerButton,
+  // HeartButton,
+  // ShuffleButton,
   MenuHome,
   MenuSound,
   MenuMeditation,
@@ -78,5 +84,9 @@ export {
   playIcon,
   ThreeDots,
   Cog,
-  Play
+  Play,
+  playButton,
+  pauseButton,
+  saveMixButton,
+  timerButton,
 };

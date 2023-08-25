@@ -8,20 +8,23 @@ import {
   clearAllSound,
   removeSound,
   removeAudio,
-  hideErrorMessage,
 } from "../../Store/Slices/SoundPlayerSlice";
 
 // import { playAll } from "../../Store/Slices/SoundPlayerSlice";
 
 import {
-  MixerButton,
-  TimerButton,
+  // MixerButton,
+  // TimerButton,
   PauseButton,
   PlayButton,
-  Spinner,
+  // Spinner,
   CrossIcon,
   crossIcon,
-  playIcon,
+  // playIcon,
+  playButton,
+  pauseButton,
+  saveMixButton,
+  timerButton,
 
   // mixerIcon,
   // timerIcon,
@@ -34,8 +37,13 @@ import { Howl, Howler } from "howler";
 import CustomButton from "../CustomButton";
 import { getAccessToken } from "../../Util/authHeader";
 import { useLocation } from "react-router";
-import { pauseMixer, playMixer, resetMixer } from "../../Store/Slices/MixerSlice";
+import {
+  pauseMixer,
+  playMixer,
+  resetMixer,
+} from "../../Store/Slices/MixerSlice";
 import VolumeBar from "../VolumeBar";
+import VolumeSlider from "./../VolumeSlider";
 
 const MultiAudioPlayerrr = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -282,7 +290,7 @@ const MultiAudioPlayerrr = () => {
       });
       setHowlList([]);
       dispatch(clearAllSound());
-      dispatch(resetMixer())
+      dispatch(resetMixer());
       // setIsPlaying(false);
     }
     if (audioState.audio) {
@@ -290,7 +298,7 @@ const MultiAudioPlayerrr = () => {
       setAudioHowl(null);
       setAudioState(null);
       dispatch(clearAllSound());
-      dispatch(resetMixer())
+      dispatch(resetMixer());
     }
   };
 
@@ -325,30 +333,42 @@ const MultiAudioPlayerrr = () => {
                     className="playButton playerAction"
                     onClick={handlePauseAll}
                   >
-                    <PauseButton className="playerActionIcon" />
+                    {/* <PauseButton className="playerActionIcon" /> */}
                     {/* <p className="playerActionText">Pause</p> */}
+
+                    <img
+                      src={pauseButton}
+                      alt="Pause"
+                      className="playerActionIcon"
+                    />
                   </button>
                 ) : (
                   <button
                     className="playButton playerAction"
                     onClick={handlePlayAll}
                   >
-                    <PlayButton className="playerActionIcon" />
+                    {/* <PlayButton className="playerActionIcon" /> */}
                     {/* <p className="playerActionText">Play</p> */}
+                    <img
+                      src={playButton}
+                      alt="Play"
+                      className="playerActionIcon"
+                    />
                   </button>
                 )}
-                <div className="mixerCenter d-md-block d-none">
+                <div className="mixerCenter d-md-block d-none flex-grow-1">
                   <p className="overallVolumeText">Volume</p>
-                  <VolumeBar />
+                  <VolumeSlider />
                 </div>
                 <div className="mixerRight">
                   <button className="playerAction">
                     <img
-                      src={crossIcon}
-                      alt="Timer Icon"
+                      src={timerButton}
+                      alt="Timer"
                       className="playerActionIcon"
-                      onClick={handleClearMix}
+                      onClick={handleShowTimer}
                     />
+
                     {/* <p className="playerActionText">Add Timer</p> */}
                     {/* <MixerButton className="playerActionIcon" /> */}
                   </button>
@@ -530,50 +550,50 @@ const MultiAudioPlayerrr = () => {
               className="closeButton notButton ms-auto"
               onClick={handleCloseTimer}
             >
-              <CrossIcon />
-              {/* <img src={crossIcon} alt="" /> */}
+              {/* <CrossIcon /> */}
+              <img src={crossIcon} alt="" />
             </button>
           </div>
           <div className="customModalContent text-center">
             <h2 className="modalHeading pageTitle mb-4">Select Time</h2>
             <div className="timerOptions">
               <CustomButton
-                variant="secondaryButton fw-normal"
+                variant="secondaryButton fw-light"
                 text="None"
                 onClick={() => {
                   runTimer(null);
                 }}
               />
               <CustomButton
-                variant="secondaryButton fw-normal"
+                variant="secondaryButton fw-light"
                 text="1 Minute"
                 onClick={() => {
                   runTimer(1);
                 }}
               />
               <CustomButton
-                variant="secondaryButton fw-normal"
+                variant="secondaryButton fw-light"
                 text="15 Minutes"
                 onClick={() => {
                   runTimer(15);
                 }}
               />
               <CustomButton
-                variant="secondaryButton fw-normal"
+                variant="secondaryButton fw-light"
                 text="30 Minutes"
                 onClick={() => {
                   runTimer(30);
                 }}
               />
               <CustomButton
-                variant="secondaryButton fw-normal"
+                variant="secondaryButton fw-light"
                 text="1 Hour"
                 onClick={() => {
                   runTimer(60);
                 }}
               />
               <CustomButton
-                variant="secondaryButton fw-normal"
+                variant="secondaryButton fw-light"
                 text="2 Hours"
                 onClick={() => {
                   runTimer(120);
