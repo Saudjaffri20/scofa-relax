@@ -18,12 +18,19 @@ import {
   crossIcon,
   mixerIcon,
   timerIcon,
+  save,
   saveMixIcon,
 } from "../../Assets/svg";
 
+import { logo } from "../../Assets/images";
+
 import "./style.css";
 import BASEURL from "../../Config/global";
-import { pauseMixer, playMixer, resetMixerVolume } from "../../Store/Slices/MixerSlice";
+import {
+  pauseMixer,
+  playMixer,
+  resetMixerVolume,
+} from "../../Store/Slices/MixerSlice";
 import VolumeBar from "../VolumeBar";
 
 const MainMixer = ({
@@ -50,6 +57,60 @@ const MainMixer = ({
       dispatch(resetMixerVolume());
     };
   }, []);
+
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (menuClass == "mobileMenu") {
+      
+        if (document.visibilityState === "hidden") {
+          handlePauseAll();
+        } else {
+          if (isPlaying) {
+            handlePlayAll();
+          }
+        }
+      }
+    };
+
+    window.addEventListener("visibilitychange", handleVisibilityChange);
+
+    // Clean up the event listener when the component unmounts
+    return () => {
+      window.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, []);
+
+  // useEffect(() => {
+  //   // ...
+
+  //   // Define media metadata for the Media Session API
+  //   if ("mediaSession" in navigator) {
+  //     navigator.mediaSession.metadata = new window.MediaMetadata({
+  //       title: "Relax Scofa",
+  //       artwork: [
+  //         {
+  //           src: `${BASEURL + "/" + logo}`,
+  //           sizes: "96x96",
+  //           type: "image/png",
+  //         },
+  //       ],
+  //     });
+
+  //     navigator.mediaSession.playbackState = isPlaying ? "playing" : "paused";
+
+  //     navigator.mediaSession.setActionHandler("play", handlePlayAll);
+  //     navigator.mediaSession.setActionHandler("pause", handlePauseAll);
+  //   }
+
+  //   return () => {
+  //     // Clean up
+  //     dispatch(pauseMixer());
+  //     dispatch(resetMixerVolume());
+  //     if ("mediaSession" in navigator) {
+  //       navigator.mediaSession.metadata = null;
+  //     }
+  //   };
+  // }, []);
 
   const handlePlayAll = () => {
     dispatch(playMixer());

@@ -20,8 +20,10 @@ const IndividualAudio = ({
   useEffect(() => {
     howlInstanceRef.current = new Howl({
       src: [BASEURL + sound.audio],
+      loop: false,
       autoplay: isPlaying,
-      html5: true,
+      usingWebAudio: true,
+      // html5: true,
       autoUnlock: true,
       preload: true,
       volume: volume,

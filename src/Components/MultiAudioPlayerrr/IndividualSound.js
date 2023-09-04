@@ -10,7 +10,7 @@ const IndividualSound = ({
   isPlaying,
   individualRemoveSound,
   clearMixClicked,
-  setSoundList
+  setSoundList,
 }) => {
   const dispatch = useDispatch();
   const howlInstanceRef = useRef(null);
@@ -18,20 +18,40 @@ const IndividualSound = ({
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    // let duration;
     howlInstanceRef.current = new Howl({
       src: [BASEURL + sound.audio],
       loop: true,
       autoplay: isPlaying,
-      html5: true,
+      usingWebAudio: true,
+      html5: false,
       autoUnlock: true,
       preload: true,
       volume: volume,
       autoSuspend: false,
+      onload: function () {
+        setIsLoading(false);
+        console.log("Loaded");
+      },
+      onplay: function () {
+        // duration
+        console.log("Playing");
+      },
+      onunlock: function () {
+        console.log("Unlock");
+      },
+      onpause: function () {
+        console.log("Pause");
+      },
+      onend: function () {
+        // this.play();   
+        console.log("End");
+      },
     });
 
-    howlInstanceRef.current.on("load", () => {
-      setIsLoading(false);
-    });
+    // howlInstanceRef.current.on("load", () => {
+    //   setIsLoading(false);
+    // });
 
     return () => {
       if (howlInstanceRef.current) {
@@ -40,15 +60,15 @@ const IndividualSound = ({
     };
   }, [sound.audio]);
 
-  useEffect(() => {
-    if (howlInstanceRef.current) {
-      if (isPlaying) {
-        howlInstanceRef.current.play();
-      } else {
-        howlInstanceRef.current.pause();
-      }
-    }
-  }, [isPlaying]);
+  // useEffect(() => {
+  //   if (howlInstanceRef.current) {
+  //     if (isPlaying) {
+  //       howlInstanceRef.current.play();
+  //     } else {
+  //       howlInstanceRef.current.pause();
+  //     }
+  //   }
+  // }, [isPlaying]);
 
   useEffect(() => {
     if (howlInstanceRef.current) {

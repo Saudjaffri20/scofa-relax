@@ -10,7 +10,6 @@ const VolumeBar = () => {
   const dispatch = useDispatch();
 
   const volume = useSelector((state) => state.mixer.volume);
-  console.log(volume);
 
   const increaseVolume = () => {
     dispatch(increaseMixerVolume());
