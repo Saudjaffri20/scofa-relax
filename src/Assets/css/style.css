@@ -270,9 +270,6 @@ d -----*/
 }
 
 @media screen and (max-width: 575px) {
-    .pageTitle {
-        font-size: 20px;
-    }
 
     .sectionTitle {
         font-size: 18px;

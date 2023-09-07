@@ -23,7 +23,7 @@ const MainLayout = (props) => {
   const menuClass = windowWidth < 1024 ? "mobileMenu" : "desktopMenu";
   return (
     <>
-      <Menubar menuClass={menuClass} />
+      {/* <Menubar menuClass={menuClass} /> */}
       <div className="secondaryBg">
         <div className="container-fluid">
           <div className="row g-0">
@@ -33,7 +33,7 @@ const MainLayout = (props) => {
                   menuClass === "mobileMenu" ? "mobileBody" : "desktopBody"
                 }`}
               >
-                <Header />
+                {/* <Header /> */}
                 {props.children}
               </div>
             </div>
