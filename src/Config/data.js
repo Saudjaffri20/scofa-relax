@@ -170,7 +170,7 @@ export const sounds = [
 export const meditation = [
   {
     id: 1,
-    title: "Meditation Exercise 1",
+    title: "Relaxation Exercise 1",
     image: cardImage5,
     thumbnail: thumbnail1,
     duration: "05:22",
@@ -178,7 +178,7 @@ export const meditation = [
   },
   {
     id: 2,
-    title: "Meditation Exercise 2",
+    title: "Relaxation Exercise 2",
     image: cardImage7,
     thumbnail: thumbnail2,
     duration: "02:05",
@@ -186,7 +186,7 @@ export const meditation = [
   },
   {
     id: 3,
-    title: "Meditation Exercise 3",
+    title: "Relaxation Exercise 3",
     image: cardImage4,
     thumbnail: thumbnail3,
     duration: "03:19",
@@ -194,7 +194,7 @@ export const meditation = [
   },
   {
     id: 4,
-    title: "Meditation Exercise 4",
+    title: "Relaxation Exercise 4",
     image: cardImage1,
     thumbnail: thumbnail4,
     duration: "03:11",
@@ -202,7 +202,7 @@ export const meditation = [
   },
   {
     id: 5,
-    title: "Meditation Exercise 5",
+    title: "Relaxation Exercise 5",
     image: cardImage3,
     thumbnail: thumbnail5,
     duration: "08:44",
@@ -210,7 +210,7 @@ export const meditation = [
   },
   {
     id: 6,
-    title: "Meditation Exercise 6",
+    title: "Relaxation Exercise 6",
     image: cardImage7,
     thumbnail: thumbnail2,
     duration: "12:16",
@@ -218,7 +218,7 @@ export const meditation = [
   },
   {
     id: 7,
-    title: "Meditation Exercise 7",
+    title: "Relaxation Exercise 7",
     image: cardImage2,
     thumbnail: thumbnail4,
     duration: "04:52",
@@ -226,7 +226,7 @@ export const meditation = [
   },
   {
     id: 8,
-    title: "Meditation Exercise 8",
+    title: "Relaxation Exercise 8",
     image: cardImage3,
     thumbnail: thumbnail1,
     duration: "07:56",

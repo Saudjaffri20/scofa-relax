@@ -114,10 +114,6 @@ const MultiAudioPlayerrr = () => {
     setAudioState(audio);
   }, [audio]);
 
-  // console.log(soundList)
-  // console.log(lastSource);
-  console.log(isPlaying);
-
   // useEffect(() => {
   //   const lastElem = sourceList[sourceList.length - 1];
   //   setLastSource(lastElem);
@@ -143,7 +139,7 @@ const MultiAudioPlayerrr = () => {
         src: [lastSource],
         loop: true,
         autoplay: isPlaying,
-        webAudio: true, // Use Web Audio API if supported
+        // webAudio: true, // Use Web Audio API if supported
         html5: true, // Use HTML5 audio if supported
         autoUnlock: true,
         preload: true,
@@ -164,6 +160,8 @@ const MultiAudioPlayerrr = () => {
 
     setHowlCount(howlList.length);
   }, [lastSource]);
+
+  console.log("howlList", howlList);
 
   useEffect(() => {
     if (audioHowl) {
@@ -240,6 +238,18 @@ const MultiAudioPlayerrr = () => {
   const handleIndividualVolume = (e, index) => {
     const volumeLevel = parseFloat(e.target.value);
     howlList[index].volume(volumeLevel);
+  };
+
+  const handleSoundVolume = (method, index) => {
+    if (method === "Increase") {
+      const newVolume = Math.min(howlList[index]?.volume() + 0.1, 1.0);
+      howlList[index].volume(newVolume);
+      console.log("increase", newVolume.toFixed(1));
+    } else if (method === "Decrease") {
+      const newVolume = Math.max(howlList[index]?.volume() - 0.1, 0);
+      howlList[index].volume(newVolume);
+      console.log("decrease", newVolume.toFixed(1));
+    }
   };
 
   const handleRemoveSound = (index) => {
@@ -460,13 +470,17 @@ const MultiAudioPlayerrr = () => {
                                 <div className="d-flex align-center gap-2 flex-shrink-0">
                                   <span
                                     className="soundControlButton"
-                                    // onClick={() => handleVolume("Decrease")}
+                                    onClick={() =>
+                                      handleSoundVolume("Decrease", index)
+                                    }
                                   >
                                     -
                                   </span>
                                   <span
                                     className="soundControlButton"
-                                    // onClick={() => handleVolume("Increase")}
+                                    onClick={() =>
+                                      handleSoundVolume("Increase", index)
+                                    }
                                   >
                                     +
                                   </span>

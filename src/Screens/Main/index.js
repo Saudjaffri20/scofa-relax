@@ -36,8 +36,8 @@ const Main = () => {
                     </Link>
                   </div>
                   <div className="col-12">
-                    <Link to={"/meditation"} className="categoryLink">
-                      Meditation
+                    <Link to={"/relaxation"} className="categoryLink">
+                      Relaxation
                     </Link>
                   </div>
                   <div className="col-12">
