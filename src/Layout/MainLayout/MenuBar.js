@@ -44,34 +44,10 @@ export const Menubar = (props) => {
 
   const menu = [
     {
-      text: "Home",
-      link: "/home",
-      path: "home",
-      icon: MenuHome,
-    },
-    {
       text: "Sounds",
-      link: "/sounds",
-      path: "sounds",
+      link: "/",
+      path: "/",
       icon: MenuSound,
-    },
-    {
-      text: "Relaxation",
-      link: "/relaxation",
-      path: "relaxation",
-      icon: MenuMeditation,
-    },
-    {
-      text: "Stories",
-      link: "/stories",
-      path: "stories",
-      icon: MenuMoon,
-    },
-    {
-      text: "Audio Articles",
-      link: "/articles",
-      path: "articles",
-      icon: MenuArticle,
     },
   ];
 
@@ -114,54 +90,11 @@ export const Menubar = (props) => {
               }
               to={item.link}
             >
-              {/* <span className="menuIcon">{item.icon}</span> */}
               <img src={item.icon} className="menuIcon" />
               <span className="menuLinkText">{item.text}</span>
             </Link>
           </li>
         ))}
-      </ul>
-      <hr className="menuSeperator d-none d-md-block" />
-      <ul className="list-unstyled d-none d-md-block">
-        <li className="menubar-li">
-          <Link
-            className={
-              location.pathname.includes("playist")
-                ? "menuLink active"
-                : "menuLink"
-            }
-            to={"#_"}
-          >
-            <span className="menuLinkText">Playlist</span>
-          </Link>
-        </li>
-        <li className="menubar-li">
-          <Link
-            className={
-              location.pathname.includes("favorite")
-                ? "menuLink active"
-                : "menuLink"
-            }
-            to={"#_"}
-          >
-            <span className="menuLinkText">Favorite</span>
-          </Link>
-        </li>
-        {externalMenu.map((item, index) => (
-          <li className="menubar-li" key={index}>
-            <Link
-              className="menuLink"
-              to={item.link}
-              target="_blank"
-            >
-              <img src={item.icon} className="menuIcon" />
-              {/* <ArticlesIcon /> */}
-              {/* </span> */}
-              <span className="menuLinkText">{item.text}</span>
-            </Link>
-          </li>
-        ))}
-
       </ul>
     </div>
   );

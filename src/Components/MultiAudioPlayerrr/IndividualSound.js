@@ -14,17 +14,18 @@ const IndividualSound = ({
 }) => {
   const dispatch = useDispatch();
   const howlInstanceRef = useRef(null);
+  const patchHowlRef = useRef(null);
   const [volume, setVolume] = useState(0.6);
   const [isLoading, setIsLoading] = useState(true);
+  const [hasReached19Seconds, setHasReached19Seconds] = useState(false);
 
   useEffect(() => {
-    // let duration;
     howlInstanceRef.current = new Howl({
       src: [BASEURL + sound.audio],
       loop: true,
       autoplay: isPlaying,
       usingWebAudio: true,
-      html5: false,
+      html5: true,
       autoUnlock: true,
       preload: true,
       volume: volume,
@@ -32,9 +33,19 @@ const IndividualSound = ({
       onload: function () {
         setIsLoading(false);
         console.log("Loaded");
+        patchHowlRef.current = new Howl({
+          src: [BASEURL + sound.patch],
+          loop: false,
+          autoplay: true,
+          usingWebAudio: true,
+          html5: true,
+          autoUnlock: true,
+          preload: true,
+          volume: 0,
+          autoSuspend: false,
+        });
       },
       onplay: function () {
-        // duration
         console.log("Playing");
       },
       onunlock: function () {
@@ -44,8 +55,10 @@ const IndividualSound = ({
         console.log("Pause");
       },
       onend: function () {
-        // this.play();   
         console.log("End");
+      },
+      onseek: function () {
+        console.log("seeking", howlInstanceRef.current.seek());
       },
     });
 
@@ -56,19 +69,20 @@ const IndividualSound = ({
     return () => {
       if (howlInstanceRef.current) {
         howlInstanceRef.current.unload();
+        // patchHowlRef.current.unload();
       }
     };
   }, [sound.audio]);
 
-  // useEffect(() => {
-  //   if (howlInstanceRef.current) {
-  //     if (isPlaying) {
-  //       howlInstanceRef.current.play();
-  //     } else {
-  //       howlInstanceRef.current.pause();
-  //     }
-  //   }
-  // }, [isPlaying]);
+  useEffect(() => {
+    if (howlInstanceRef.current) {
+      if (isPlaying) {
+        howlInstanceRef.current.play();
+      } else {
+        howlInstanceRef.current.pause();
+      }
+    }
+  }, [isPlaying]);
 
   useEffect(() => {
     if (howlInstanceRef.current) {
@@ -85,6 +99,57 @@ const IndividualSound = ({
       howlInstanceRef.current.volume(volume);
     }
   }, [volume]);
+
+  useEffect(() => {
+    let intervalId;
+
+    // Function to check the playback time and handle the 19-second condition
+    const checkPlaybackTime = () => {
+      if (howlInstanceRef.current) {
+        const currentTime = howlInstanceRef.current.seek();
+
+        // Check if it has reached 19 seconds
+        if (currentTime >= 24 && !hasReached19Seconds) {
+          setHasReached19Seconds(true);
+          patchHowlRef.current = new Howl({
+            src: [BASEURL + sound.patch],
+            loop: false,
+            autoplay: true,
+            usingWebAudio: true,
+            html5: true,
+            autoUnlock: true,
+            preload: true,
+            volume: 1, // Adjust the volume as needed
+            autoSuspend: false,
+            onend: function () {
+              // Unload patchHowl when it ends
+              patchHowlRef.current.unload();
+            },
+            onplay: function () {
+              console.log("Patch Play");
+            },
+          });
+          // Do something when it reaches 19 seconds
+        }
+
+        // If it's looping, reset the flag to false after each loop
+        if (currentTime < 1 && hasReached19Seconds) {
+          setHasReached19Seconds(false);
+        }
+      }
+    };
+
+    // Set up an interval to continuously check the playback time (every second)
+    intervalId = setInterval(checkPlaybackTime, 1000);
+
+    // Clear the interval when the component unmounts to prevent memory leaks
+    return () => {
+      clearInterval(intervalId);
+      // if (patchHowlRef.current) {
+      //   patchHowlRef.current.unload();
+      // }
+    };
+  }, [hasReached19Seconds]);
 
   const handleVolume = (value) => {
     if (value === "Increase") {

@@ -58,27 +58,27 @@ const MainMixer = ({
     };
   }, []);
 
-  useEffect(() => {
-    const handleVisibilityChange = () => {
-      if (menuClass == "mobileMenu") {
+  // useEffect(() => {
+  //   const handleVisibilityChange = () => {
+  //     if (menuClass == "mobileMenu") {
       
-        if (document.visibilityState === "hidden") {
-          handlePauseAll();
-        } else {
-          if (isPlaying) {
-            handlePlayAll();
-          }
-        }
-      }
-    };
+  //       if (document.visibilityState === "hidden") {
+  //         handlePauseAll();
+  //       } else {
+  //         if (isPlaying) {
+  //           handlePlayAll();
+  //         }
+  //       }
+  //     }
+  //   };
 
-    window.addEventListener("visibilitychange", handleVisibilityChange);
+  //   window.addEventListener("visibilitychange", handleVisibilityChange);
 
-    // Clean up the event listener when the component unmounts
-    return () => {
-      window.removeEventListener("visibilitychange", handleVisibilityChange);
-    };
-  }, []);
+  //   // Clean up the event listener when the component unmounts
+  //   return () => {
+  //     window.removeEventListener("visibilitychange", handleVisibilityChange);
+  //   };
+  // }, []);
 
   // useEffect(() => {
   //   // ...
