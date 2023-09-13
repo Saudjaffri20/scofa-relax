@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
+import IndividualSound from "./IndividualSound";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import { Modal } from "react-bootstrap";
@@ -44,7 +44,6 @@ import {
 } from "../../Store/Slices/MixerSlice";
 import VolumeBar from "../VolumeBar";
 import VolumeSlider from "./../VolumeSlider";
-import IndividualSound from "./IndividualSound";
 
 const MultiAudioPlayerrr = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -71,7 +70,6 @@ const MultiAudioPlayerrr = () => {
   const [audioState, setAudioState] = useState({});
   const [sourceList, setSourceList] = useState([]);
   const [lastSource, setLastSource] = useState(null);
-  const [lastPatch, setLastPatch] = useState(null);
   const [soundInfo, setSoundInfo] = useState(false);
   const [audioInfo, setAudioInfo] = useState(false);
   const [howlList, setHowlList] = useState([]);
@@ -107,8 +105,7 @@ const MultiAudioPlayerrr = () => {
     // });
     // setSourceList(duplicateArray);
     const lastElem = soundList[soundList.length - 1];
-    setLastSource(BASEURL + lastElem?.audio);
-    // setLastPatch(BASEURL + lastElem?.patch);
+    setLastSource(lastElem);
     setSoundInfo(lastElem);
     // const lastSoundInfo = soundList[soundList.length - 1];
   }, [soundList]);
@@ -136,90 +133,73 @@ const MultiAudioPlayerrr = () => {
   //   }
   // }, [soundList]);
 
-  // useEffect(() => {
-  //   if (soundList.length > 0 && soundList.length > howlCount) {
-  //     const howl = new Howl({
-  //       src: [lastSource],
-  //       loop: true,
-  //       autoplay: isPlaying,
-  //       // webAudio: true, // Use Web Audio API if supported
-  //       html5: true, // Use HTML5 audio if supported
-  //       autoUnlock: true,
-  //       preload: true,
-  //       volume: 0.5,
-  //       autoSuspend: false,
-  //       onload: function () {
-  //         this.loaded = true;
-  //         setLoader((prevLoader) => [...prevLoader, true]);
-  //       },
-  //     });
+  useEffect(() => {
+    if (soundList.length > 0 && soundList.length > howlCount) {
+      const howl = new Howl({
+        src: [BASEURL + lastSource.audio],
+        loop: true,
+        autoplay: isPlaying,
+        // webAudio: true, // Use Web Audio API if supported
+        html5: true, // Use HTML5 audio if supported
+        autoUnlock: true,
+        preload: true,
+        volume: 0.5,
+        autoSuspend: false,
+        onload: function () {
+          this.loaded = true;
+          setLoader((prevLoader) => [...prevLoader, true]);
+        },
+      });
+      const patch = new Howl({
+        src: [BASEURL + lastSource.patch],
+        loop: true,
+        autoplay: isPlaying,
+        // webAudio: true, // Use Web Audio API if supported
+        html5: true, // Use HTML5 audio if supported
+        autoUnlock: true,
+        preload: true,
+        mute: true,
+        volume: 0,
+        autoSuspend: false,
+      });
+      howl.loaded = false;
+      howl.info = soundInfo;
+      const duplicateHowlList = [...howlList];
+      duplicateHowlList.push(howl);
+      setHowlList(duplicateHowlList);
+      // checkAndUpdateMediaSession(howl);
+    }
 
-  //     howl.on("play", () => {
-  //       // Start tracking the progress when the sound starts playing
-  //       const duration = howl.duration();
-  //       const updateInterval = 500; // Update interval in milliseconds (adjust as needed)
+    setHowlCount(howlList.length);
+  }, [lastSource]);
 
-  //       const progressInterval = setInterval(() => {
-  //         const currentTime = howl.seek();
-  //         const remainingTime = duration - currentTime;
+  useEffect(() => {
+    if (audioHowl) {
+      // If an existing audioHowl instance exists, unload it
+      audioHowl.unload();
+    }
+    const howl = new Howl({
+      src: [BASEURL + audioState?.audio],
+      loop: false,
+      autoplay: isPlaying,
+      webAudio: true, // Use Web Audio API if supported
+      html5: true, // Use HTML5 audio if supported
+      autoUnlock: true,
+      preload: true,
+      volume: 0.5,
+      autoSuspend: false,
+      onload: function () {
+        this.loaded = true;
+        setLoader((prevLoader) => [...prevLoader, true]);
+      },
+    });
+    // howl.loaded = false;
+    // howl.info = audioInfo;
 
-  //         if (remainingTime <= 1) {
-  //           const patch = new Howl({
-  //             src: [lastPatch],
-  //             loop: false,
-  //             autoplay: isPlaying,
-  //             html5: true, // Use HTML5 audio if supported
-  //             autoUnlock: true,
-  //             preload: true,
-  //             volume: 0.5,
-  //             autoSuspend: false,
-  //           });
-  //         }
-
-  //         if (!howl.playing()) {
-  //           clearInterval(progressInterval);
-  //         }
-  //       }, updateInterval);
-  //     });
-
-  //     howl.loaded = false;
-  //     howl.info = soundInfo;
-  //     const duplicateHowlList = [...howlList];
-  //     duplicateHowlList.push(howl);
-  //     setHowlList(duplicateHowlList);
-  //     // checkAndUpdateMediaSession(howl);
-  //   }
-
-  //   setHowlCount(howlList.length);
-  // }, [lastSource]);
-
-  // useEffect(() => {
-  //   if (audioHowl) {
-  //     // If an existing audioHowl instance exists, unload it
-  //     audioHowl.unload();
-  //   }
-  //   const howl = new Howl({
-  //     src: [BASEURL + audioState?.audio],
-  //     loop: false,
-  //     autoplay: isPlaying,
-  //     webAudio: true, // Use Web Audio API if supported
-  //     html5: true, // Use HTML5 audio if supported
-  //     autoUnlock: true,
-  //     preload: true,
-  //     volume: 0.5,
-  //     autoSuspend: false,
-  //     onload: function () {
-  //       this.loaded = true;
-  //       setLoader((prevLoader) => [...prevLoader, true]);
-  //     },
-  //   });
-  //   // howl.loaded = false;
-  //   // howl.info = audioInfo;
-
-  //   // const duplicateHowlList = [...howlList];
-  //   // duplicateHowlList.push(howl);
-  //   setAudioHowl(howl);
-  // }, [audioState]);
+    // const duplicateHowlList = [...howlList];
+    // duplicateHowlList.push(howl);
+    setAudioHowl(howl);
+  }, [audioState]);
 
   // useEffect(() => {
   //   if (audioHowl) {
@@ -283,6 +263,7 @@ const MultiAudioPlayerrr = () => {
   };
 
   const handleRemoveSound = (index) => {
+    console.log(index);
     howlList[index].unload();
 
     const updatedHowlList = [...howlList];
@@ -473,51 +454,14 @@ const MultiAudioPlayerrr = () => {
                       <div className="individualSoundsWrapper">
                         {soundList.map((sound, index) => (
                           <>
-                            {/* <div className="individualAudio" key={index}>
-                              <div className="mixerSoundDetail">
-                                <div className="mixerSoundThumbnailWrapper flex-shrink-0">
-                                  <span
-                                    className="soundControlButton audioRemoveButton"
-                                    onClick={() => {
-                                      handleRemoveSound(index);
-                                    }}
-                                  >
-                                    <img src={crossIcon} alt="Cross Icon" />
-                                  </span>
-
-                                  <div className="mixerSoundThumbnail">
-                                    <img
-                                      src={BASEURL + sound.thumbnail}
-                                      alt="Thumbnail"
-                                    />
-                                  </div>
-                                </div>
-                                <div className="flex-grow-1">
-                                  <p className="mixerAudioTitle">
-                                    {sound.title}
-                                  </p>
-                                </div>
-                                <div className="d-flex align-center gap-2 flex-shrink-0">
-                                  <span
-                                    className="soundControlButton"
-                                    onClick={() =>
-                                      handleSoundVolume("Decrease", index)
-                                    }
-                                  >
-                                    -
-                                  </span>
-                                  <span
-                                    className="soundControlButton"
-                                    onClick={() =>
-                                      handleSoundVolume("Increase", index)
-                                    }
-                                  >
-                                    +
-                                  </span>
-                                </div>
-                              </div>
-                            </div> */}
-                            <IndividualSound key={index} sound={sound} isPlaying={isPlaying}/>
+                            <IndividualSound
+                              sound={sound}
+                              index={index}
+                              handleRemoveSound={handleRemoveSound}
+                              handleSoundVolume={handleSoundVolume}
+                              soundList={soundList}
+                              howlList={howlList}
+                            />
                           </>
                         ))}
                       </div>
