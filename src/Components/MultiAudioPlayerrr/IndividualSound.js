@@ -33,17 +33,6 @@ const IndividualSound = ({
       onload: function () {
         setIsLoading(false);
         console.log("Loaded");
-        patchHowlRef.current = new Howl({
-          src: [BASEURL + sound.patch],
-          loop: false,
-          autoplay: true,
-          usingWebAudio: true,
-          html5: true,
-          autoUnlock: true,
-          preload: true,
-          volume: 0,
-          autoSuspend: false,
-        });
       },
       onplay: function () {
         console.log("Playing");
@@ -62,6 +51,18 @@ const IndividualSound = ({
       },
     });
 
+    patchHowlRef.current = new Howl({
+      src: [BASEURL + sound.patch],
+      loop: false,
+      autoplay: true,
+      usingWebAudio: true,
+      html5: true,
+      autoUnlock: true,
+      preload: true,
+      volume: 0,
+      autoSuspend: false,
+    });
+
     // howlInstanceRef.current.on("load", () => {
     //   setIsLoading(false);
     // });
@@ -69,6 +70,9 @@ const IndividualSound = ({
     return () => {
       if (howlInstanceRef.current) {
         howlInstanceRef.current.unload();
+      }
+      if (patchHowlRef.current) {
+        patchHowlRef.current.unload();
         // patchHowlRef.current.unload();
       }
     };
@@ -109,7 +113,7 @@ const IndividualSound = ({
         const currentTime = howlInstanceRef.current.seek();
 
         // Check if it has reached 19 seconds
-        if (currentTime >= 24 && !hasReached19Seconds) {
+        if (currentTime >= 23.5 && !hasReached19Seconds) {
           setHasReached19Seconds(true);
           patchHowlRef.current = new Howl({
             src: [BASEURL + sound.patch],
