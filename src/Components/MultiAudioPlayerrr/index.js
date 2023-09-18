@@ -366,7 +366,7 @@ const MultiAudioPlayerrr = () => {
                     />
                   </button>
                 )}
-                <div className="mixerCenter d-md-block d-none flex-grow-1">
+                <div className="mixerCenter d-lg-block d-none flex-grow-1">
                   <p className="overallVolumeText">Volume</p>
                   <VolumeSlider />
                 </div>

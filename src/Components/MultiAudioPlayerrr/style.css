@@ -1,10 +1,24 @@
-.audioPlayerWrapper {
+/* .audioPlayerWrapper {
     background: #042047;
     border-top: 1px solid var(--lightColor);
     bottom: 0;
     padding: 0.5rem 1rem;
     position: fixed;
     width: 100%;
+    z-index: 99;
+} */
+
+.audioPlayerWrapper {
+    position: fixed;
+    bottom: 20px;
+    left: calc(50% + 130px);
+    transform: translateX(-50%);
+    background: #040f2b;
+    /* border-top: 1px solid var(--lightColor); */
+    border-radius: 6px;
+    padding: 0.5rem 1rem;
+    width: calc(100% - 16px);
+    max-width: 991px;
     z-index: 99;
 }
 
@@ -190,8 +204,8 @@
 }
 
 .audioPlayerWrapper.mobileMenu {
-    left: 0;
-    bottom: 60px;
+    left: 50%;
+    bottom: 70px;
 }
 
 
@@ -546,10 +560,12 @@
 .mixerSoundThumbnailWrapper {
     position: relative;
 }
+
 .mixerLeft, .mixerRight {
     display: flex;
     gap: 1.2rem;
 }
+
 .audioHeader {
     padding: 0.8rem 1rem;
 }
@@ -566,5 +582,6 @@
         right: 50%;
         -webkit-transform: translateX(50%);
         transform: translateX(50%);
+        max-width: none;
     }
 }
