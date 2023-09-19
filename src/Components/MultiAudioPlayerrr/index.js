@@ -208,10 +208,9 @@ const MultiAudioPlayerrr = () => {
 
   useEffect(() => {
     if (soundList.length > 0 && soundList.length > howlCount) {
-      let hasPlayedPatch = false;
-
       const howl = new Howl({
         src: [BASEURL + lastSource.audio],
+        format: [],
         loop: true,
         autoplay: isPlaying,
         html5: true,
@@ -223,49 +222,40 @@ const MultiAudioPlayerrr = () => {
           this.loaded = true;
           setLoader((prevLoader) => [...prevLoader, true]);
         },
-        onplay: function () {
-          const intervalId = setInterval(() => {
-            checkPlaybackTime();
-          }, 100);
-        },
         onend: function () {
-          hasPlayedPatch = false;
+          console.log("End");
         },
       });
-
       const patch = new Howl({
-        src: [BASEURL + lastSource.patch],
-        loop: false,
+        src: [BASEURL + lastSource.audio],
+        format: [],
+        loop: true,
         autoplay: isPlaying,
         html5: true,
         autoUnlock: true,
         preload: true,
-        mute: false,
-        volume: 0,
+        volume: 0.5,
         autoSuspend: false,
+        onload: function () {
+          this.loaded = true;
+          setLoader((prevLoader) => [...prevLoader, true]);
+        },
+        onend: function () {
+          console.log("End Patch");
+        },
       });
-
-      const checkPlaybackTime = () => {
-        const currentTime = howl.seek();
-
-        // Check if it has reached a certain time within the loop
-        if (currentTime >= 24 && currentTime <= 24.2 && !hasPlayedPatch) {
-          console.log("patch Playing", currentTime);
-          patch.volume(0.6); 
-          patch.play(); 
-          hasPlayedPatch = true;
-        }
-      };
 
       howl.loaded = false;
       howl.info = soundInfo;
       const duplicateHowlList = [...howlList];
-      duplicateHowlList.push(howl);
+      duplicateHowlList.push({ howl, patch });
       setHowlList(duplicateHowlList);
     }
 
     setHowlCount(howlList.length);
   }, [lastSource]);
+
+  console.log(howlList);
 
   useEffect(() => {
     if (audioHowl) {
@@ -321,7 +311,8 @@ const MultiAudioPlayerrr = () => {
     }
     if (howlList.length > 0) {
       howlList.forEach((howl) => {
-        howl.pause();
+        howl.howl.pause();
+        howl.patch.pause();
       });
     }
     dispatch(pauseMixer());
@@ -333,7 +324,8 @@ const MultiAudioPlayerrr = () => {
     }
     if (howlList.length > 0) {
       howlList.forEach((howl) => {
-        howl.play();
+        howl.howl.play();
+        howl.patch.play();
       });
     }
     dispatch(playMixer());
@@ -346,19 +338,22 @@ const MultiAudioPlayerrr = () => {
 
   const handleSoundVolume = (method, index) => {
     if (method === "Increase") {
-      const newVolume = Math.min(howlList[index]?.volume() + 0.1, 1.0);
-      howlList[index].volume(newVolume);
+      const newVolume = Math.min(howlList[index]?.howl.volume() + 0.1, 1.0);
+      howlList[index]?.howl?.volume(newVolume);
+      howlList[index]?.patch?.volume(newVolume);
       console.log("increase", newVolume.toFixed(1));
     } else if (method === "Decrease") {
-      const newVolume = Math.max(howlList[index]?.volume() - 0.1, 0);
-      howlList[index].volume(newVolume);
+      const newVolume = Math.max(howlList[index]?.howl.volume() - 0.1, 0);
+      howlList[index]?.howl?.volume(newVolume);
+      howlList[index]?.patch?.volume(newVolume);
       console.log("decrease", newVolume.toFixed(1));
     }
   };
 
   const handleRemoveSound = (index) => {
     console.log(index);
-    howlList[index].unload();
+    howlList[index]?.howl.unload();
+    howlList[index]?.patch.unload();
 
     const updatedHowlList = [...howlList];
     updatedHowlList.splice(index, 1);
@@ -401,7 +396,8 @@ const MultiAudioPlayerrr = () => {
   const handleClearMix = () => {
     if (howlList.length > 0) {
       howlList.forEach((howl) => {
-        howl.unload();
+        howl.howl.unload();
+        howl.patch.unload();
       });
       setHowlList([]);
       dispatch(clearAllSound());
