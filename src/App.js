@@ -13,6 +13,7 @@ function App() {
     try {
       const response = await axios.get(`${BASEURL}/api/user/get_device_info`);
       const device = response.data.data;
+      console.log(device)
       if (device == "iOS" || device == "Mac OS X") {
         window.location.href = "https://relax.scofa.com/ios";
       }
