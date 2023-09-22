@@ -20,7 +20,7 @@ const WebRoutes = () => {
   const token = getAccessToken();
   return (
     <>
-      <BrowserRouter basename="/ios">
+      <BrowserRouter basename="/oobt">
         <Routes>
           <Route path="/" element={<Sounds />} />
         </Routes>

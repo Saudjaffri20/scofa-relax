@@ -211,7 +211,10 @@ const MultiAudioPlayerrr = () => {
       const howl = new Howl({
         src: [BASEURL + lastSource.audio],
         format: [],
-        loop: true,
+        // loop: true,
+        sprite: {
+          main: [50, 11050, true], // Skip the first second and play the remaining duration
+        },
         autoplay: isPlaying,
         html5: true,
         autoUnlock: true,
@@ -221,41 +224,49 @@ const MultiAudioPlayerrr = () => {
         onload: function () {
           this.loaded = true;
           setLoader((prevLoader) => [...prevLoader, true]);
+          console.log(BASEURL + lastSource.audio);
+          // if(isPlaying) {
+          //   this.play('main')
+          // }
+        },
+        onplay: function () {
+          console.log("Play", this.seek());
         },
         onend: function () {
-          console.log("End");
+          console.log("End", this.seek());
         },
       });
-      const patch = new Howl({
-        src: [BASEURL + lastSource.patch],
-        format: [],
-        loop: true,
-        autoplay: isPlaying,
-        html5: true,
-        autoUnlock: true,
-        preload: true,
-        volume: 0.5,
-        autoSuspend: false,
-        onload: function () {
-          this.loaded = true;
-          setLoader((prevLoader) => [...prevLoader, true]);
-        },
-        onend: function () {
-          console.log("End Patch");
-        },
-      });
-
+  
+      // const patch = new Howl({
+      //   src: [BASEURL + lastSource.patch],
+      //   format: [],
+      //   loop: true,
+      //   autoplay: isPlaying,
+      //   html5: true,
+      //   autoUnlock: true,
+      //   preload: true,
+      //   volume: 0.5,
+      //   autoSuspend: false,
+      //   onload: function () {
+      //     this.loaded = true;
+      //     setLoader((prevLoader) => [...prevLoader, true]);
+      //   },
+      //   onend: function () {
+      //     console.log("End Patch");
+      //   },
+      // });
+      if(isPlaying) {
+        howl.play('main')
+      }
       howl.loaded = false;
       howl.info = soundInfo;
       const duplicateHowlList = [...howlList];
-      duplicateHowlList.push({ howl, patch });
+      duplicateHowlList.push({ howl });
       setHowlList(duplicateHowlList);
     }
 
     setHowlCount(howlList.length);
   }, [lastSource]);
-
-  console.log(howlList);
 
   useEffect(() => {
     if (audioHowl) {
@@ -312,7 +323,7 @@ const MultiAudioPlayerrr = () => {
     if (howlList.length > 0) {
       howlList.forEach((howl) => {
         howl.howl.pause();
-        howl.patch.pause();
+        // howl.patch.pause();
       });
     }
     dispatch(pauseMixer());
@@ -324,8 +335,8 @@ const MultiAudioPlayerrr = () => {
     }
     if (howlList.length > 0) {
       howlList.forEach((howl) => {
-        howl.howl.play();
-        howl.patch.play();
+        howl.howl.play("main");
+        // howl.patch.play();
       });
     }
     dispatch(playMixer());
@@ -340,12 +351,12 @@ const MultiAudioPlayerrr = () => {
     if (method === "Increase") {
       const newVolume = Math.min(howlList[index]?.howl.volume() + 0.1, 1.0);
       howlList[index]?.howl?.volume(newVolume);
-      howlList[index]?.patch?.volume(newVolume);
+      // howlList[index]?.patch?.volume(newVolume);
       console.log("increase", newVolume.toFixed(1));
     } else if (method === "Decrease") {
       const newVolume = Math.max(howlList[index]?.howl.volume() - 0.1, 0);
       howlList[index]?.howl?.volume(newVolume);
-      howlList[index]?.patch?.volume(newVolume);
+      // howlList[index]?.patch?.volume(newVolume);
       console.log("decrease", newVolume.toFixed(1));
     }
   };
@@ -353,7 +364,7 @@ const MultiAudioPlayerrr = () => {
   const handleRemoveSound = (index) => {
     console.log(index);
     howlList[index]?.howl.unload();
-    howlList[index]?.patch.unload();
+    // howlList[index]?.patch.unload();
 
     const updatedHowlList = [...howlList];
     updatedHowlList.splice(index, 1);
@@ -397,7 +408,7 @@ const MultiAudioPlayerrr = () => {
     if (howlList.length > 0) {
       howlList.forEach((howl) => {
         howl.howl.unload();
-        howl.patch.unload();
+        // howl.patch.unload();
       });
       setHowlList([]);
       dispatch(clearAllSound());
