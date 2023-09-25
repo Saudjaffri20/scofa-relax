@@ -260,6 +260,7 @@ const MultiAudioPlayerrr = () => {
     setHowlList(updatedHowlList);
 
     const updatedSoundList = [...soundList];
+    
     updatedSoundList.splice(index, 1);
     setSoundList(updatedSoundList);
 
